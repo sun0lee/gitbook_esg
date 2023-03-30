@@ -4,7 +4,7 @@ description: >-
   유동성 프리미엄) 정보 적재
 ---
 
-# 적용 LP✱(250)
+# 적용 LP✱
 
 ## Table&#x20;
 
@@ -12,7 +12,7 @@ description: >-
 
 
 
-## Work Detail
+## Work Detail [job250.md](../../../../etc/java/src/job250.md "mention")
 
 `IR PARAM SW` 에 설정된 `LIQ PREM APPL DV` (유동성프리미엄 구분코드) 에 따라서 최종적으로 할인율 산출에 적용할 조정항목 (변동성조정, 유동성프리미엄)을 선택하여 `IR SPRD LP BIZ` 적재함.
 

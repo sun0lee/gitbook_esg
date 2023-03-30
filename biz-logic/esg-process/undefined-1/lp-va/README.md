@@ -6,7 +6,7 @@ description: >-
 
 # 조정항목(LP,VA) 산출
 
-<table data-view="cards"><thead><tr><th></th><th align="right"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>조정항목(LP, VA) 적재</strong>  </em> </td><td align="right">240</td><td><a href="lp-240.md">lp-240.md</a></td></tr><tr><td><em><strong>조정항목(LP, VA) 적용</strong></em> </td><td align="right">250</td><td><a href="lp-250.md">lp-250.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th align="right"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>조정항목(LP, VA) 적재</strong>  </em> </td><td align="right">240</td><td><a href="lp.md">lp.md</a></td></tr><tr><td><em><strong>조정항목(LP, VA) 적용</strong></em> </td><td align="right">250</td><td><a href="lp-1.md">lp-1.md</a></td></tr></tbody></table>
 
 
 

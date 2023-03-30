@@ -4,7 +4,7 @@ description: >-
   있음.
 ---
 
-# 적용 스프레드✱(230)
+# 적용 스프레드✱
 
 ## Work Detail &#x20;
 
@@ -26,7 +26,7 @@ description: >-
 
 내부모형 등 산출목적에 따라 자체적으로 산출한 금리충격스프레드를 적용하고 싶은 경우 IR\_SPRD\_AFNS\_USR 에 해당월 정보를 지우고, 220 작업을 선행한다. IR\_SPRD\_AFNS\_CALC 에 충격수준이 생성되면 230 작업에서 이를 적용  테이블 (IR\_SPRD\_AFNS\_BIZ) 에 적재한다.&#x20;
 
-## Work Detail( )
+## Work Detail [job230.md](../../../../etc/java/src/job230.md "mention")
 
 1.  IR\_SPRD\_AFNS\_USR 정보가 있는가 ?&#x20;
 

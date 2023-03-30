@@ -4,7 +4,7 @@ description: >-
   설계되어 있으며, 각 구분코드별로 조정항목을 적재함
 ---
 
-# LP 산출 (240)
+# LP 산출
 
 ## Table&#x20;
 
@@ -16,7 +16,7 @@ description: >-
 
 
 
-## Work Detail
+## Work Detail [job240.md](../../../../etc/java/src/job240.md "mention")
 
 조정항목 (변동성 조정, 유동성 프리미엄)은 요건에 따라 다양한 방식으로 산출할 수 있으며, 적용단위 또한 사용자의 목적에 따라 조정 가능한 항목임.&#x20;
 

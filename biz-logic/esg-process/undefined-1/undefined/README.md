@@ -6,7 +6,7 @@ description: K-ICS 금리 위험액을 산출용 결정론적 금리시나리오
 
 자체적으로 충격 시나리오를 산출하는 경우와 금감원에서 제공한 충격스프레드를 적용하는 경우 두 가지 방법을 지원함. ( 금감원 제공 스프레드를 우선 적용함 )
 
-<table data-column-title-hidden data-view="cards"><thead><tr><th>적용</th><th>Table</th><th align="right">Job</th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>금리이력정보 생성  (hist)</strong></em></td><td>AFNS 모수산출용 </td><td align="right">210 </td><td><a href="210.md">210.md</a></td></tr><tr><td><em><strong>자체 산출 금리충격스프레드</strong></em></td><td>AFNS </td><td align="right">220 </td><td><a href="220.md">220.md</a></td></tr><tr><td><em><strong>금감원 제공 금리충격스프레드</strong></em></td><td><em><strong></strong></em></td><td align="right">230</td><td><a href="230.md">230.md</a></td></tr></tbody></table>
+<table data-column-title-hidden data-view="cards"><thead><tr><th>적용</th><th>Table</th><th align="right">Job</th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>금리이력정보 생성  (hist)</strong></em></td><td>AFNS 모수산출용 </td><td align="right">210 </td><td><a href="undefined.md">undefined.md</a></td></tr><tr><td><em><strong>자체 산출 금리충격스프레드</strong></em></td><td>AFNS </td><td align="right">220 </td><td><a href="undefined-1.md">undefined-1.md</a></td></tr><tr><td><em><strong>금감원 제공 금리충격스프레드</strong></em></td><td><em><strong></strong></em></td><td align="right">230</td><td><a href="undefined-2.md">undefined-2.md</a></td></tr></tbody></table>
 
 
 
