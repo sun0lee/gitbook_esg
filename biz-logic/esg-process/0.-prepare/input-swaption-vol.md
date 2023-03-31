@@ -1,8 +1,8 @@
 ---
-description: 금리커브 단위로 스왑션 만기별 테너별 변동성 정보를 가져와 unpivot 처리.
+description: 스왑션변동성 입수 ; 금리커브 단위로 스왑션 만기별 테너별 변동성 정보를 가져와 unpivot 처리.
 ---
 
-# 스왑션변동성 입수 (120)
+# input Swaption Vol
 
 ## Check
 

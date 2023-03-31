@@ -1,12 +1,12 @@
 ---
 description: >-
-  Bottom up 방식으로 할인율을 산출하는 경우, 기본 무위험금리에 조정항목 (변동성 조정, 유동성 프리미엄)을 가산하여 조정
-  무위험금리기간구조를 산출함.
+  LP(liquidity premium),VA(Volatility Adjustment) ; Bottom up 방식으로 할인율을 산출하는 경우,
+  기본 무위험금리에 조정항목 (변동성 조정, 유동성 프리미엄)을 가산하여 조정 무위험금리기간구조를 산출함.
 ---
 
-# 조정항목(LP,VA) 산출
+# LP, VA
 
-<table data-view="cards"><thead><tr><th></th><th align="right"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>조정항목(LP, VA) 적재</strong>  </em> </td><td align="right">240</td><td><a href="lp.md">lp.md</a></td></tr><tr><td><em><strong>조정항목(LP, VA) 적용</strong></em> </td><td align="right">250</td><td><a href="lp-1.md">lp-1.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th align="right"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>조정항목(LP, VA) 적재</strong>  </em> </td><td align="right">240</td><td><a href="calculate-lp-va.md">calculate-lp-va.md</a></td></tr><tr><td><em><strong>조정항목(LP, VA) 적용</strong></em> </td><td align="right">250</td><td><a href="apply-lp-va.md">apply-lp-va.md</a></td></tr></tbody></table>
 
 
 

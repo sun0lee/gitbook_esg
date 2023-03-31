@@ -2,11 +2,11 @@
 
 ## ESG에서 하는 일
 
-{% content-ref url="prepare/" %}
-[prepare](prepare/)
+{% content-ref url="0.-prepare/" %}
+[0.-prepare](0.-prepare/)
 {% endcontent-ref %}
 
-<table data-view="cards"><thead><tr><th></th><th></th><th align="right"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>기본 무위험 금리기간구조</strong></em></td><td>ytm to spot</td><td align="right">130,150</td><td><a href="undefined/">undefined</a></td></tr><tr><td><em><strong>조정 무위험 금리기간구조</strong></em></td><td>apply adjustment</td><td align="right">210 ~ 280</td><td><a href="undefined-1/">undefined-1</a></td></tr><tr><td><em><strong>확률론적 금리시나리오</strong></em> </td><td>stochastic IR scen gen</td><td align="right">310~</td><td><a href="undefined-2/">undefined-2</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th align="right"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td>1.<em><strong>기본 무위험 금리기간구조</strong></em></td><td>ytm to spot</td><td align="right">130,150</td><td><a href="1.-risk-free-term-structure/">1.-risk-free-term-structure</a></td></tr><tr><td>2.<em><strong>조정 무위험 금리기간구조</strong></em></td><td>apply adjustment</td><td align="right">210 ~ 280</td><td><a href="2.-adjusted-risk-free-term-structure/">2.-adjusted-risk-free-term-structure</a></td></tr><tr><td>3.<em><strong>확률론적 금리시나리오</strong></em> </td><td>stochastic IR scen gen</td><td align="right">310~</td><td><a href="3.-stochastic-scenario/">3.-stochastic-scenario</a></td></tr></tbody></table>
 
 
 
