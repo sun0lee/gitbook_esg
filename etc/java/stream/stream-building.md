@@ -1,4 +1,4 @@
-# Stream Building ; 생성
+# Stream Building
 
 연속된 데이터 목록만 있으면 스트림을 만들 수 있다 ?
 
@@ -14,7 +14,7 @@ int sum = Arrays.stream(numbers).sum();
 
 ### 1.2. 컬렉션&#x20;
 
-컬렉션 인터페이스에 추가된 디폴트 메서드( [#default-method](../undefined/interface.md#default-method "mention") ) stream을 이용해서 스트림을 생성할 수 있음 .
+컬렉션 인터페이스에 추가된 디폴트 메서드stream을 이용해서 스트림을 생성할 수 있음 .
 
 ```java
 public interface Collection<E> extends Iterable<E> {

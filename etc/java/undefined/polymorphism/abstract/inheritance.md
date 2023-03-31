@@ -1,4 +1,4 @@
-# Inheritance (상속)
+# Inheritance
 
 부모 paraent /. super class <-> 자식 child / sub class
 
@@ -50,12 +50,12 @@ super는 부모를 지칭함.
   * 부모 클래스 :  IrModel
   *
 
-      <figure><img src="../../../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
 * SmithWilsonKics에 정의된 매개변수가 있는 생성자&#x20;
   * SmithWilsonKics(baseDate, ... )
   *
 
-      <figure><img src="../../../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../../../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
 * super() -> IrModel()&#x20;
   * 초기화 시점에 IrModel의 멤버변수도 초기화 하기&#x20;
 

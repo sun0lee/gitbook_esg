@@ -1,4 +1,4 @@
-# Constructor ; 생성자
+# Constructor
 
 1. 클래스의 인스턴스를 생성할 때 자동으로 호출되는 메서드.&#x20;
 2. 클래스에 선언하는 메서드 중 하나. 근데 일반적인 메서드랑 다른 점이 있음.
@@ -67,4 +67,51 @@ ref. 인스턴스 변수의 이름과 지역변수의 이름이 같을 경우 �
 
 </details>
 
-####
+
+
+<details>
+
+<summary>Lombok.@Builder</summary>
+
+* 생성자에 매개변수가 많을 때. builder class를 만들면 유용함.
+  * 매핑관계를 한눈에 확인할 수 있기 떄문임.&#x20;
+* Lombok의 @Builder는 간단히 어노테이션으로 builder class를 작성하지 않아도 bulider를 사용할 수 있게 해줌&#x20;
+
+[https://velog.io/@becolorful/Lombok-Builder-%EA%B0%84%EB%8B%A8-%EC%A0%95%EB%A6%AC](https://velog.io/@becolorful/Lombok-Builder-%EA%B0%84%EB%8B%A8-%EC%A0%95%EB%A6%AC)
+
+{% code title="Esg150_YtmToSpotSw.class" %}
+```java
+SmithWilsonKicsBts swBts = SmithWilsonKicsBts.of()
+               .baseDate(DateUtil.convertFrom(baseYmd))
+               .ytmCurveHisList(ytmRst)
+               .alphaApplied(alphaApplied)			 
+               .freq(freq)
+               .build();
+```
+{% endcode %}
+
+{% code title="SmithWilsonKicsBts.class" %}
+```java
+@Builder(builderClassName="of", builderMethodName="of")
+public SmithWilsonKicsBts(LocalDate baseDate, List<IrCurveYtm> ytmCurveHisList, Double alphaApplied, Boolean isRealNumber, Integer freq, Double liqPrem) {				
+  super();		
+  this.baseDate = baseDate;		
+  this.setTermStructureYtm(ytmCurveHisList);
+  this.setLastLiquidPoint(this.tenor[this.tenor.length-1]);
+  this.isRealNumber = (isRealNumber == null ? true : isRealNumber);		
+  this.alphaApplied = (alphaApplied == null ? 0.1  : alphaApplied);		
+  this.freq         = (freq         == null ? 2    : freq        );
+  this.liqPrem      = (liqPrem      == null ? 0.0  : liqPrem     );
+  
+  double toRealScale = this.isRealNumber ? 1 : 0.01;
+  for(int i=0; i<this.iRateBase.length; i++) this.iRateBase[i] = toRealScale * this.iRateBase[i];		
+      
+  this.ltfr = this.iRateBase[this.iRateBase.length-1];
+  this.ltfrT = (int) this.lastLiquidPoint;
+  this.ltfrCont = irDiscToCont(this.ltfr);
+  this.liqPrem = toRealScale * this.liqPrem;
+}
+```
+{% endcode %}
+
+</details>
