@@ -1,5 +1,15 @@
 # SmithWilsonKicsBts.class
 
+## 0. 산출절차&#x20;
+
+YTM을 input으로 spot rate로 변환 혹은 보간(interpolation), 보외(extrapolation)를 위한 작업절차는 아래와 같음. ( 다만, 1.부터 서술된 내용은 src 코드 debugging을 기준으로 기술하였기 때문에 최종적으로 산출된 결과 값을 전달받는 부분부터 내부산출 로직에 접근하기까지 과정이 역순으로 설명되고 있음 (5->4->1->2->3))
+
+1. base tenor 단위의 YTM 준비 ; 시장에서 입수한 zero coupon bond 의 가격.&#x20;
+2. CF matrix 생성 ; YTM 및 이자지급주기를 기반으로 현금흐름 테너별 현금흐름 매트릭스 생성&#x20;
+3. $$\zeta, \hat{\zeta}$$,  산출 ; (m, Mu, W)
+4. smith wilson result (보간결과 (interpolation, extrapolation)) 산출 ( 및 누적 )&#x20;
+5. smith wilson result -> spot rate ( 출력 타입변환 )
+
 ## 1. spot rate 가져오기 call&#x20;
 
 ### 1.1. SmithWilsonResult -> IrCurveSpot&#x20;
@@ -55,7 +65,7 @@ private List<SmithWilsonRslt> swProjectionList(double alpha) {
 
 ## 2. Smith-Wilson 변환
 
-Smith-Wilson 변환에 따라 만기에 따른 현가함수를 산출해주므로 이 결과 값은 만기코별로 한 줄 씩 산출됨.  &#x20;
+Smith-Wilson 변환에 따라 만기에 따른 현가함수를 산출해주므로 이 결과 값은 만기 코드별로 한 줄 씩 산출됨.  &#x20;
 
 {% code title="swProjectionList(alpha,tenor)" %}
 ```java
