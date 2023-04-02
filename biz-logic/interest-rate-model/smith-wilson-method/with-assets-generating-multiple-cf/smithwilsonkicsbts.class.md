@@ -2,6 +2,10 @@
 
 ## 1. spot rate 가져오기 call&#x20;
 
+### 1.1. SmithWilsonResult -> IrCurveSpot&#x20;
+
+SmithWilsonResult결과를 적재할 테이블 템플릿에 맞춰 변환하여 컬럼값 세팅. &#x20;
+
 {% code title="(line17) getSpotBtsRslt()" lineNumbers="true" %}
 ```java
 public List<IrCurveSpot> getSpotBtsRslt() {		
@@ -20,7 +24,9 @@ public List<IrCurveSpot> getSpotBtsRslt() {
 ```
 {% endcode %}
 
-### 1.1. smith wilson 변환결과 call
+### 1.2. smith wilson 변환결과 call
+
+smith wilson 변환 결과 값이 key(기준일자의 금리커브)에 따른 tenor (matCd) 단위로 한줄씩 산출되기 때문에 동일key 단위(기준일자의 금리커브 단위)로 add함. &#x20;
 
 {% code title="(line5) getSmithWilsonResultList()" lineNumbers="true" %}
 ```java
@@ -33,7 +39,7 @@ public List<SmithWilsonRslt> getSmithWilsonResultList() {
 ```
 {% endcode %}
 
-### 1.2. smith wilson 프로젝션 결과 : (alpha, tenor 입력)&#x20;
+### 1.3. smith wilson 프로젝션 결과 : (alpha, tenor 입력)&#x20;
 
 {% code title="swProjectionList(alphaApplied)" %}
 ```java
@@ -47,7 +53,9 @@ private List<SmithWilsonRslt> swProjectionList(double alpha) {
 * this SmithWilsonKicsBts (id=162)
   * \[0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 7.0, 10.0, 15.0, 20.0, 30.0, 50.0]
 
-## 2. Smith-Wilson 변환&#x20;
+## 2. Smith-Wilson 변환
+
+Smith-Wilson 변환에 따라 만기에 따른 현가함수를 산출해주므로 이 결과 값은 만기코별로 한 줄 씩 산출됨.  &#x20;
 
 {% code title="swProjectionList(alpha,tenor)" %}
 ```java
