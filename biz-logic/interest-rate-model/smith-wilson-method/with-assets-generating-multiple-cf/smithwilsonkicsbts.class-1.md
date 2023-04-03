@@ -1,8 +1,8 @@
-# SmithWilsonKicsBts.class
+# (수정) SmithWilsonKicsBts.class
 
 ## 0. 산출절차&#x20;
 
-YTM을 input으로 spot rate로 변환 혹은 보간(interpolation), 보외(extrapolation)를 위한 작업절차는 아래와 같음. ( 다만, 1.부터 서술된 내용은 src 코드 debugging을 기준으로 기술하였기 때문에 최종적으로 산출된 결과 값을 전달받는 부분부터 내부산출 로직에 접근하기까지 과정이 역순으로 설명되고 있음 (e->d->a->b->c))
+YTM을 input으로 spot rate로 변환 혹은 보간(interpolation), 보외(extrapolation)를 위한 작업절차는 아래와 같음. ( 다만, 1.부터 서술된 내용은 src 코드 debugging을 기준으로 기술하였기 때문에 최종적으로 산출된 결과 값을 전달받는 부분부터 내부산출 로직에 접근하기까지 과정이 역순으로 설명되고 있음 (5->4->1->2->3))
 
 a. base tenor 단위의 YTM 준비 ; 시장에서 입수한 zero coupon bond 의 가격.&#x20;
 
@@ -16,113 +16,76 @@ e. smith wilson result -> spot rate ( 출력 타입변환 )
 
 
 
+## 1. SmithEsg150\_YtmToSpotSw (e)
 
-
-## 1. SmithEsg150\_YtmToSpotSw
-
-실질적인 변환 처리는 line 17  List\<IrCurveSpot> rst = swBts.getSpotBtsRslt(); 에서 처리함. 3
+실질적인 Smith-wilson 로직인  line 17  List\<IrCurveSpot> rst = swBts.getSpotBtsRslt(); 에서 처리함. Esg150\_YtmToSpotSw에서는 요건상의 로직처리가 아니라 테이블 template에 맞추는 작업을 하도록 분리함.&#x20;
 
 {% code lineNumbers="true" %}
 ```java
-public static List<IrCurveSpot> createIrCurveSpot
-  ( String baseYmd
-  , String irCurveNm
-  , List<IrCurveYtm> ytmRst
-  , Double alphaApplied
-  , Integer freq) 
-{
- // 인스턴스 생성 	SmithWilsonKicsBts // sw 처리하는 biz logic 	  
-  SmithWilsonKicsBts swBts = SmithWilsonKicsBts.of()
-                 .baseDate(DateUtil.convertFrom(baseYmd))
-                 .ytmCurveHisList(ytmRst)
-                 .alphaApplied(alphaApplied) // 수렴속도 0.1													 
-                 .freq(freq) // 이자지급주기 2 
-                 .build();
-  
-  // ★★★★ SmithWilsonKicsBts에서 산출한 spot rate 가져오기 
-  List<IrCurveSpot> rst = swBts.getSpotBtsRslt();
-  
-  // 산출결과 오류 체크 
-  for(IrCurveSpot crv : rst) {
-    if(crv.getSpotRate().isNaN() || crv.getSpotRate().isInfinite()) {
-      log.error("YTM to SPOT BootStrapping is failed. Check YTM Data in [{}] Table for [ID: {} in {}]", Process.toPhysicalName(IrCurveYtm.class.getSimpleName()), irCurveNm, baseYmd);
-      return new ArrayList<IrCurveSpot>();
-    }
+public static List<IrCurveSpot> createIrCurveSpot(List<IRateInput> ytmRst, Double alphaApplied, Integer freq) {		
+
+// 파라미터 중 중복되는 항목은 내부 변수로 정의 
+String baseYmd   = ytmRst.get(0).getBaseDate();
+IrCurve irCurve  = ytmRst.get(0).getIrCurve();
+
+
+SmithWilsonKicsBts swBts = SmithWilsonKicsBts.of()
+              .baseDate(DateUtil.convertFrom(baseYmd))
+              .ytmCurveHisList(ytmRst)
+              .alphaApplied(alphaApplied)													 
+              .freq(freq)
+              .build();
+
+List<IrCurveSpot> spotRst = new ArrayList<IrCurveSpot>() ;
+  IrCurveSpot tempSpot ;
+// SmithWilsonResult -> IrCurveSpot 
+// SmithWilsonResult결과를 적재할 테이블 템플릿에 맞춰 변환하여 컬럼값 세팅.  
+  for (SmithWilsonRslt swRst : swBts.getSmithWilsonResultList()) {
+    tempSpot = new IrCurveSpot( baseYmd, irCurve, swRst.getMatCd(), 1, swRst.getSpotDisc()) ;
+    spotRst.add(tempSpot) ;
   }
-  
-  // rst setting  
-  rst.stream().forEach(s -> s.setIrCurveNm(irCurveNm));
-  rst.stream().forEach(s -> s.setBaseDate(baseYmd));
-  rst.stream().forEach(s -> s.setModifiedBy(jobId));
-  rst.stream().forEach(s -> s.setUpdateDate(LocalDateTime.now()));
-  
-  log.info("{}({}) creates [{}] results of [{}] in [{}]. They are inserted into [{}] Table"
-    , jobId
-    , EJob.valueOf(jobId).getJobName()
-    , rst.size()
-    , irCurveNm
-    , baseYmd
-    , toPhysicalName(IrCurveSpot.class.getSimpleName()));
-  
-  return rst;
+
+//산출결과 오류체크 
+for(IrCurveSpot crv : spotRst) {
+  if(crv.getSpotRate().isNaN() || crv.getSpotRate().isInfinite()) {
+    log.error("YTM to SPOT BootStrapping is failed. Check YTM Data in [{}] Table for [ID: {} in {}]"
+        , Process.toPhysicalName(IrCurveYtm.class.getSimpleName())
+        , irCurve.getIrCurveNm()
+        , baseYmd);
+    return new ArrayList<IrCurveSpot>();
+  }
+}
+ 
+spotRst.stream().forEach(s -> s.setModifiedBy("ESG150")); 			 // TODO : 작업마다 공통적으로 찍어주는 로그 처리
+spotRst.stream().forEach(s -> s.setUpdateDate(LocalDateTime.now())); // TODO : trigger 로 처리하기 
+
+log.info("{}({}) creates [{}] results of [{}] in [{}]. They are inserted into [{}] Table", jobId, EJob.valueOf(jobId).getJobName(), spotRst.size(), baseYmd, toPhysicalName(IrCurveSpot.class.getSimpleName()));
+
+return spotRst;
 }
 ```
 {% endcode %}
 
-## 1. spot rate 가져오기 call&#x20;
+## 2. smith-wilson&#x20;
 
-### 1.1. SmithWilsonResult -> IrCurveSpot&#x20;
+### 2.1. smith-wilson 변환결과 전달 (d)
 
-SmithWilsonResult결과를 적재할 테이블 템플릿에 맞춰 변환하여 컬럼값 매핑&#x20;
-
-{% code title="(line17) getSpotBtsRslt()" lineNumbers="true" %}
+{% code title="getSmithWilsonResultList()" lineNumbers="true" %}
 ```java
-public List<IrCurveSpot> getSpotBtsRslt() {		
+public List<SmithWilsonRslt> getSmithWilsonResultList() {
   
-  List<IrCurveSpot> curveList = new ArrayList<IrCurveSpot>();
+  List<SmithWilsonRslt> resultList = new ArrayList<SmithWilsonRslt>();		
+  resultList.addAll(this.swProjectionList(this.alphaApplied, this.tenor));
   
-  for(SmithWilsonRslt sw : this.getSmithWilsonResultList()) {
-    IrCurveSpot crv = new IrCurveSpot();
-    crv.setBaseDate(sw.getBaseDate());
-    crv.setMatCd.  (sw.getMatCd());
-    crv.setSpotRate(sw.getSpotDisc());
-    curveList.add(crv);
-  }		
-  return curveList;
+  return resultList;
 }	
 ```
 {% endcode %}
 
-### 1.2. smith wilson 변환결과 call
+* this.alphaApplied = 0.1
+* this.tenor = \[0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 7.0, 10.0, 15.0, 20.0, 30.0, 50.0]
 
-smith wilson 변환 결과 값이 key(기준일자의 금리커브)에 따른 tenor (matCd) 단위로 한줄씩 산출되기 때문에 동일key 단위(기준일자의 금리커브 단위)로 add함. &#x20;
-
-{% code title="(line5) getSmithWilsonResultList()" lineNumbers="true" %}
-```java
-public List<SmithWilsonRslt> getSmithWilsonResultList() {
-  
-  List<SmithWilsonRslt> resultList = new ArrayList<SmithWilsonRslt>();
-  resultList.addAll(this.swProjectionList(this.alphaApplied)); // alpha= 0.1
-  return resultList;
-}
-```
-{% endcode %}
-
-### 1.3. smith wilson 프로젝션 결과 : (alpha, tenor 입력)&#x20;
-
-{% code title="swProjectionList(alphaApplied)" %}
-```java
-private List<SmithWilsonRslt> swProjectionList(double alpha) {
-  return swProjectionList(alpha, this.tenor);
-} 
-```
-{% endcode %}
-
-* alpha = 0.1
-* this SmithWilsonKicsBts (id=162)
-  * \[0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 7.0, 10.0, 15.0, 20.0, 30.0, 50.0]
-
-## 2. Smith-Wilson 변환
+### 2.2. smith-wilson 변환
 
 Smith-Wilson 변환에 따라 만기에 따른 현가함수를 산출해주므로 이 결과 값은 만기 코드별로 한 줄 씩 산출됨.  &#x20;
 
@@ -182,7 +145,7 @@ private List<SmithWilsonRslt> swProjectionList(double alpha, double[] prjTenor) 
 ```
 {% endcode %}
 
-### 2.1. zetaHat&#x9;
+#### 2.2.1. zetaHat&#x9;
 
 {% code title="2.1. zetaHat" %}
 ```java
@@ -440,7 +403,7 @@ this.zetaHat  = cfMatx.transpose().multiply(zetaCol);
 
 </details>
 
-### 2.2. 만기별 가중치 (wilson function)&#x20;
+#### 2.2.2. 만기별 가중치 (wilson function)&#x20;
 
 {% code title="2.2. 만기별 가중치 " %}
 ```java
@@ -487,7 +450,7 @@ private double[][] smithWilsonWeight(
 
 </details>
 
-### 2.3. Mu 산출&#x20;
+#### 2.2.3. Mu 산출&#x20;
 
 {% code title="프로젝션 기간 UFR로 할인한 현가 산출." %}
 ```java
@@ -507,7 +470,7 @@ $$\mu = \begin{bmatrix}e^{-UFR\cdot t_1} \\e^{-UFR\cdot t_2} \\ \vdots\\e^{-UFR\
 
 </details>
 
-### 2.4. zero coupon bond (현가함수)
+#### 2.2.4. zero coupon bond (현가함수)
 
 {% code title="2.4. zcb 가격 산출" %}
 ```java
@@ -519,7 +482,7 @@ RealMatrix priceCol
 
 
 
-### 2.5. spot rate, fwd rate ,swResult&#x20;
+#### 2.2.5. SmithWilsonRslt&#x20;
 
 {% code title="spotCont, fwdCont 산출 & swResult출력 " %}
 ```java

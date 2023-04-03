@@ -40,6 +40,7 @@
       * [SmithWilsonKics.class](biz-logic/interest-rate-model/smith-wilson-method/with-zero-coupon-bonds/smithwilsonkics.class.md)
     * [with Assets generating multiple CF](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/README.md)
       * [SmithWilsonKicsBts.class](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/smithwilsonkicsbts.class.md)
+      * [(수정) SmithWilsonKicsBts.class](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/smithwilsonkicsbts.class-1.md)
   * [AFNS](biz-logic/interest-rate-model/afns.md)
   * [Hull-White 1 Factor](biz-logic/interest-rate-model/hull-white-1-factor.md)
 
