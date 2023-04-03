@@ -121,3 +121,9 @@ session.clear();
 }
 
 ## 6. log
+
+```java
+completeJob("SUCCESS", jobLog);
+```
+
+&#x20;

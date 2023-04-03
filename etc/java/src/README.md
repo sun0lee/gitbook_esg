@@ -2,6 +2,8 @@
 
 ## job src 구성&#x20;
 
+job 단위 세부 로직은 try{ } 안의 로직을 정리함.&#x20;
+
 ```java
 // 실행대상에 해당 작업이 포함되는지 체크 
 if(jobList.contains("jobNo")) {
