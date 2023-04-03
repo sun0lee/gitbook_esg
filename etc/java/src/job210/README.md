@@ -98,7 +98,6 @@ log.info("[{}] has been Deleted in Job:[{}] [IR_CURVE_NM: {}, COUNT: {}]"
 
 ## 4. spotWeek
 
-{% code title="" %}
 ```java
 List<IrCurveSpotWeek> spotWeek = Esg210_SpotWeek.setupIrCurveSpotWeek
     ( bssd
@@ -111,20 +110,13 @@ spotWeek.stream().forEach(s -> s.setUpdateDate(LocalDateTime.now()));
 spotWeek.stream().forEach(s -> s.setModifiedBy("ESG210")) ;
 spotWeek.stream().forEach(s -> session.save(s));
 ```
-{% endcode %}
-
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
 
 ## 5. save
 
-{% code title="" %}
 ```java
 session.flush();
 session.clear();
 ```
-{% endcode %}
 
 }
 
