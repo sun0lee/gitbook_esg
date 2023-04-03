@@ -1,8 +1,10 @@
-# job260
+---
+description: (bssd, "AFNS", "KICS", kicsSwMap)
+---
 
-### &#x20;Esg261\_IrDcntRateBu\_Ytm.setIrDcntRateBu(bssd, "AFNS", "KICS", kicsSwMap)
+# Esg261\_IrDcntRateBu\_Ytm.setIrDcntRateBu()
 
-#### 1. curveMap
+## 1. curveMap
 
 결정론적 시나리오 산출 대상을 금리커브 및 금리시나리오 (irCurveSceNo) 에 따라 구분함. (반복작업) &#x20;
 
@@ -21,11 +23,11 @@ Map.Entry<String, Map<Integer, IrParamSw>>
 
 *
 
-    <figure><img src="../../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
-#### 2. ytmList&#x20;
+## 2. ytmList&#x20;
 
 금리 커브 별 ytm 정보 입수.&#x20;
 
@@ -39,11 +41,11 @@ List ytmList = IrCurveYtmDao.getIrCurveYtm(bssd, curveSwMap.getKey())
 
 *
 
-    <figure><img src="../../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
-#### 3. 이하 작업은 시나리오별 loop&#x20;
+## 3. 이하 작업은 시나리오별 loop&#x20;
 
 <details>
 
@@ -62,10 +64,10 @@ List ytmAddList = ytmList.stream()
 
 *   `addSpread`&#x20;
 
-    <figure><img src="../../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
 *
 
-    <figure><img src="../../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
@@ -91,7 +93,7 @@ List<IrCurveSpot> spotList
 
 *
 
-    <figure><img src="../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 &#x20;
 
@@ -112,7 +114,7 @@ TreeMap<String, Double> spotMap
 
 *
 
-    <figure><img src="../../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
@@ -132,7 +134,7 @@ Map<String, Double> irSprdLpMap
 
 *
 
-    <figure><img src="../../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
@@ -156,7 +158,7 @@ Map<String, Double> irSprdShkMap
 
 *   ``
 
-    <figure><img src="../../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
@@ -177,11 +179,11 @@ List spotSceList
 
 *   ``
 
-    <figure><img src="../../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
-#### 3.3\~3.5  스프레드 적용 순서 &#x20;
+## 3.3\~3.5  스프레드 적용 순서 &#x20;
 
 * <mark style="color:red;">`shkCont`</mark>  : AFNS 충격 스프레드는 연속(continuous) 복리 기준의 충격치임 &#x20;
 * <mark style="color:red;">`lpDisc`</mark> : 유동성프리미엄은 이산 (discrete) 기준의 스프레드임&#x20;
@@ -194,47 +196,3 @@ List spotSceList
 ``
 
 ``
-
-## 1.delete&#x20;
-
-```java
-int delNum = session.createQuery("delete IrDcntRateBu a where a.baseYymm=:param")
-        .setParameter("param", bssd).executeUpdate();				
-log.info("[{}] has been Deleted in Job:[{}] [BASE_YYMM: {}, COUNT: {}]"
-        , Process.toPhysicalName(IrDcntRateBu.class.getSimpleName())
-        , jobLog.getJobId()
-        , bssd
-        , delNum);
-```
-
-## 2. biz logic&#x20;
-
-```java
-String irModelNm = "AFNS";//for acquiring AFNS Shock Spread		
-
-List<IrDcntRateBu> kicsDcntRateBu = Esg261_IrDcntRateBu_Ytm.setIrDcntRateBu(bssd, irModelNm, "KICS", kicsSwMap);				
-kicsDcntRateBu.stream().forEach(s -> session.save(s));
-
-List<IrDcntRateBu> ifrsDcntRateBu = Esg260_IrDcntRateBu.setIrDcntRateBu(bssd, irModelNm, "IFRS", ifrsSwMap);
-ifrsDcntRateBu.stream().forEach(s -> session.save(s));
-
-List<IrDcntRateBu> ibizDcntRateBu = Esg260_IrDcntRateBu.setIrDcntRateBu(bssd, irModelNm, "IBIZ", ibizSwMap);
-ibizDcntRateBu.stream().forEach(s -> session.save(s));
-
-//forward curve or manual shift of term structure is treated here
-List<IrDcntRateBu> saasDcntRateBu = Esg260_IrDcntRateBu.setIrDcntRateBu(bssd, irModelNm, "SAAS", saasSwMap);
-saasDcntRateBu.stream().forEach(s -> session.save(s));
-```
-
-## 3. save&#x20;
-
-```java
-session.flush();
-session.clear();
-```
-
-## 4.log
-
-```java
-completeJob("SUCCESS", jobLog);
-```

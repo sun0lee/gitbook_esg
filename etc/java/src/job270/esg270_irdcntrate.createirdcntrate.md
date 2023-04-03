@@ -1,4 +1,4 @@
-# job270
+# Esg270\_IrDcntRate.createIrDcntRate()
 
 ### 1. Common &  for all Scen
 
@@ -33,7 +33,7 @@ Map<String, SmithWilsonRslt> baseRateSce1Map = new TreeMap<String, SmithWilsonRs
 
 <details>
 
-<summary>Liab 할인율 smith-wilson 변환 (<a data-mention href="../../../biz-logic/interest-rate-model/smith-wilson-method/with-zero-coupon-bonds/smithwilsonkics.class.md">smithwilsonkics.class.md</a>)</summary>
+<summary>Liab 할인율 smith-wilson 변환 (<a data-mention href="../../../../biz-logic/interest-rate-model/smith-wilson-method/with-zero-coupon-bonds/smithwilsonkics.class.md">smithwilsonkics.class.md</a>)</summary>
 
 ```java
 SmithWilsonKics swKics = new SmithWilsonKics
@@ -61,7 +61,7 @@ List<IrDcntRate> adjRateList
 
 * 아직 부채할인율만 담아서 자산할인율항목(spotRate, fwdRate)은 null임&#x20;
 
-<img src="../../../.gitbook/assets/image (41).png" alt="" data-size="original">
+<img src="../../../../.gitbook/assets/image (41).png" alt="" data-size="original">
 
 </details>
 
@@ -84,7 +84,7 @@ TreeSet<Double> tenorList
   .collect(Collectors.toCollection(TreeSet::new)); 
 ```
 
-<img src="../../../.gitbook/assets/image (78).png" alt="" data-size="original">
+<img src="../../../../.gitbook/assets/image (78).png" alt="" data-size="original">
 
 </details>
 
@@ -106,7 +106,7 @@ adjRateSce1Map
 
 * 위에서 이미 부채할인율은 smith-wilton 보간했음. 그 결과 중에 시나리오 1번은 1번 통에 담기 &#x20;
 
-<img src="../../../.gitbook/assets/image.png" alt="" data-size="original">
+<img src="../../../../.gitbook/assets/image.png" alt="" data-size="original">
 
 </details>
 
@@ -142,7 +142,7 @@ baseRateSce1Map
 	(SmithWilsonRslt::getMatCd, Function.identity()));
 ```
 
-<img src="../../../.gitbook/assets/image (81).png" alt="" data-size="original">
+<img src="../../../../.gitbook/assets/image (81).png" alt="" data-size="original">
 
 </details>
 
@@ -157,9 +157,9 @@ for(IrDcntRate rslt : adjRateList) {
     rslt.setFwdRate (baseRateSce1Map.get(rslt.getMatCd()).getFwdDisc());}
 ```
 
-<img src="../../../.gitbook/assets/image (31).png" alt="" data-size="original">
+<img src="../../../../.gitbook/assets/image (31).png" alt="" data-size="original">
 
-<img src="../../../.gitbook/assets/image (30).png" alt="" data-size="original">
+<img src="../../../../.gitbook/assets/image (30).png" alt="" data-size="original">
 
 </details>
 
@@ -260,53 +260,4 @@ for(IrDcntRate rslt : adjRateList) {
 
 
 
-
-
-
-
-
-## 1.  delete&#x20;
-
-```java
-int delNum = session.createQuery("delete IrDcntRate a where a.baseYymm=:param")
-            .setParameter("param", bssd).executeUpdate();	
-log.info("[{}] has been Deleted in Job:[{}] [BASE_YYMM: {}, COUNT: {}]"
-            , Process.toPhysicalName(IrDcntRate.class.getSimpleName())
-            , jobLog.getJobId()
-            , bssd
-            , delNum);
-```
-
-## 2.  biz logic&#x20;
-
-```java
-List<IrDcntRate> kicsDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "KICS", kicsSwMap, projectionYear);
-    kicsDcntRate.stream().forEach(s -> session.save(s));
-
-List<IrDcntRate> ifrsDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "IFRS", ifrsSwMap, projectionYear);
-    ifrsDcntRate.stream().forEach(s -> session.save(s));
-
-List<IrDcntRate> ibizDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "IBIZ", ibizSwMap, projectionYear);
-    ibizDcntRate.stream().forEach(s -> session.save(s));
-
-List<IrDcntRate> saasDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "SAAS", saasSwMap, projectionYear);
-    saasDcntRate.stream().forEach(s -> session.save(s));
-```
-
-## 3. save&#x20;
-
-```java
-session.flush();
-session.clear();
-```
-
-## 4.log			&#x9;
-
-```java
-completeJob("SUCCESS", jobLog);
-```
 

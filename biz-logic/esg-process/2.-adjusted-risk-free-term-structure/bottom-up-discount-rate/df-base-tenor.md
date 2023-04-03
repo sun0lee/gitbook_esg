@@ -2,7 +2,7 @@
 description: 기본 무위험 금리기간구조에 조정항목을 반영하여 조정 무위험금리기간구조 산출함. 금리위험 산출용 금리충격시나리오 반영하는 것도 여기서 처리함.
 ---
 
-# base Tenor별 할인율
+# DF (base Tenor)
 
 ## Check
 
@@ -29,9 +29,9 @@ description: 기본 무위험 금리기간구조에 조정항목을 반영하여
 
 <table data-view="cards"><thead><tr><th></th><th>entity</th><th>table</th></tr></thead><tbody><tr><td>input</td><td></td><td></td></tr><tr><td>output</td><td>IrDcntRateBu</td><td>IR_DCNT_RATE_BU</td></tr></tbody></table>
 
-## Work Detail [job260.md](../../../../etc/java/src/job260.md "mention")
+## Work Detail
 
-bottom-up 방식에 따라 기본 무위험 금리기간구조에 조정항목(유동성프리미엄, 변동성 조정)을 반영하여 조정 무위험기간구조를 산출함.&#x20;
-
-결정론적 금리 충격 시나리오를 적용하는 경우 , paramSw설정에 따라 시나리오를 구분하여 충격시나리오를 반영한 결과를 산출함. (조정항목 + 충격시나리오 반영)
+* &#x20;[job260](../../../../etc/java/src/job260/ "mention")
+* bottom-up 방식에 따라 기본 무위험 금리기간구조에 조정항목(유동성프리미엄, 변동성 조정)을 반영하여 조정 무위험기간구조를 산출함.&#x20;
+* 결정론적 금리 충격 시나리오를 적용하는 경우 , paramSw설정에 따라 시나리오를 구분하여 충격시나리오를 반영한 결과를 산출함. (조정항목 + 충격시나리오 반영)
 

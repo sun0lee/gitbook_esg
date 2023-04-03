@@ -4,7 +4,7 @@ description: >-
   방식을 적용해 전체 월별 만기구간에 대해 보간/보외
 ---
 
-# 전체 기간별 할인율
+# DF (Full Tenor)
 
 ## Preview
 
@@ -49,14 +49,14 @@ description: >-
 
 
 
-## Work Detail [job270.md](../../../../etc/java/src/job270.md "mention")
+## Work Detail&#x20;
 
-irCurveNm(금리커브) 단위로 paramSw에 설정된 irCurveSceNo(시나리오)마다 아래의 작업을 반복한다.&#x20;
-
+* [job270](../../../../etc/java/src/job270/ "mention")
+  * paramSw에 설정된 irCurveNm(금리커브) 단위로 &#x20;
+  * irCurveSceNo(시나리오)마다 아래의 작업을 반복한다.&#x20;
+    1. 부채 할인율 처리&#x20;
+    2. \~4. 자산 할인율을 위한 처리&#x20;
 * K-ICS(applBizDv)의 경우 민감도 분석 목적에 따라 YTM에 직접 충격을 반영하는 경우를 처리하기 위해 작업을 구분하였음.&#x20;
-
-1. 부채 할인율 처리&#x20;
-2. \~4. 자산 할인율을 위한 처리&#x20;
 
 
 

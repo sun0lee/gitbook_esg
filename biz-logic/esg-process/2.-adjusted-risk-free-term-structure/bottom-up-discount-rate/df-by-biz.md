@@ -2,7 +2,7 @@
 description: 전 구간 월단위로 산출된 금리커브를 기초로 자산시나리오와 부채 시나리오에 따라 조정여부가 상이하므로 구분하여 적재.
 ---
 
-# 목적별 할인율
+# DF by Biz
 
 ## Preview
 
@@ -16,11 +16,11 @@ description: 전 구간 월단위로 산출된 금리커브를 기초로 자산�
 
 
 
-## Work Detail [job280.md](../../../../etc/java/src/job280.md "mention")
+## Work Detail&#x20;
 
-자산의 경우 조정(유동성프리미엄 또는 변동성조정)을 반영하지 않은 spot rate, fwd rate 값을 가져온다.&#x20;
-
-부채의 경우 조정후 무위험금리기간구조인 adj spot rate, adj fwd rate를 가져온다
+* [job280.md](../../../../etc/java/src/job280.md "mention")
+* 자산의 경우 조정(LP 또는 VA)을 반영하지 않은 spot rate, fwd rate 값을 가져온다.&#x20;
+* 부채의 경우 조정후 무위험금리기간구조인 adj spot rate, adj fwd rate를 가져온다.
 
 
 
