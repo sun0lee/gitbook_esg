@@ -17,20 +17,16 @@ log.info("[{}] has been Deleted in Job:[{}] [BASE_YYMM: {}, COUNT: {}]"
 ## 2.  biz logic&#x20;
 
 ```java
-List<IrDcntRate> kicsDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "KICS", kicsSwMap, projectionYear);
+List<IrDcntRate> kicsDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd, "KICS", kicsSwMap, projectionYear);
     kicsDcntRate.stream().forEach(s -> session.save(s));
 
-List<IrDcntRate> ifrsDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "IFRS", ifrsSwMap, projectionYear);
+List<IrDcntRate> ifrsDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd, "IFRS", ifrsSwMap, projectionYear);
     ifrsDcntRate.stream().forEach(s -> session.save(s));
 
-List<IrDcntRate> ibizDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "IBIZ", ibizSwMap, projectionYear);
+List<IrDcntRate> ibizDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd, "IBIZ", ibizSwMap, projectionYear);
     ibizDcntRate.stream().forEach(s -> session.save(s));
 
-List<IrDcntRate> saasDcntRate = Esg270_IrDcntRate.createIrDcntRate
-                                (bssd, "SAAS", saasSwMap, projectionYear);
+List<IrDcntRate> saasDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd, "SAAS", saasSwMap, projectionYear);
     saasDcntRate.stream().forEach(s -> session.save(s));
 ```
 

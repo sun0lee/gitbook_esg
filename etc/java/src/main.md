@@ -226,6 +226,14 @@ cirPrjYear                   = Integer.parseInt(argInDBMap.getOrDefault("CIR_PRO
 |  조정 무위험 금리커브 | [job280.md](job280.md "mention") | Biz Applied TermStructure by SW                         |
 |              |                                  |                                                         |
 
+#### TODO : 반복되는 처리구간 중복되는 로직 없는지 확인하기&#x20;
+
+* JOB240\~JOB260 : (loop) BIZ -> IRCURVE -> SCENARIO -> TENOR&#x20;
+* JOB260 : (loop) BIZ -> IRCURVE&#x20;
+* JOB270 :  (loop) BIZ -> IRCURVE -> SCENARIO
+
+
+
 ## 4. main 종료&#x20;
 
 {% code title="세션종료 " %}
