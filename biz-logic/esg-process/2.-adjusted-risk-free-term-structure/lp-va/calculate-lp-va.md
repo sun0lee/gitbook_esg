@@ -24,7 +24,7 @@ description: >-
 
 {% tabs %}
 {% tab title="BU1" %}
-`setLpFromSwMap`
+[#2.1.-esg240\_lpsprd.setlpfromswmap](../../../../etc/java/src/job240.md#2.1.-esg240\_lpsprd.setlpfromswmap "mention")
 
 금감원에서 제공한 조정 값(변동성 조정, 유동성 프리미엄)처럼 만기 구분없이 일정한 상수값(constant)을 적용하고자 하는 경우.  변동성 조정 산출식의 인정비율(KICS 80%, IFRS 100%)이 이미 반영되어 산출된 상수를 조정항목 (변동성 조정, 유동성프리미엄) 값에 입력함.&#x20;
 
@@ -44,7 +44,7 @@ description: >-
 {% endtab %}
 
 {% tab title="BU2" %}
-`setLpFromCrdSprd`&#x20;
+[#2.2.esg240\_lpsprd.setlpfromcrdsprd](../../../../etc/java/src/job240.md#2.2.esg240\_lpsprd.setlpfromcrdsprd "mention")
 
 만기에 따라 조정 수준을 차등 적용하고자하는 경우 IR\_SPRD\_CURVE 테이블의 만기별 유동성 프리미엄 값을 적용함.&#x20;
 
@@ -64,7 +64,7 @@ description: >-
 {% endtab %}
 
 {% tab title="BU3" %}
-`setLpFromUsr`
+[#2.3.-esg240\_lpsprd.setlpfromusr](../../../../etc/java/src/job240.md#2.3.-esg240\_lpsprd.setlpfromusr "mention")
 
 금리커브 및 만기에  따라 조정항목(변동성 조정, 유동성 프리미엄)의 수준을 차등 적용하고 싶은 경우 적용.
 
