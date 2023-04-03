@@ -2,7 +2,7 @@
 description: 업무구분 (IFRS, KICS, IBIZ, SAAS)에 따라 필요한 입력변수를 Map으로 구분함. 금리커브 및 시나리오 단위로 설정함.
 ---
 
-# Parameter 설정✱(110)
+# set Parameter✱
 
 ## Table&#x20;
 
@@ -15,6 +15,8 @@ IR\_PARAM\_SW\_USR에 사용자가 엔진 수행시 필요한 입력변수(param
 
 
 ## Work Detail
+
+* [job110.md](../../../etc/java/src/job110.md "mention")
 
 1. IR\_PARAM\_SW\_USR -> IR\_PARAM\_SW
 2. 엔진 내부적으로는 업무구분 (IFRS, KICS, IBIZ, SAAS)에 따라 이후 작업에 필요한 입력변수를 Map으로 구분함. applBizDvSet : 이후 작업에서 biz구분에 따라 각각의 맵을 이용하여 작업하기 때문에 110번 작업을 필수작업이 됨.&#x20;

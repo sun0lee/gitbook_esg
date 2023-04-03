@@ -4,7 +4,7 @@ description: >-
   가지의 입력방식이 존재
 ---
 
-# YTM 입수
+# input YTM
 
 ## Source
 
@@ -32,12 +32,14 @@ description: >-
 
 
 
-## Work Detail [job130.md](../../../etc/java/src/job130.md "mention")
+## Work Detail&#x20;
 
-기준일자에는 아래의 두 작업 중 1가지 방식을 선택해서 작업함. 즉, 사용자는 두 개의 USR 테이블 중 1개에만 YTM을 적재하면 됨. &#x20;
+* [job130.md](../../../etc/java/src/job130.md "mention")
+* 기준일자에는 아래의 두 작업 중 1가지 방식을 선택해서 작업함. 즉, 사용자는 두 개의 USR 테이블 중 1개에만 YTM을 적재하면 됨. &#x20;
+  1. IR\_CURVE\_YTM\_USR\_HIS -> IR\_CURVE\_YTM
+     * input 01 형태로 가져오는 경우 만기 구분이 컬럼으로 구분되기 때문에 unpivot 처리&#x20;
+  2. IR\_CURVE\_YTM\_USR -> IR\_CURVE\_YTM
+     * input 02 형태로 가져오는 경우 1:1 move  (과거 데이터 일괄 적재용인가 ?)&#x20;
 
-1. IR\_CURVE\_YTM\_USR\_HIS -> IR\_CURVE\_YTM
-   * input 01 형태로 가져오는 경우 만기 구분이 컬럼으로 구분되기 때문에 unpivot 처리&#x20;
-2. IR\_CURVE\_YTM\_USR -> IR\_CURVE\_YTM
-   * input 02 형태로 가져오는 경우 1:1 move  (과거 데이터 일괄 적재용인가 ?)&#x20;
+1.
 

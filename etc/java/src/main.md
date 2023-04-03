@@ -63,7 +63,9 @@ String    iRateHisStBaseDate          = "20100101";
 
 <details>
 
-<summary><strong>argInputMap 생성</strong> </summary>
+<summary>properties</summary>
+
+**argInputMap 생성**&#x20;
 
 실행시 입력변수 arg 를 입력받아 **ERunArgument** 속성에 따라 분류&#x20;
 
@@ -80,11 +82,7 @@ String    iRateHisStBaseDate          = "20100101";
   * properties PROPERTIES
   * encrypt ENCRYPT
 
-</details>
-
-<details>
-
-<summary>properties 정보 생성 </summary>
+#### properties 정보 생성&#x20;
 
 ```java
 Properties properties = new Properties();
@@ -106,11 +104,13 @@ try {
 }
 ```
 
+
+
 </details>
 
 <details>
 
-<summary>session 생성 -> hibernate가 해줌 </summary>
+<summary>session 생성 </summary>
 
 ```java
 session = HibernateUtil.getSessionFactory().openSession();
@@ -127,19 +127,36 @@ log.info("End of session call");
 
 <details>
 
-<summary>argInDBMap </summary>
+<summary>properties (DB :  default) </summary>
+
+argInDBMap (table에 설정된 properties 설정정보 읽어와서 처리)&#x20;
 
 * 엔진에서 산출에 필요한 상수를 db에서 읽어옴&#x20;
 * static 변수랑 겹침 !! 아래에서 default 처리함&#x20;
 * CO\_ESG\_META / GROUP\_ID ='PROPERTIES'
 
 ```java
-argInDBMap = CoEsgMetaDao.getCoEsgMeta("PROPERTIES").stream().collect(toMap(s->s.getParamKey(), s->s.getParamValue()));		
+argInDBMap = CoEsgMetaDao.getCoEsgMeta("PROPERTIES").stream()
+        .collect(toMap(s->s.getParamKey(), s->s.getParamValue()));	
 log.info("argInDBMap: {}", argInDBMap);
 ```
 
-```
-argInDBMap: {AFNS_CONF_INTERVAL=0.995, SIGNIFICANCE_LEVEL=0.05, BOND_YIELD_TGT_DURATION=3, IR_HIS_START_DATE=20100101, HW_SIGMA_AVG_NUM=120, HW_ALPHA_AVG_NUM=120, CIR_PROJECTION_YEAR=30, HW1F_SIGMA_INIT=0.007, LP_CURVE_ID=5010110, CIR_AVG_MONTH=36, HW1F_ALPHA_INIT=0.05, PROJECTION_YEAR=120, AFNS_WEEK_DAY=5}
+```java
+argInDBMap: {
+  AFNS_CONF_INTERVAL=0.995
+, SIGNIFICANCE_LEVEL=0.05
+, BOND_YIELD_TGT_DURATION=3
+, IR_HIS_START_DATE=20100101
+, HW_SIGMA_AVG_NUM=120
+, HW_ALPHA_AVG_NUM=120
+, CIR_PROJECTION_YEAR=30
+, HW1F_SIGMA_INIT=0.007
+, LP_CURVE_ID=5010110
+, CIR_AVG_MONTH=36
+, HW1F_ALPHA_INIT=0.05
+, PROJECTION_YEAR=120
+, AFNS_WEEK_DAY=5
+}
 ```
 
 </details>
@@ -152,8 +169,13 @@ argInDBMap: {AFNS_CONF_INTERVAL=0.995, SIGNIFICANCE_LEVEL=0.05, BOND_YIELD_TGT_D
 * CO\_JOB\_LIST /  USE\_YN ='Y
 
 ```java
-CoJobListDao.getCoJobList().stream().forEach(s -> log.info("JOB LIST: {}, {}", s.getJobNm().trim(), s.getJobName().trim()));
-jobList    = CoJobListDao.getCoJobList().stream().map(s -> s.getJobNm().trim()).collect(Collectors.toList());
+CoJobListDao.getCoJobList().stream()
+    .forEach(s -> log.info("JOB LIST: {}, {}"
+    , s.getJobNm().trim()
+    , s.getJobName().trim()));
+    
+jobList    = CoJobListDao.getCoJobList().stream()
+    .map(s -> s.getJobNm().trim()).collect(Collectors.toList());
 ```
 
 </details>
@@ -188,23 +210,21 @@ cirPrjYear                   = Integer.parseInt(argInDBMap.getOrDefault("CIR_PRO
 
 ## 3. main job (job110 ... job820)&#x20;
 
-|      구분      | job | desc                                                    |
-| :----------: | :-: | ------------------------------------------------------- |
-|   prepare    |     | Set Smith-Wilson Attribute                              |
-|    prepare   |     | Set Swaption Volatility                                 |
-|  기본 무위험 금리커브 |     | Set YTM TermStructure                                   |
-|  기본 무위험 금리커브 |     | YTM to SPOT by Smith-Wilson Method                      |
-| 조정 무위험 금리커브  |     | AFNS Weekly Input TermStructure Setup                   |
-|  조정 무위험 금리커브 |     | AFNS Shock Spread                                       |
-|  조정 무위험 금리커브 |     | Biz Applied AFNS Shock Spread                           |
-|  조정 무위험 금리커브 |     | Set Liquidity Premium                                   |
-|  조정 무위험 금리커브 |     | Biz Applied Liquidity Premium                           |
-|  조정 무위험 금리커브 |     | BottomUp Risk Free TermStructure with Liquidity Premium |
-|  조정 무위험 금리커브 |     | Interpolated TermStructure by SW                        |
-|  조정 무위험 금리커브 |     | Biz Applied TermStructure by SW                         |
-|              |     |                                                         |
-
-###
+|      구분      |                job               | desc                                                    |
+| :----------: | :------------------------------: | ------------------------------------------------------- |
+|   prepare    | [job110.md](job110.md "mention") | Set Smith-Wilson Attribute                              |
+|    prepare   | [job120.md](job120.md "mention") | Set Swaption Volatility                                 |
+|  기본 무위험 금리커브 | [job130.md](job130.md "mention") | Set YTM TermStructure                                   |
+|  기본 무위험 금리커브 | [job150.md](job150.md "mention") | YTM to SPOT by Smith-Wilson Method                      |
+| 조정 무위험 금리커브  |    [job210](job210/ "mention")   | AFNS Weekly Input TermStructure Setup                   |
+|  조정 무위험 금리커브 |    [job220](job220/ "mention")   | AFNS Shock Spread                                       |
+|  조정 무위험 금리커브 | [job230.md](job230.md "mention") | Biz Applied AFNS Shock Spread                           |
+|  조정 무위험 금리커브 | [job240.md](job240.md "mention") | Set Liquidity Premium                                   |
+|  조정 무위험 금리커브 | [job240.md](job240.md "mention") | Biz Applied Liquidity Premium                           |
+|  조정 무위험 금리커브 |    [job260](job260/ "mention")   | BottomUp Risk Free TermStructure with Liquidity Premium |
+|  조정 무위험 금리커브 |    [job270](job270/ "mention")   | Interpolated TermStructure by SW                        |
+|  조정 무위험 금리커브 | [job280.md](job280.md "mention") | Biz Applied TermStructure by SW                         |
+|              |                                  |                                                         |
 
 ## 4. main 종료&#x20;
 

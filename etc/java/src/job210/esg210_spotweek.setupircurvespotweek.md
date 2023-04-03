@@ -38,7 +38,12 @@ if(curveHisList.size() < 1000) {
 <summary>getIrCurveSpotListHis()</summary>
 
 ```java
-public static List<IrCurveSpot> getIrCurveSpotListHis(String bssd, String stBssd, String irCurveNm, List<String> tenorList) {
+public static List<IrCurveSpot> getIrCurveSpotListHis
+( String bssd
+, String stBssd
+, String irCurveNm
+, List<String> tenorList
+) {
 
 String query = " select a from IrCurveSpot a    " 
              + "  where a.irCurveNm =:irCurveNm "			
@@ -141,4 +146,4 @@ return weekHisMap.values().stream()
                 .flatMap(s -> s.stream()).collect(Collectors.toList());		
 ```
 
-## Job210 [#4.-spotweek](./#4.-spotweek "mention")
+#### Job210 [#4.-spotweek](./#4.-spotweek "mention")

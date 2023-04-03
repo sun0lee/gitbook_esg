@@ -21,7 +21,8 @@ description: 스왑션변동성 입수 ; 금리커브 단위로 스왑션 만기
 
 <table data-view="cards"><thead><tr><th></th><th>entity</th><th>table</th></tr></thead><tbody><tr><td>input</td><td>IrVolSwpnUsr</td><td>IR_VOL_SWPN_USR</td></tr><tr><td>output</td><td>IrVolSwpn</td><td>IR_VOL_SWPN</td></tr></tbody></table>
 
-## Work Detail( )
+## Work Detail
 
-IR\_VOL\_SWPN\_USR -> IR\_VOL\_SWPN
+* [job120.md](../../../etc/java/src/job120.md "mention")
+* IR\_VOL\_SWPN\_USR -> IR\_VOL\_SWPN
 

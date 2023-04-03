@@ -1,5 +1,7 @@
 # job270
 
+#### (process) [df-full-tenor.md](../../../../biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-full-tenor.md "mention")
+
 ## 1.  delete&#x20;
 
 ```java
@@ -45,6 +47,3 @@ session.clear();
 completeJob("SUCCESS", jobLog);
 ```
 
-
-
-## (process) [df-full-tenor.md](../../../../biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-full-tenor.md "mention")

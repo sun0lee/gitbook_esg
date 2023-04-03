@@ -1,5 +1,7 @@
 # job210
 
+#### (Process) [ir-historical.md](../../../../biz-logic/esg-process/2.-adjusted-risk-free-term-structure/ir-shock-spread/ir-historical.md "mention")
+
 ## 0. 금리커브 단위로 반복&#x20;
 
 ```java
@@ -10,7 +12,6 @@ for(Map.Entry<String, IrCurve> irCrv : irCurveMap.entrySet())
 
 ## 1. check
 
-{% code title="IR_PARAM_SW 설정여부 확인" %}
 ```java
 if(!irCurveSwMap.containsKey(irCrv.getKey())) {
   log.warn("No Ir Curve Data [{}] in Smith-Wilson Map for [{}]"
@@ -19,20 +20,18 @@ if(!irCurveSwMap.containsKey(irCrv.getKey())) {
   continue;
 }
 ```
-{% endcode %}
 
 ## 2. tenorList&#x20;
 
 작업기준일자의 base Tenor 목록을 추출함. (hist 내역에서도 동일한 tenor기준으로 조회할 목적 )
 
-{% code title="LLP 까지 tenor " %}
 ```java
 List<String> tenorList = IrCurveSpotDao.getIrCurveTenorList
     ( bssd
     , irCrv.getKey()
     , Math.min(
            StringUtil.objectToPrimitive(irCurveSwMap.get(irCrv.getKey()).getLlp())
-         , 20)
+         , 20) // llp까지 
     );
     
 log.info("TenorList in [{}]: ID: [{}], llp: [{}], matCd: {}"
@@ -42,7 +41,6 @@ log.info("TenorList in [{}]: ID: [{}], llp: [{}], matCd: {}"
    , tenorList
    );	
 ```
-{% endcode %}
 
 <details>
 
@@ -75,7 +73,6 @@ return session.createQuery(query, String.class)
 
 ## 3. delete
 
-{% code title="기준일에 해당하는 월 데이터 delete " %}
 ```java
 int delNum = session.createQuery(
      " delete IrCurveSpotWeek a 
@@ -94,7 +91,6 @@ log.info("[{}] has been Deleted in Job:[{}] [IR_CURVE_NM: {}, COUNT: {}]"
 , delNum);
 
 ```
-{% endcode %}
 
 ## 4. spotWeek
 
