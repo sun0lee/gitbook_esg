@@ -107,5 +107,4 @@
   * [Making objects persistent](etc/orm-jpa-hibernate/making-objects-persistent.md)
 * [Git](etc/git.md)
 * [Todo](etc/todo/README.md)
-  * [공통작업 분리대상](etc/todo/undefined.md)
   * [@enumerated](etc/todo/enumerated.md)

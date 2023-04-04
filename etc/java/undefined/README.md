@@ -2,12 +2,12 @@
 
 <details>
 
-<summary>Data Type</summary>
+<summary>Type ; 자료형 </summary>
 
-* 변수 : @stack 영역에 성됨.&#x20;
-* 기본타입 : 값 자체를 저장함 (@stack)
-* 참조타입 : 객체가 생성된 메모리(@heap) 주소(@stack)를 저장함.
-* String 문자열은 대표적인 참조타입 , 자체가 객체임
+* 변수 : @stack 영역에 생성됨.&#x20;
+* 기본타입 : 값 자체를 저장함 (@stack) ; primitive&#x20;
+* 참조타입 : 객체가 생성된 메모리(@heap) 주소(@stack)를 저장함. ; interface, class, array
+  * String 문자열은 대표적인 참조타입 , 자체가 객체임
 *
 
     <figure><img src="../../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
