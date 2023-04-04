@@ -56,6 +56,7 @@
         * [Inheritance](etc/java/undefined/polymorphism/abstract/inheritance.md)
         * [Final](etc/java/undefined/polymorphism/abstract/final.md)
       * [Interface](etc/java/undefined/polymorphism/interface.md)
+    * [ENUM](etc/java/undefined/enum.md)
   * [Collection](etc/java/collection/README.md)
     * [List\<E>](etc/java/collection/list-less-than-e-greater-than.md)
     * [Set\<E>](etc/java/collection/set-less-than-e-greater-than.md)
