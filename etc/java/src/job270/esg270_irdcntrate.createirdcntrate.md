@@ -80,7 +80,8 @@ Map<String, IrDcntRate> adjRateMap
 
 TreeSet<Double> tenorList 
 = adjRateList.stream().map
-  (s -> Double.valueOf(1.0 * Integer.valueOf(s.getMatCd().substring(1)) / MONTH_IN_YEAR))
+  (s -> Double.valueOf(1.0 * Integer.valueOf(s.getMatCd().substring(1)) 
+       / MONTH_IN_YEAR))
   .collect(Collectors.toCollection(TreeSet::new)); 
 ```
 
@@ -104,7 +105,7 @@ adjRateSce1Map
  ));
 ```
 
-* 위에서 이미 부채할인율은 smith-wilton 보간했음. 그 결과 중에 시나리오 1번은 1번 통에 담기 &#x20;
+* 위에서 이미 부채할인율은 smith-wilson 보간했음. 그 결과 중에 시나리오 1번은 1번 통에 담기 &#x20;
 
 <img src="../../../../.gitbook/assets/image.png" alt="" data-size="original">
 
@@ -171,7 +172,7 @@ for(IrDcntRate rslt : adjRateList) {
 
 * 엑셀로직  A base + ( L scen - L base ) &#x20;
   * 시나리오별 자산할인율 = 자산 기준시나리오 값에 만기별 금리충격수준 반영
-* 엔진로직 . L scen + (A base - L base)
+* 엔진로직  L scen + (A base - L base)
   * 시나리오별 자산 할인율 = 시나리오별 부채할인율에 만기별 자산/부채 스프레드조정 반영
 
 ```java
@@ -219,6 +220,7 @@ List<IrCurveYtm> ytmList
 = IrDcntRateDao
  .getIrDcntRateBuToBaseSpotList(bssd, applBizDv, curveSwMap.getKey(), swSce.getKey())
  .stream().map(s -> s.convertSimpleYtm()).collect(Collectors.toList());					
+
 //자산 할인율 
 SmithWilsonKicsBts swBts 
 = SmithWilsonKicsBts.of()
