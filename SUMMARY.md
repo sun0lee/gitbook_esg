@@ -89,6 +89,7 @@
     * [job250](etc/java/src/job250.md)
     * [job260](etc/java/src/job260/README.md)
       * [Esg261\_IrDcntRateBu\_Ytm.setIrDcntRateBu()](etc/java/src/job260/esg261\_irdcntratebu\_ytm.setirdcntratebu.md)
+      * [Esg260\_IrDcntRateBu.setIrDcntRateBu](etc/java/src/job260/esg260\_irdcntratebu.setirdcntratebu.md)
     * [job270](etc/java/src/job270/README.md)
       * [Esg270\_IrDcntRate.createIrDcntRate()](etc/java/src/job270/esg270\_irdcntrate.createirdcntrate.md)
     * [job280](etc/java/src/job280.md)
