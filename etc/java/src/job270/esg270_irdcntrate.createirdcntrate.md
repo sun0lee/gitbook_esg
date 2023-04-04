@@ -107,7 +107,7 @@ adjRateSce1Map
 
 * 위에서 이미 부채할인율은 smith-wilson 보간했음. 그 결과 중에 시나리오 1번은 1번 통에 담기 &#x20;
 
-<img src="../../../../.gitbook/assets/image.png" alt="" data-size="original">
+<img src="../../../../.gitbook/assets/image (6).png" alt="" data-size="original">
 
 </details>
 
