@@ -4,21 +4,27 @@ description: stream().collect(Collectors.toList())
 
 # stream().collect()
 
-최종 연산중에 하나인 자주쓰는 collect 의 예시를 통해 어떻게 결과 값을 반환하는지 확인함.&#x20;
+자주 사용되는 최종 연산중에 하나인 collect() 의 구체적인 예시를 통해 어떻게 결과 값을 반환하는지 확인함.&#x20;
 
 {% code overflow="wrap" %}
 ```java
-import java.util.stream.Collectors ;
+import java.util.stream.Collectors ; 
+//Collectors구현 클래스를 임포트 하는경우  
 
-List<String> rst = sampleList.stream().collect(Collectors.toList());
+List<String> rst = sampleList.stream().collect(Collectors.toList()); 
+// collect()의 인자는 객체.매서드()
 ```
 {% endcode %}
 
+
+
 {% code overflow="wrap" %}
 ```java
-import static java.util.stream.Collectors.toList ;
+import static java.util.stream.Collectors.toList ; 
+// 정적 메서드 자체를 임포트 하는 경우 
 
-List<String> rst = sampleList.stream().collect(toList());
+List<String> rst = sampleList.stream().collect(toList()); 
+//collect()의 인자는 toList 메서드만 call을 해도 됨.(정적메서드라 객체 없이 써도 됨)
 ```
 {% endcode %}
 
@@ -36,7 +42,7 @@ List<String> rst = sampleList.stream().collect(toList());
 
 ## 1. Stream.collect()
 
-데이터의 중간처리 후 마지막에 원하는 형태로 변환해주는 역할을 하는 메서드.&#x20;
+#### 데이터의 중간처리 후 마지막에 원하는 형태로 변환해주는 역할을 하는 "추상" 메서드.&#x20;
 
 Stream.class는 stream이 해야할 일들을 정의한 interface이고, 여기에 정의된 collect()는 추상메서드임. 여기에서 직접 구현하지 않음 (하기로 한 일들에 대한 명세만 있을 뿐임 )
 
@@ -49,25 +55,7 @@ Stream.class는 stream이 해야할 일들을 정의한 interface이고, 여기�
 
 
 
-## 2. Collectors.class&#x20;
-
-그럼 Stream.class (인터페이스)에서 정의한 일들을 실제로 누가 구현하냐면 Collectors.class가 함. 그래서 미리 정의된 모든 구현은 Collectors 클래스에 찾을 수 있음. 약속된 기능을 사용해야 할때는 실제로 구현한 Collectors를 import하고. call 할 때에는 인터페이스의 약속된 형태로 calll 하는 것임.&#x20;
-
-### 2.1. Collectors.toList()
-
-
-
-### 2.2. Collectors.toSet()&#x20;
-
-### 2.4. Collectors.toMap()
-
-
-
-
-
-
-
-## 3. Collector\<T, A, R>
+## 2. Collector\<T, A, R>
 
 #### public interface Collector\<T, A, R>
 
@@ -98,30 +86,20 @@ public interface Collector<T, A, R> {
                                                                            characteristics));
         return new Collectors.CollectorImpl<>(supplier, accumulator, combiner, cs);
     }
-
-    public static<T, A, R> Collector<T, A, R> of(Supplier<A> supplier,
-                                                 BiConsumer<A, T> accumulator,
-                                                 BinaryOperator<A> combiner,
-                                                 Function<A, R> finisher,
-                                                 Characteristics... characteristics) {
-        Objects.requireNonNull(supplier);
-        Objects.requireNonNull(accumulator);
-        Objects.requireNonNull(combiner);
-        Objects.requireNonNull(finisher);
-        Objects.requireNonNull(characteristics);
-        Set<Characteristics> cs = Collectors.CH_NOID;
-        if (characteristics.length > 0) {
-            cs = EnumSet.noneOf(Characteristics.class);
-            Collections.addAll(cs, characteristics);
-            cs = Collections.unmodifiableSet(cs);
-        }
-        return new Collectors.CollectorImpl<>(supplier, accumulator, combiner, finisher, cs);
-    }
-    enum Characteristics {
-        CONCURRENT,
-        UNORDERED,
-        IDENTITY_FINISH
-    }
 }
 ```
+
+
+
+## 3. Collectors.class&#x20;
+
+Stream.class (인터페이스)에서 정의한 일들을 실제로 누가 구현하냐면 Collectors.class가 함. 미리 정의된 모든 구현은 Collectors 클래스에 찾을 수 있음. 약속된 기능을 사용해야 할때는 실제로 구현한 Collectors를 import하고. call 할 때에는 인터페이스의 약속된 형태로 calll 하는 것임.&#x20;
+
+#### 2.1. Collectors.toList()
+
+#### 2.2. Collectors.toSet()&#x20;
+
+#### 2.3. Collectors.toMap()
+
+
 
