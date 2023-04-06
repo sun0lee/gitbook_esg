@@ -14,7 +14,7 @@ description: 스트림에서 제공하는 연산 관련된 메서드
 
 ## 1. Intermediate operation (중간연산)&#x20;
 
-| Operation (method                          | Return type | Functional IF            | Fn discriptor |
+| Operation                                  | Return type | Functional IF            | Fn discriptor |
 | ------------------------------------------ | ----------- | ------------------------ | ------------- |
 | [#1.1.-filter](./#1.1.-filter "mention")   | Stream\<T>  | Predicate\<T>            | T -> boolean  |
 | [#1.2.-map](./#1.2.-map "mention")         | Stream\<R>  | Function\<T,R>           | T -> R        |
@@ -79,17 +79,17 @@ Returns a stream consisting of the elements of this stream, sorted according to 
 
 ## 2. Terminal operation (최종연산)&#x20;
 
-| Operation | Return type   | Functional IF      | Fn discriptor |
-| --------- | ------------- | ------------------ | ------------- |
-| forEach   | void          | Consumer\<T>       | T-> void      |
-| collect   | R             | Collector\<T,A,R>  |               |
-| reduce    | Optional\<T>  | BinaryOperator\<T> | (T,T) -> T    |
-| anyMatch  | boolean       | Predicate\<T>      | T -> boolean  |
-| noneMatch | boolean       | Predicate\<T>      | T -> boolean  |
-| allMatch  | boolean       | Predicate\<T>      | T -> boolean  |
-| count     | ong (generic) | long               |               |
-| findAny   | Optional\<T>  |                    |               |
-| findFirst | Optional\<T>  |                    |               |
+| Operation                                  | Return type   | Functional IF      | Fn discriptor |
+| ------------------------------------------ | ------------- | ------------------ | ------------- |
+| [#2.1.-foreach](./#2.1.-foreach "mention") | void          | Consumer\<T>       | T-> void      |
+| [#2.2.-collect](./#2.2.-collect "mention") | R             | Collector\<T,A,R>  |               |
+| reduce                                     | Optional\<T>  | BinaryOperator\<T> | (T,T) -> T    |
+| anyMatch                                   | boolean       | Predicate\<T>      | T -> boolean  |
+| noneMatch                                  | boolean       | Predicate\<T>      | T -> boolean  |
+| allMatch                                   | boolean       | Predicate\<T>      | T -> boolean  |
+| count                                      | ong (generic) | long               |               |
+| findAny                                    | Optional\<T>  |                    |               |
+| findFirst                                  | Optional\<T>  |                    |               |
 
 ### 2.1. forEach()
 
@@ -156,7 +156,7 @@ String concat
 
 </details>
 
-이 작업은 아래의 작업의 결과와 같음&#x20;
+위 작업은 아래의 결과와 같음&#x20;
 
 ```java
 R result = supplier.get();
