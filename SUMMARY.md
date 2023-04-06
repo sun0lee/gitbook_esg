@@ -107,6 +107,6 @@
     * [단방향 ManyToOne](etc/orm-jpa-hibernate/entity-relationships/manytoone.md)
   * [Making objects persistent](etc/orm-jpa-hibernate/making-objects-persistent.md)
 * [Git](etc/git/README.md)
-  * [gitbook](etc/git/gitbook.md)
+  * [Rollback (gitbook)](etc/git/gitbook.md)
 * [Todo](etc/todo/README.md)
   * [@enumerated](etc/todo/enumerated.md)
