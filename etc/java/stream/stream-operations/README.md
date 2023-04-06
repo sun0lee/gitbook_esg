@@ -26,7 +26,7 @@ description: 스트림에서 제공하는 연산 관련된 메서드
 | takeWhile                                  | Stream\<T>  | Predicate\<T>            | T->boolean    |
 | dropWhile                                  | Stream\<T>  | redicate\<T>             | T->boolean    |
 
-### 1.1. filter
+### 1.1. filter()
 
 ```java
 Stream<T> filter(Predicate<? super T> predicate)
@@ -38,7 +38,7 @@ Stream<T> filter(Predicate<? super T> predicate)
 
 
 
-### 1.2. map
+### 1.2. map()
 
 ```java
 <R> Stream<R> map(Function<? super T,? extends R> mapper)
@@ -51,7 +51,7 @@ Stream<T> filter(Predicate<? super T> predicate)
 
 
 
-### 1.3. flatMap
+### 1.3. flatMap()
 
 ```java
 <R> Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
@@ -65,7 +65,7 @@ Returns a stream consisting of the results of replacing each element of this str
 
 
 
-### 1.4. sorted
+### 1.4. sorted()
 
 ```java
 Stream<T> sorted(Comparator<? super T> comparator)
@@ -79,18 +79,95 @@ Returns a stream consisting of the elements of this stream, sorted according to 
 
 ## 2. Terminal operation (최종연산)&#x20;
 
-| Operation | Return type   | Functional IF                                                                                    | Fn discriptor |
-| --------- | ------------- | ------------------------------------------------------------------------------------------------ | ------------- |
-| forEach   | void          | Consumer\<T>                                                                                     | T-> void      |
-| collect   | R             | [collector-less-than-t-a-r-greater-than.md](collector-less-than-t-a-r-greater-than.md "mention") |               |
-| reduce    | Optional\<T>  | BinaryOperator\<T>                                                                               | (T,T) -> T    |
-| anyMatch  | boolean       | Predicate\<T>                                                                                    | T -> boolean  |
-| noneMatch | boolean       | Predicate\<T>                                                                                    | T -> boolean  |
-| allMatch  | boolean       | Predicate\<T>                                                                                    | T -> boolean  |
-| count     | ong (generic) | long                                                                                             |               |
-| findAny   | Optional\<T>  |                                                                                                  |               |
-| findFirst | Optional\<T>  |                                                                                                  |               |
+| Operation | Return type   | Functional IF      | Fn discriptor |
+| --------- | ------------- | ------------------ | ------------- |
+| forEach   | void          | Consumer\<T>       | T-> void      |
+| collect   | R             | Collector\<T,A,R>  |               |
+| reduce    | Optional\<T>  | BinaryOperator\<T> | (T,T) -> T    |
+| anyMatch  | boolean       | Predicate\<T>      | T -> boolean  |
+| noneMatch | boolean       | Predicate\<T>      | T -> boolean  |
+| allMatch  | boolean       | Predicate\<T>      | T -> boolean  |
+| count     | ong (generic) | long               |               |
+| findAny   | Optional\<T>  |                    |               |
+| findFirst | Optional\<T>  |                    |               |
 
-### 2.1. forEach
+### 2.1. forEach()
 
-### 2.2. collect
+```java
+void forEach(Consumer<? super T> action)
+```
+
+Performs an action for each element of this stream.
+
+The behavior of this operation is explicitly nondeterministic. For parallel stream pipelines, this operation does _not_ guarantee to respect the encounter order of the stream, as doing so would sacrifice the benefit of parallelism. For any given element, the action may be performed at whatever time and in whatever thread the library chooses. If the action accesses shared state, it is responsible for providing the required synchronization.
+
+* Parameters:`action` - a [non-interfering](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#NonInterference) action to perform on the elements
+
+
+
+### 2.2. collect()
+
+```java
+<R> R collect(Supplier<R> supplier,
+              BiConsumer<R,? super T> accumulator,
+              BiConsumer<R,R> combiner)
+```
+
+스트림의 모든 요소를 수집하는 메서드 . `Collector` 인터페이스를 구현하는 객체를 인수로 받음.  Performs a [mutable reduction](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#MutableReduction) operation on the elements of this stream. (스트림의 요소들에 대해 가변적인(reduce) 연산을 수행함.)
+
+<details>
+
+<summary>Mutable reduction</summary>
+
+결과 컨테이너(result container)가 가변적(mutable)인 연산을 의미.&#x20;
+
+* 결과 컨테이너는, 예를 들어 `ArrayList`와 같은 자료구조를 의미함. 이러한 컨테이너는 요소가 추가됨에 따라 내부 상태가 변경됨.
+* 즉, "mutable reduction"이란, 요소를 결과 컨테이너의 상태를 갱신하면서 추가하는 연산을 의미.
+
+#### example
+
+```java
+javaCopy codeList<Integer> numb = Arrays.asList(1, 2, 3, 4, 5); 
+List<Integer> result 
+= numb.stream()
+      .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+```
+
+위 코드는 `numb` 리스트의 요소들을 가지고&#x20;
+
+1. 새로운 `ArrayList` 객체를 생성하고,&#x20;
+2. 각 요소를 해당 리스트에 추가하며,&#x20;
+3. 최종적으로 결과 컨테이너에 모든 요소를 추가함.
+
+* `ArrayList::new`는 초기값으로 빈 리스트를 생성하는 메서드
+* `ArrayList::add`는 요소를 추가하는 메서드
+* `ArrayList::addAll`은 여러 요소를 추가하는 메서드
+
+즉, 위 코드는 `numb` 리스트의 요소들을 `ArrayList`에 추가하는 "mutable reduction" 연산을 수행하는것을 의미.
+
+```java
+// The following will take a stream of strings and concatenates them into a single string:
+String concat 
+= stringStream.collect(StringBuilder::new
+                     , StringBuilder::append
+                     , StringBuilder::append)
+              .toString();
+```
+
+</details>
+
+이 작업은 아래의 작업의 결과와 같음&#x20;
+
+```java
+R result = supplier.get();
+ for (T element : this stream)
+      accumulator.accept(result, element);
+  return result;
+```
+
+* Type Parameters:`R` - type of the result
+* Parameters:
+  * `supplier` - a function that creates a new result container. For a parallel execution, this function may be called multiple times and must return a fresh value each time.
+  * `accumulator` - an [associative](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#Associativity), [non-interfering](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#NonInterference), [stateless](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#Statelessness) function for incorporating an additional element into a result
+  * `combiner` - an [associative](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#Associativity), [non-interfering](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#NonInterference), [stateless](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#Statelessness) function for combining two values, which must be compatible with the accumulator function
+* Returns:the result of the reduction
