@@ -4,6 +4,13 @@ description: java.util.stream.Collectors / 스트림의 최종연산에 사용�
 
 # Collector\<T,A,R>
 
+|                               |           |                                                                                                                                                                                                                                                             |
+| ----------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `java.util.stream.Collectors` | class     | <ul><li>Java 8에서 추가된 스트림 API의 일부. </li><li> <code>Collector</code> 인터페이스를 구현하는 여러 가지 유용한 컬렉터를 제공하는 유틸리티 클래스 </li></ul>                                                                                                                                      |
+| `Collector`                   | interface | <p>스트림 요소들을 수집하는 데 사용되는 연산자 인터페이스</p><p>이 인터페이스는 다음과 같은 세 가지 메서드를 선언함. </p><p></p><p>public interface Collector&#x3C;T, A, R> { </p><p>Supplier supplier(); </p><p>BiConsumer&#x3C;A, T> accumulator(); </p><p>Function&#x3C;A, R> finisher(); </p><p>}</p> |
+|                               |           |                                                                                                                                                                                                                                                             |
+|                               |           |                                                                                                                                                                                                                                                             |
+
 the argument passed to the `collect()` method is an implementation of the `Collector` interface, which  is a recipe for how to build a summary of the elements in the Stream.
 
 `collect()` 메서드에 `Collector` 인터페이스(functional Interface)의 구현\__스트림의 요소를 어떤식으로 도출할지 지정하는\__ 을 전달함.&#x20;
