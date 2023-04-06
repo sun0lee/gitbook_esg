@@ -19,7 +19,7 @@ description: 기본 무위험 금리기간구조에 조정항목을 반영하여
 * 금리 충격은 신용위험요소말고 "금리" 자체에만 위험효과를 반영하기 위해 무위험에 가산하라고 해놓고 왜 ytm에 직접 치도록 했을까 ??? (궁금) &#x20;
 *
 
-    <figure><img src="../../../../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 

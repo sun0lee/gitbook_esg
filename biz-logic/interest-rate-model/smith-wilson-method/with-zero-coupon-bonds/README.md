@@ -11,7 +11,7 @@
 > _in the long run the curve reflecting the forward interest rates will reach asymptotically the UFR, the Correction tends to 0 when t->_$$\infin$$.
 >
 > * _Present market value = Present value applying the UFR_ $$\pm$$_Correction_.
-> * _Correction =_ $$\zeta_1\cdot(w_1) + \zeta_2\cdot(w_2)+ \dots +\zeta_N\cdot(w_N)$$__
+> * _Correction =_ $$\zeta_1\cdot(w_1) + \zeta_2\cdot(w_2)+ \dots +\zeta_N\cdot(w_N)$$
 > * $$w_j$$_is obtained through a Kernal function_ $$Kernel_j(t)$$ _that depends on the input's maturity._
 > *   $$\small W(t, u_j) = e^{-UFR \cdot(t+u_j)} \cdot \{\alpha\cdot min(t,u_j)-0.5\cdot e^{-\alpha \cdot max(t,u_j)} \cdot (e^{\alpha \cdot min(t,u_j)} - e^{-\alpha \cdot min(t,u_j)}) \}$$
 >

@@ -23,7 +23,7 @@ Map.Entry<String, Map<Integer, IrParamSw>>
 
 *
 
-    <figure><img src="../../../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
@@ -156,7 +156,7 @@ Map<String, Double> irSprdShkMap
 ```
 {% endcode %}
 
-*   ``
+*
 
     <figure><img src="../../../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
 
@@ -177,7 +177,7 @@ List spotSceList
 ```
 {% endcode %}
 
-*   ``
+*
 
     <figure><img src="../../../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
@@ -193,6 +193,5 @@ List spotSceList
 3. `adjSpotDisc =  spot_disc +`` `<mark style="color:red;">`lpDisc`</mark>` ``;`&#x20;
 4. `adjSpotCont = irDiscToCont (adjSpotDisc) ;`
 
-``
 
-``
+

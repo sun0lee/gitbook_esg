@@ -10,7 +10,7 @@ description: >-
 
 * [https://www.kofiabond.or.kr](https://www.kofiabond.or.kr) (금융투자협회 채권정보센터)=> 시가평가 => 채권시가평가기준수익률 &#x20;
 
-<figure><img src="../../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
 
 ## Table&#x20;
 

@@ -64,7 +64,7 @@
   * [Stream](etc/java/stream/README.md)
     * [Stream Building](etc/java/stream/stream-building.md)
     * [Stream Operations](etc/java/stream/stream-operations/README.md)
-      * [Collector\<T,A,R>](etc/java/stream/stream-operations/collector-less-than-t-a-r-greater-than.md)
+      * [stream().collect()](etc/java/stream/stream-operations/collector-less-than-t-a-r-greater-than.md)
   * [Behavior parameterization](etc/java/behavior-parameterization/README.md)
     * [Lambdas](etc/java/behavior-parameterization/lambdas/README.md)
       * [람다식 example](etc/java/behavior-parameterization/lambdas/example.md)

@@ -7,10 +7,10 @@
 #### Generalized Smith-Wilson method
 
 * _Present market value = Present value applying the UFR_ $$\pm$$_Correction_.
-* _(참고)무이표채일 때 Correction =_ $$\zeta_1\cdot(w_1) + \zeta_2\cdot(w_2)+ \dots +\zeta_N\cdot(w_N)$$__
-*   _Correction =_ $$\zeta_1\cdot(\displaystyle\sum_{j=1}^J c_{1,j}\cdot w_1) + \zeta_2\cdot(\displaystyle\sum_{j=1}^J c_{2,j}\cdot w_2)+ \dots +\zeta_N\cdot(\displaystyle\sum_{j=1}^J c_{N,j}\cdot w_N)$$__
+* _(참고)무이표채일 때 Correction =_ $$\zeta_1\cdot(w_1) + \zeta_2\cdot(w_2)+ \dots +\zeta_N\cdot(w_N)$$
+*   _Correction =_ $$\zeta_1\cdot(\displaystyle\sum_{j=1}^J c_{1,j}\cdot w_1) + \zeta_2\cdot(\displaystyle\sum_{j=1}^J c_{2,j}\cdot w_2)+ \dots +\zeta_N\cdot(\displaystyle\sum_{j=1}^J c_{N,j}\cdot w_N)$$
 
-    __
+
 * 제타에 곱해지는 만기 별 가중치를 산출할 때, 기준이 되는 상품이 단일 현금흐름으로 구성된 것이 아니라 각 시점 별 현금흐름으로 구성되어 있기 때문에 이 현금흐름(이표)의 효과를 반영해야 함. &#x20;
 * 시장에서 관찰가능한 N개의 상품 중 i번째 상품 $$asset_i$$의 $$j$$번째 $$c_{i,j}$$의 효과를 포함하기 위해 현금흐름의 금액 비중을 만기별 가중치에 반영함. &#x20;
 * $$Kernel_i(t) = \displaystyle\sum_{j=1}^M c_{i,j}\cdot W(t,t_j)$$

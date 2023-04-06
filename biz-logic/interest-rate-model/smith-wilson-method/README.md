@@ -11,7 +11,7 @@ ytm 을 input으로 하여 보간하거나 spot rate로 변환하는 경우 K-IC
 
 반면에 spot rate (continuous)을 input으로 하여, 보간 보외 처리하는 경우, zero coupon bond 기반 smith-wilson 모형을 적용함. =>  `SmithWilsonKics`
 
-``
+
 
 <table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>wirh ZCB</strong></em></td><td><code>SmithWilsonKics</code></td><td>보간,보외 </td><td><a href="with-zero-coupon-bonds/">with-zero-coupon-bonds</a></td></tr><tr><td><em><strong>with Assets Multiple CFs</strong></em></td><td><code>SmithWilsonKicsBts</code></td><td>보간,보외 / 변환ytm2spot</td><td><a href="with-assets-generating-multiple-cf/">with-assets-generating-multiple-cf</a></td></tr></tbody></table>
 
