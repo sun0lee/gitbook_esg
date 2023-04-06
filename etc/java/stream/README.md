@@ -4,9 +4,9 @@ description: Interface Stream<T> / (Package) java.util.stream
 
 # Stream
 
-## Definition&#x20;
+## 1. Definition&#x20;
 
-스트림이란 컬렉션의 저장요소를 하나씩 참조해서 람다표현식([lambdas](../behavior-parameterization/lambdas/ "mention"))으로 처리할 수 있도록 해주는 반복자
+스트림이란 컬렉션의 저장요소를 하나씩 참조해서 람다표현식([lambdas.md](../behavior-parameterization/lambdas.md "mention"))으로 처리할 수 있도록 해주는 반복자
 
 &#x20;데이터 처리 연산을 지원하도록(supporting sequential and parallel aggregate operations) 소스에서 추출된 연속된 요소 (A sequence of elements) .
 
@@ -34,14 +34,14 @@ stream.forEach (matCd -> System.out.println(matCd));
 ```
 {% endcode %}
 
-## 스트림의 특징&#x20;
+## 2. 스트림의 특징&#x20;
 
 * pipelining : 파이프 라인
 * lazy : 게으른 연산
 
 
 
-## &#x20;Collection vs. Stream&#x20;
+## &#x20;3. Collection vs. Stream&#x20;
 
 Collection은 자료 자체를 정의하고 담고 처리하는 방식에 집중하는 반면 Stream은 대상을 가지 처리할 동작 자체에 관심이 있음.&#x20;
 

@@ -12,6 +12,18 @@ description: 스트림에서 제공하는 연산 관련된 메서드
 | 하나의 스트림을 다른 스트림으로 변환하는 연산, 스트림의 요소를 소비하지 않음. 파이프라인 구성  |          스트림의 요소를 소비하여 최종결과를 도출함.           |
 |                  filter, sorted, map                   | count, findFirst, forEach, reduce, collect  |
 
+<details>
+
+<summary>(ref) interface Stream 스트림 메서드 목록  </summary>
+
+*
+
+    <figure><img src="../../../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+
+</details>
+
+
+
 ## 1. Intermediate operation (중간연산)&#x20;
 
 | Operation                                  | Return type | Functional IF            | Fn discriptor |

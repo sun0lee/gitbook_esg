@@ -8,7 +8,7 @@ description: 전 구간 월단위로 산출된 금리커브를 기초로 자산�
 
 <figure><img src="../../../../.gitbook/assets/image (80).png" alt=""><figcaption><p>IR_DCNT_RATE</p></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/image (64).png" alt=""><figcaption><p>IR_DCNT_RATE_BIZ</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (64) (1).png" alt=""><figcaption><p>IR_DCNT_RATE_BIZ</p></figcaption></figure>
 
 ## Table&#x20;
 

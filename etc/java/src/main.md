@@ -210,7 +210,7 @@ cirPrjYear                   = Integer.parseInt(argInDBMap.getOrDefault("CIR_PRO
 
 ## 3. main job (job110 ... job820)&#x20;
 
-|      구분      |                job               | desc                                                    |
+|              |                                  |                                                         |
 | :----------: | :------------------------------: | ------------------------------------------------------- |
 |   prepare    | [job110.md](job110.md "mention") | Set Smith-Wilson Attribute                              |
 |    prepare   | [job120.md](job120.md "mention") | Set Swaption Volatility                                 |

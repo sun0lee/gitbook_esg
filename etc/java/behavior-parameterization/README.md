@@ -31,6 +31,6 @@ _**How (어떻게 하는지)**_에 치중하는 명령형 프로그래밍과 달
 
 이러한 작업이 가능하도록, 혹은 수월하게 구현할 수 있도록 자바 8부터 아래의 기능들이 추가 & 보완됨.&#x20;
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td></td><td><p>람다식</p><p><em><strong>Lambdas</strong></em> </p></td><td></td><td><a href="lambdas/">lambdas</a></td></tr><tr><td></td><td>메서드 참조 </td><td><em><strong>Method References</strong></em></td><td><a href="method-references.md">method-references.md</a></td></tr><tr><td></td><td>함수형 인터페이스 </td><td><em><strong>Functional Interface</strong></em> </td><td><a href="functional-interface/">functional-interface</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><p>람다식</p><p><em><strong>Lambdas</strong></em> </p></td><td><a href="lambdas.md">lambdas.md</a></td></tr><tr><td><p>메서드 참조 </p><p><em><strong>Method References</strong></em></p></td><td><a href="method-references.md">method-references.md</a></td></tr><tr><td><p>함수형 인터페이스 </p><p><em><strong>Functional Interface</strong></em> </p></td><td><a href="functional-interface/">functional-interface</a></td></tr></tbody></table>
 
 &#x20; &#x20;

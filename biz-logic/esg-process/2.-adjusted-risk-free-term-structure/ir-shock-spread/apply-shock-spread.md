@@ -14,7 +14,7 @@ description: >-
 
 금감원에서 제공한 금리충격 스프레드 정보(Tenor별 상승 하락 수준)를 적용하여 결정론적 시나리오를 산출하고 싶은 경우 IR\_SPRD\_AFNS\_USR 테이블에 제공받은 충격수준을 입력한다.&#x20;
 
-<figure><img src="../../../../.gitbook/assets/image (29).png" alt=""><figcaption><p>금감원 제공 만기별 금리충격스프레드 예시 </p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (29) (1).png" alt=""><figcaption><p>금감원 제공 만기별 금리충격스프레드 예시 </p></figcaption></figure>
 
 
 

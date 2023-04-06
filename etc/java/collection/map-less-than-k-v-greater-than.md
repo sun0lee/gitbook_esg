@@ -50,7 +50,7 @@ map.forEach((key,value) ->  ... ; )
 
 `forEach()` 메서드는 함수적 인터페이스 타입([functional-interface](../behavior-parameterization/functional-interface/ "mention"))을 매개값으로 가지므로 컬렉션의 요소를 소비할 코드를 람다식으로 기술.&#x20;
 
-(스트림이 제공하는 요소처리 메서드는 함수형 인터페이스 타입( [consumer-less-than-t-greater-than.md](../behavior-parameterization/functional-interface/consumer-less-than-t-greater-than.md "mention"))이므로 람다식([lambdas](../behavior-parameterization/lambdas/ "mention")), 메서드참조 ([method-references.md](../behavior-parameterization/method-references.md "mention"))를 이용하여 요소처리 내용을 인자로 전달할 수 있음.)
+(스트림이 제공하는 요소처리 메서드는 함수형 인터페이스 타입( [consumer-less-than-t-greater-than.md](../behavior-parameterization/functional-interface/consumer-less-than-t-greater-than.md "mention"))이므로 람다식([lambdas.md](../behavior-parameterization/lambdas.md "mention")), 메서드참조 ([method-references.md](../behavior-parameterization/method-references.md "mention"))를 이용하여 요소처리 내용을 인자로 전달할 수 있음.)
 
 ```java
 void forEach(Consumer<T> action)
