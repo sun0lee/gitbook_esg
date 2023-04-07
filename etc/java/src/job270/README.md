@@ -30,6 +30,10 @@ List<IrDcntRate> saasDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd, "SAAS",
     saasDcntRate.stream().forEach(s -> session.save(s));
 ```
 
+{% content-ref url="esg270_irdcntrate.createirdcntrate.md" %}
+[esg270\_irdcntrate.createirdcntrate.md](esg270\_irdcntrate.createirdcntrate.md)
+{% endcontent-ref %}
+
 ## 3. save&#x20;
 
 ```java

@@ -1,6 +1,10 @@
 # Esg270\_IrDcntRate.createIrDcntRate()
 
-### 1. Common &  for all Scen
+{% content-ref url="./" %}
+[.](./)
+{% endcontent-ref %}
+
+## 1. Common &  for all Scen
 
 <details>
 
@@ -89,7 +93,7 @@ TreeSet<Double> tenorList
 
 </details>
 
-### 2. K-ICS &  only if Scen #1
+## 2. K-ICS &  only if Scen #1
 
 <details>
 
@@ -164,7 +168,7 @@ for(IrDcntRate rslt : adjRateList) {
 
 </details>
 
-### 3. K-ICS &  only if Scen #2\~#5
+## 3. K-ICS &  only if Scen #2\~#5
 
 <details>
 
@@ -197,7 +201,7 @@ for(IrDcntRate rslt : adjRateList) {
 
 </details>
 
-### 4.  K-ICS 외&#x20;
+## 4.  K-ICS 외&#x20;
 
 <details>
 

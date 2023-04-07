@@ -2,15 +2,36 @@
 
 <details>
 
-<summary>Type ; 자료형 </summary>
+<summary>Type ; 자료형 , Wrapper Class</summary>
 
 * 변수 : @stack 영역에 생성됨.&#x20;
 * 기본타입 : 값 자체를 저장함 (@stack) ; primitive&#x20;
-* 참조타입 : 객체가 생성된 메모리(@heap) 주소(@stack)를 저장함. ; interface, class, array
-  * String 문자열은 대표적인 참조타입 , 자체가 객체임
-*
+*   참조타입 : 객체가 생성된 메모리(@heap) 주소(@stack)를 저장함. ; interface, class, array
 
-    <figure><img src="../../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+    * String 문자열은 대표적인 참조타입 , 자체가 객체임
+    *
+
+        <figure><img src="../../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+
+
+## 무슨 차이 `Double` vs. `double` ??
+
+#### wrapper class
+
+자바에서 기본 타입(primitive type)과 래퍼 클래스(wrapper class)가 있습니다. `double`은 기본 타입이며 `Double`은 래퍼 클래스입니다.
+
+`Double`은 `double`의 객체 표현입니다. 따라서 `Double`은 null을 허용하며, 객체로서의 기능을 제공합니다. 이에 비해 `double`은 null을 허용하지 않으며, 객체로서의 기능을 제공하지 않습니다.
+
+따라서 필드를 `Double`로 선언하면 해당 필드에 null 값을 할당할 수 있습니다. 이는 유용한 경우가 많습니다. 예를 들어, 데이터베이스에서 값을 가져올 때 null 값을 가져올 수 있기 때문에 `Double`을 사용하면 이를 처리할 수 있습니다. 또한, 클래스의 필드 중에 값을 초기화하지 않을 경우 null 값을 할당할 수 있습니다.
+
+그러나 `Double`은 기본 타입인 `double`보다 더 많은 메모리를 사용하며, 성능면에서도 느릴 수 있습니다. 따라서 값이 항상 존재하고 null을 필요로 하지 않는 경우에는 `double`을 사용하는 것이 더 적절합니다.
+
+*   엔진에서는 엔티티 필드를 정의할 때 기본타입으로 정의하지 않고 Wrapper 클래스로 정의함.  \
+    \
+
+
+    <figure><img src="../../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 

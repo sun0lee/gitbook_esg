@@ -18,7 +18,7 @@ description: >-
 
 <figure><img src="../../../../.gitbook/assets/image (80).png" alt=""><figcaption><p>IR_DCNT_RATE</p></figcaption></figure>
 
-### 기본 무위험 금리기간구조&#x20;
+## 1. 기본 무위험 금리기간구조&#x20;
 
 * SPOT RATE, FWD RATE &#x20;
 * class : `SmithWilsonKicsBts`
@@ -30,7 +30,7 @@ description: >-
 
 
 
-### 조정 무위험 금리기간구조&#x20;
+## 2. 조정 무위험 금리기간구조&#x20;
 
 * ADJ SPOT RATE, ADJ FWD RATE
 * class : `SmithWilsonKics`
@@ -42,11 +42,6 @@ description: >-
 
 
 
-'기본 무위험 금리기간구조' 와 'base시나리오'가 둘 다 '기본(base)' 이라는 단어로 혼용될 소지가 있으므로 이하에서는 아래의 용어를 사용함. &#x20;
-
-* 기본 무위험 금리기간구조 (LTFR, LP 반영 전) -> Asset할인율&#x20;
-* 조정 무위험 금리기간구조 (LTFR, LP 반영 후) -> Liab할인율 &#x20;
-
 
 
 ## Work Detail&#x20;
@@ -55,7 +50,11 @@ description: >-
   * paramSw에 설정된 irCurveNm(금리커브) 단위로 &#x20;
   * irCurveSceNo(시나리오)마다 아래의 작업을 반복한다.&#x20;
     1. 부채 할인율 처리&#x20;
+       * [#1.-common-and-for-all-scen](../../../../etc/java/src/job270/esg270\_irdcntrate.createirdcntrate.md#1.-common-and-for-all-scen "mention")
     2. \~4. 자산 할인율을 위한 처리&#x20;
+       * [#2.-k-ics-and-only-if-scen-1](../../../../etc/java/src/job270/esg270\_irdcntrate.createirdcntrate.md#2.-k-ics-and-only-if-scen-1 "mention")
+       * [#3.-k-ics-and-only-if-scen-2-5](../../../../etc/java/src/job270/esg270\_irdcntrate.createirdcntrate.md#3.-k-ics-and-only-if-scen-2-5 "mention")
+       * [#4.-k-ics](../../../../etc/java/src/job270/esg270\_irdcntrate.createirdcntrate.md#4.-k-ics "mention")
 * K-ICS(applBizDv)의 경우 민감도 분석 목적에 따라 YTM에 직접 충격을 반영하는 경우를 처리하기 위해 작업을 구분하였음.&#x20;
 
 
