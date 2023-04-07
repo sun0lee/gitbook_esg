@@ -1,8 +1,26 @@
 # Esg270\_IrDcntRate.createIrDcntRate()
 
-{% content-ref url="./" %}
-[.](./)
-{% endcontent-ref %}
+#### (process) [df-full-tenor.md](../../../../biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-full-tenor.md "mention")
+
+## &#x20;0. Asset 할인율 (기본 무위험 금리기간구조)에 충격시나리오 반영방안&#x20;
+
+#### 대상
+
+* K-ICS표준모형 : 금리위험 산출을 위해 결정론적 금리 충격시나리오를 반영함.&#x20;
+
+#### 문제점&#x20;
+
+* Asset 할인율은 ytm 기반 보간 ->금리 shock 수준별 결과가 없음 (only base 시나리오)&#x20;
+* Liab 할인율은  spot rate 기반 보간 -> 금리 shock 수준별 결과가 있음
+* 결정론적 금리shock은 ytm에 직접 주지 않고, spot rate로 변환 후 충격을 주는 구조이기 때문.&#x20;
+
+#### 해결방법
+
+* Asset 할인율에 충격수준 반영을 위해서 만기별로 충격스프레드(충격 전후의 Liab 할인율의 차이)를 산출해서 Asset 할인율 (base시나리오)에 가산하는 방식으로 산출함. (감독원 엑셀)
+* 이 처리를 위해 baseScenRst 결과를 따로 집계함
+  * &#x20;`adjRateSce1Map, baseRateSce1Map`
+
+
 
 ## 1. Common &  for all Scen
 
@@ -11,27 +29,11 @@
 <summary>baseScen 통 만들기 => for Asset 할인율</summary>
 
 ```java
-Map<String, IrDcntRate> adjRateSce1Map       = new TreeMap<String, IrDcntRate>();
-Map<String, SmithWilsonRslt> baseRateSce1Map = new TreeMap<String, SmithWilsonRslt>(); 
+Map<String, IrDcntRate> adjRateSce1Map       
+    = new TreeMap<String, IrDcntRate>();
+Map<String, SmithWilsonRslt> baseRateSce1Map 
+    = new TreeMap<String, SmithWilsonRslt>(); 
 ```
-
-#### &#x20;Asset 할인율 (기본 무위험 금리기간구조)에 충격시나리오 반영방안&#x20;
-
-대상
-
-* K-ICS표준모형 : 금리위험 산출을 위해 결정론적 금리 충격시나리오를 반영함.&#x20;
-
-문제점&#x20;
-
-* Asset 할인율은 ytm 기반 보간 ->금리 shock 수준별 결과가 없음 (only base 시나리오)&#x20;
-* Liab 할인율은  spot rate 기반 보간 -> 금리 shock 수준별 결과가 있음
-* 결정론적 금리shock은 ytm에 직접 주지 않고, spot rate로 변환 후 충격을 주는 구조이기 때문.&#x20;
-
-해결방법
-
-* Asset 할인율에 충격수준 반영을 위해서 만기별로 충격스프레드(충격 전후의 Liab 할인율의 차이)를 산출해서 Asset 할인율 (base시나리오)에 가산하는 방식으로 산출함. (감독원 엑셀)
-* 이 처리를 위해 baseScenRst 결과를 따로 집계함
-  * &#x20;`adjRateSce1Map, baseRateSce1Map`
 
 </details>
 
@@ -92,6 +94,8 @@ TreeSet<Double> tenorList
 <img src="../../../../.gitbook/assets/image (78).png" alt="" data-size="original">
 
 </details>
+
+
 
 ## 2. K-ICS &  only if Scen #1
 
@@ -168,16 +172,20 @@ for(IrDcntRate rslt : adjRateList) {
 
 </details>
 
+
+
 ## 3. K-ICS &  only if Scen #2\~#5
 
-<details>
-
-<summary>A scen  =  A base + ( L scen - L base )  =>  L scen + (A base - L base)</summary>
+A scen  =  A base + ( L scen - L base )  =>  L scen + (A base - L base)
 
 * 엑셀로직  A base + ( L scen - L base ) &#x20;
   * 시나리오별 자산할인율 = 자산 기준시나리오 값에 만기별 금리충격수준 반영
 * 엔진로직  L scen + (A base - L base)
   * 시나리오별 자산 할인율 = 시나리오별 부채할인율에 만기별 자산/부채 스프레드조정 반영
+
+<details>
+
+<summary>A scen  =  A base + ( L scen - L base )  =>  L scen + (A base - L base)</summary>
 
 ```java
 TreeMap<String, Double> spotRateMap = new TreeMap<String, Double>();
@@ -200,6 +208,8 @@ for(IrDcntRate rslt : adjRateList) {
 ```
 
 </details>
+
+
 
 ## 4.  K-ICS 외&#x20;
 
