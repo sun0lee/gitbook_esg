@@ -11,16 +11,28 @@ Map <String, Integer> map = ... ;
 map.put("age,22") ; 
 ```
 
-* 메서드&#x20;
-  * `get()` ; Map 내에 key 값 알아내기
-  * Map 내에 value 값 알아내기
-    1. `entrySet`
-    2. `KeySet`
-    3. `forEach` (lambda)
+*   메서드&#x20;
+
+    * `get()` ; Map 내에 key 값 알아내기
+
+
+
+## 1. Map에 데이터 뽑아서 사용하기
+
+`KeySet` : key 만 뽑아서 반복하기&#x20;
+
+```java
+// 1. KeySet
+for (string Key : map.KeySet()){ // 키를 순서대로 반복해서 
+system.out.println(map.get(key)) // 키에 해당하는 값을 가져오기 
+}
+```
+
+`entrySet` : key와 value, 즉 entry를 뽑아서 반복하기&#x20;
 
 {% code overflow="wrap" %}
 ```java
-// 1. entrySet
+// 2. entrySet
 TreeMap<String, List<IrCurveYtm>> ytmRstMap = new TreeMap<String, List<IrCurveYtm>>();
 ytmRstMap = ytmRstList.stream().collect(Collectors.groupingBy(s -> s.getBaseDate(), TreeMap::new, Collectors.toList()));					
 
@@ -32,12 +44,7 @@ for(Map.Entry<String, List<IrCurveYtm>> ytmRst : ytmRstMap.entrySet()) {
 ```
 {% endcode %}
 
-```java
-// 2. KeySet
-for (string Key : map.KeySet()){
-  ... ;
-}
-```
+`forEach` (lambda)
 
 ```java
 // 3. forEach
@@ -60,9 +67,11 @@ void forEach(Consumer<T> action)
 
 
 
-## Map 구현 클래스&#x20;
 
-### 1. HashMap&#x20;
+
+## 2. Map 구현 클래스&#x20;
+
+### 2.1. HashMap&#x20;
 
 HashMap은 Map 인터페이스를 구현한 대표적인 map 컬렉션. key와 value로 null을 허용함. HashMap의 키로 사용할 객체는 hashCode() 메서드의 리턴값이 같고 equals() 메서드가 true를 리턴할 경우 동일 키로 판단하여 중복 저장하지 않음. [#hash](set-less-than-e-greater-than.md#hash "mention")
 
@@ -73,13 +82,13 @@ Map <String, Integer> map = new HashMap <String, Integer>();
 
 
 
-### 2. HashTable
+### 2.2. HashTable
 
 HashMap과 동일한 구조를 가지고 있으나. 단 HashTable은 동기화된 synchronized 메서드로 구성되어 있어서 멀티 스레드가 동시에 HashTable의 메서드를 실행시킬수 없는 차이점이 있음. &#x20;
 
-### SortedMap
 
-### 3.TreeMap
+
+### 2.3.TreeMap
 
 binary tree를 기반으로 한 Map 컬렉션. TreeSet과 차이점은 키와 값이 저장된 Entry를 저장한다는 점임. 내부의 값(엔트리)들을 key값을 기준으로 <mark style="color:blue;">정렬</mark>하여 가지고 있음.(Red-Black Tree 자료구조)
 
@@ -89,8 +98,10 @@ binary tree를 기반으로 한 Map 컬렉션. TreeSet과 차이점은 키와 �
 
 
 
-### 4. EnumMap
+### 2.4. EnumMap
 
 key를 Enum 타입으로 한정하는 Map&#x20;
 
-### 5. Properties &#x20;
+
+
+### 2.5. Properties &#x20;

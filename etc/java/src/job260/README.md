@@ -17,6 +17,18 @@ log.info("[{}] has been Deleted in Job:[{}] [BASE_YYMM: {}, COUNT: {}]"
 ## 2. biz logic&#x20;
 
 ```java
+for(EApplBizDv biz : EApplBizDv.getUseBizList()) {
+  // TODO : 260  
+  List<IrDcntRateBu> bizDcntRateBu = Esg261_IrDcntRateBu_Ytm.setIrDcntRateBu(bssd, irModelNm,  biz, bizIrParamSw.get(biz));
+  bizDcntRateBu.stream().forEach(s -> session.save(s));
+}
+```
+
+<details>
+
+<summary></summary>
+
+```java
 String irModelNm = "AFNS";//for acquiring AFNS Shock Spread		
 
 List<IrDcntRateBu> kicsDcntRateBu = Esg261_IrDcntRateBu_Ytm.setIrDcntRateBu(bssd, irModelNm, "KICS", kicsSwMap);				
@@ -32,6 +44,10 @@ ibizDcntRateBu.stream().forEach(s -> session.save(s));
 List<IrDcntRateBu> saasDcntRateBu = Esg260_IrDcntRateBu.setIrDcntRateBu(bssd, irModelNm, "SAAS", saasSwMap);
 saasDcntRateBu.stream().forEach(s -> session.save(s));
 ```
+
+
+
+</details>
 
 ## 3. save&#x20;
 

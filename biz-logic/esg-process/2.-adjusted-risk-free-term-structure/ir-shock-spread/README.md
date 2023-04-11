@@ -6,15 +6,19 @@ description: 금리충격스프레드 ; K-ICS 금리 위험액을 산출용 결�
 
 자체적으로 충격 시나리오를 산출하는 경우와 금감원에서 제공한 충격스프레드를 적용하는 경우 두 가지 방법을 지원함. ( 금감원 제공 스프레드를 우선 적용함 )
 
-<table data-column-title-hidden data-view="cards"><thead><tr><th>적용</th><th>Table</th><th align="right">Job</th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>금리이력정보 생성  (hist)</strong></em></td><td>AFNS 모수산출용 </td><td align="right">210 </td><td><a href="ir-historical.md">ir-historical.md</a></td></tr><tr><td><em><strong>자체 산출 금리충격스프레드</strong></em></td><td>AFNS </td><td align="right">220 </td><td><a href="calculate-shock-spread.md">calculate-shock-spread.md</a></td></tr><tr><td><em><strong>금감원 제공 금리충격스프레드</strong></em></td><td><em><strong></strong></em></td><td align="right">230</td><td><a href="apply-shock-spread.md">apply-shock-spread.md</a></td></tr></tbody></table>
+<table data-column-title-hidden data-view="cards"><thead><tr><th>적용</th><th>Table</th><th align="right">Job</th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><em><strong>금리이력정보 생성  (hist)</strong></em></td><td>AFNS 모수산출용 </td><td align="right">210 </td><td><a href="ir-historical.md">ir-historical.md</a></td></tr><tr><td><em><strong>자체 산출 금리충격스프레드</strong></em></td><td>AFNS </td><td align="right">220 </td><td><a href="calculate-shock-spread.md">calculate-shock-spread.md</a></td></tr><tr><td><em><strong>금감원 제공 금리충격스프레드</strong></em></td><td></td><td align="right">230</td><td><a href="apply-shock-spread.md">apply-shock-spread.md</a></td></tr></tbody></table>
 
 
 
 
 
-> ### 금리충격 스프레드 산출 목적 및 충격 시나리오 &#x20;
->
-> K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이 위험액을 산출하기 위해 금리충격시나리오를 생성하며,  이는 향후 1년간 99.5% 신뢰수준에서 발생할 리스크량이 되도록 산출함.
+
+
+{% hint style="info" %}
+### 금리충격 스프레드 산출 목적 및 충격 시나리오
+
+K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이 위험액을 산출하기 위해 금리충격시나리오를 생성하며,  이는 향후 1년간 99.5% 신뢰수준에서 발생할 리스크량이 되도록 산출함.
+{% endhint %}
 
 <details>
 
@@ -41,8 +45,6 @@ description: 금리충격스프레드 ; K-ICS 금리 위험액을 산출용 결�
 평균적인 금리수준으로 회귀하는 금리변동의 특성을 금액으로 환산한 값(이하 ‘평균회귀금액’)을 반영 (최근 금리가 많이 하락한 국가는 향후 금리가 조정되는 과정에서 금리가 상승할 가능성이 높으므로 평균회귀시나리오를 추가하여 금리하락 충격시나리오가 과도하게 산출되는 현상을 보완할 수 있음)
 
 </details>
-
-
 
 > ### 금리충격 스프레드 산출 절차&#x20;
 
@@ -103,8 +105,6 @@ AFNS 상태변수 L,S,C는 다변량 정규분포를 따른다고 가정.&#x20;
 * 위험스프레드 중 신용위험스프레드는 거래상대방의 부도 위험 및 등급하락 위험에 따라 산출되므로 금리리스크가 아닌 신용리스크 측정대상에 해당하며,
 * 잔여스프레드(위험스프레드–신용위험스프레드) 및 변동성조정 역시 자산 포트폴리오에 내재되어 있는 신용 스프레드가 기초가 되므로 금리리스크 측정대상에서 제외
 
-<mark style="color:red;">Check => 이렇게 해놓고 10.0 에서는 ytm 에 직접 충격을 준 이유가 뭐지 ??</mark>
-
 </details>
 
 <details>
@@ -122,5 +122,3 @@ AFDNS 모형은 금리기간구조의 주요 변동요인인 <mark style="color:
   * 기울기 변화 : 금리평탄·금리경사 시나리오
 
 </details>
-
-{% file src="../../../../.gitbook/assets/금융감독연구 제6권 제2호_K-ICS 2.0 무차익 DNS 금리충격 시나리오 산출 방법론의 이해와 검토_이상헌, 기호삼_.pdf" %}

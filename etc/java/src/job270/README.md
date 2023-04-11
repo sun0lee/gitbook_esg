@@ -17,6 +17,22 @@ log.info("[{}] has been Deleted in Job:[{}] [BASE_YYMM: {}, COUNT: {}]"
 ## 2.  biz logic&#x20;
 
 ```java
+for(EApplBizDv biz : EApplBizDv.getUseBizList()) {
+  
+  List<IrDcntRate> bizDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd,  biz, bizIrParamSw.get(biz), projectionYear);
+  bizDcntRate.stream().forEach(s -> session.save(s));
+}
+```
+
+{% content-ref url="esg270_irdcntrate.createirdcntrate.md" %}
+[esg270\_irdcntrate.createirdcntrate.md](esg270\_irdcntrate.createirdcntrate.md)
+{% endcontent-ref %}
+
+<details>
+
+<summary></summary>
+
+```java
 List<IrDcntRate> kicsDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd, "KICS", kicsSwMap, projectionYear);
     kicsDcntRate.stream().forEach(s -> session.save(s));
 
@@ -30,9 +46,9 @@ List<IrDcntRate> saasDcntRate = Esg270_IrDcntRate.createIrDcntRate(bssd, "SAAS",
     saasDcntRate.stream().forEach(s -> session.save(s));
 ```
 
-{% content-ref url="esg270_irdcntrate.createirdcntrate.md" %}
-[esg270\_irdcntrate.createirdcntrate.md](esg270\_irdcntrate.createirdcntrate.md)
-{% endcontent-ref %}
+
+
+</details>
 
 ## 3. save&#x20;
 

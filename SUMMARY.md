@@ -42,7 +42,8 @@
     * [with Assets generating multiple CF](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/README.md)
       * [SmithWilsonKicsBts.class](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/smithwilsonkicsbts.class.md)
       * [(수정) SmithWilsonKicsBts.class](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/smithwilsonkicsbts.class-1.md)
-  * [AFNS](biz-logic/interest-rate-model/afns.md)
+  * [AFNS](biz-logic/interest-rate-model/afns/README.md)
+    * [AFNelsonSiegel](biz-logic/interest-rate-model/afns/afnelsonsiegel.md)
   * [Hull-White 1 Factor](biz-logic/interest-rate-model/hull-white-1-factor.md)
 
 ## ETC
@@ -83,8 +84,7 @@
     * [job150](etc/java/src/job150.md)
     * [job210](etc/java/src/job210/README.md)
       * [Esg210\_SpotWeek.setupIrCurveSpotWeek()](etc/java/src/job210/esg210\_spotweek.setupircurvespotweek.md)
-    * [job220](etc/java/src/job220/README.md)
-      * [Esg220\_ShkSprdAfns()](etc/java/src/job220/esg220\_shksprdafns.md)
+    * [job220](etc/java/src/job220.md)
     * [job230](etc/java/src/job230.md)
     * [job240](etc/java/src/job240.md)
     * [job250](etc/java/src/job250.md)
