@@ -92,11 +92,9 @@ List<IrCurveSpot> spotSceList
 String fwdMatCd = swSce.getValue().getFwdMatCd();
  
 if(!fwdMatCd.equals("M0000")) {	
-Map<String, Double> fwdSpotMap 
- = irSpotDiscToFwdMap(bssd, spotMap, fwdMatCd);
- 
-spotSceList.stream()
-           .forEach(s -> s.setSpotRate(fwdSpotMap.get(s.getMatCd())));}
+   Map<String, Double> fwdSpotMap = irSpotDiscToFwdMap(bssd, spotMap, fwdMatCd);
+   spotSceList.stream().forEach(s -> s.setSpotRate(fwdSpotMap.get(s.getMatCd())));
+   }
 
 String pvtMatCd = swSce.getValue().getPvtRateMatCd(); 
 double pvtRate  = spotMap.getOrDefault(pvtMatCd, 0.0);		
