@@ -13,10 +13,29 @@ for(Map.Entry<String, Map<Integer, IrParamSw>>
 ```
 
 ```java
-// 기본 무위험 커브 (spot rate) 준비 
+// 기본 무위험 커브 spot(disc) 준비 
 List<IrCurveSpot> spotList 
 = IrCurveSpotDao.getIrCurveSpot(bssd, curveSwMap.getKey());
 ```
+
+<details>
+
+<summary>150 IrCurveSpot -> swRst.getSpotDisc()</summary>
+
+```java
+// sw 결과를 spot rate형태로 변환
+for (SmithWilsonRslt swRst : swBts.getSmithWilsonResultList()) {
+  tempSpot = new IrCurveSpot( baseYmd
+                             , irCurve
+                             , swRst.getMatCd()
+                             , 1
+                             , swRst.getSpotDisc()
+                             ) ;
+  spotRst.add(tempSpot) ;
+}
+```
+
+</details>
 
 ```java
 // map (만기, spotRate) => lp, shock 등 충격 스프레드 적용위해 
@@ -67,7 +86,7 @@ Map<String, Double> irSprdShkMap
 ```
 
 ```java
-// spot rate (결과 담을 통)
+// spot (disc)
 List<IrCurveSpot> spotSceList 
   = spotList.stream().map(s -> s.deepCopy(s))
           .collect(Collectors.toList());
@@ -98,18 +117,12 @@ for(IrCurveSpot spot : spotSceList) {
 ```java
 IrDcntRateBu dcntRateBu = new IrDcntRateBu();
 
-// 분석년도마다 예외적인 추가 시나리오가 있었던 듯. 
-// int kicsAddSprdContSceNo = 12;
-// if(bssd.equals("202012")) kicsAddSprdContSceNo =  6;
-// if(bssd.equals("202112")) kicsAddSprdContSceNo = 12;
-
-
 // pvtRate doesn't have an effect on parallel shift(only addSprd)
 double baseSpot = pvtMult 
                 * (StringUtil.objectToPrimitive(spot.getSpotRate()) - pvtRate) 
                 +  pvtRate + addSprd  ; 
 
-double baseSpotCont = irDiscToCont(baseSpot);
+double baseSpotCont = irDiscToCont(baseSpot); // spot -> cont
 
 double shkCont 
   = (applBizDv.equals("KICS") && swSce.getKey() <= kicsAddSprdContSceNo) ?

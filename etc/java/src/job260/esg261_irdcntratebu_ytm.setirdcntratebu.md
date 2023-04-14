@@ -26,7 +26,7 @@ for(Map.Entry<Integer, IrParamSw>
 ```
 
 ```java
-// 1. ytm -> spot 변환 
+// 1. ytm -> spot(cont) 변환 
 // (ytm에 직접 스프레드를 반영, 10.0 추가된 up down 시나리오 산출 부분 확인)
 List<IRateInput> ytmAddList 
 = ytmList.stream()
@@ -35,7 +35,7 @@ List<IRateInput> ytmAddList
 
  List<IrCurveSpot> spotList 
  = Esg150_YtmToSpotSw.createIrCurveSpot(ytmAddList, swSce.getValue())
-                  .stream().map(s-> s.convertToCont())
+                  .stream().map(s-> s.convertToCont()) //연속복리이율 형태로 get 
                   .collect(Collectors.toList());
 
 spotList.forEach(s-> s.setIrCurve(irCurve));
