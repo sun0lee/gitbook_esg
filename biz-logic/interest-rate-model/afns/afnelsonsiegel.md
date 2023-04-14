@@ -64,6 +64,73 @@ irShockSenario.put("SHOCK",  irShock);
 
 ## AFNelsonSiegel
 
+### 0. 생성자&#x20;
+
+```java
+AFNelsonSiegel afns = new AFNelsonSiegel
+                        ( bssd
+                        , curveHisList
+                        , curveBaseList
+                        , irModelMst
+                        , irParamSw
+                        , argInDBMap
+) ;
+```
+
+<details>
+
+<summary>초기화 </summary>
+
+```java
+public AFNelsonSiegel( String bssd
+ , List<IRateInput> iRateHisList
+ , List<IRateInput> iRateBaseList
+ , IrParamModel irModelMst 
+ , IrParamSw    irParamSw  
+ , Map<String, String>  argInDBMap ) 
+
+{		
+  // 모형에서 계산에 필요한 초기인수는 필요한 곳에서 풀어헤치기 
+  double errorTolerance                 = irModelMst.getItrTol();
+  double ltfr                           = irParamSw.getLtfr();
+  int    ltfrT                          = irParamSw.getLtfrCp();
+  
+  double confInterval    = Double. valueOf((String) argInDBMap.getOrDefault("AFNS_CONF_INTERVAL"   , "0.995"));
+  int    kalmanItrMax    = Integer.valueOf((String) argInDBMap.getOrDefault("AFNS_KALMAN_ITR_MAX"  , "100"));			
+  double sigmaInit       = Double. valueOf((String) argInDBMap.getOrDefault("AFNS_SIGMA_INIT"      , "0.05"));
+  double epsilonInit     = Double. valueOf((String) argInDBMap.getOrDefault("AFNS_EPSILON_INIT"    , "0.001"));	
+  int    prjYear         = Integer.valueOf((String) argInDBMap.getOrDefault("PROJECTION_YEAR"      , "120"));
+  
+  
+  this.baseDate      =  IrModel.stringToDate(bssd);
+  this.mode          =  irModelMst.getIrModelNm() ;
+  this.inputParas    =  null;		
+  this.setTermStructureHis(iRateHisList, iRateBaseList);
+  this.isRealNumber  = true;
+  this.cmpdType      = 'D';		
+  this.dt            = 1.0 /52.0 ;	//weekly only
+  this.initSigma     = sigmaInit;
+  this.dayCountBasis = DCB_MON_DIF;
+  this.ltfrL         = ltfr;
+  this.ltfrA         = 0;
+  this.ltfrT         = ltfrT;
+  this.liqPrem       = 0.0;
+  this.term          = 1.0 / 12;
+  this.minLambda     = 0.05;
+  this.maxLambda     = 2.0;
+  this.nf            = 3;
+  this.prjYear       = prjYear;
+  this.accuracy      = errorTolerance;
+  this.itrMax        = kalmanItrMax;
+  this.confInterval  = confInterval;
+  this.epsilon       = epsilonInit;
+  this.setIrmodelAttributes();
+}
+
+```
+
+</details>
+
 ### 1. getAfnsResultList()
 
 * AFNS 모형의 초기 모수 설정.
