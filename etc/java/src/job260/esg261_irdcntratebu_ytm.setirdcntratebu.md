@@ -14,7 +14,7 @@ for(Map.Entry<IrCurve, Map<Integer, IrParamSw>>
 ```
 
 ```java
-// 기본 무위험 커브 (spot rate) 준비 
+// 기본 무위험 커브 (ytm rate) 준비 
 List<IrCurveYtm> ytmList 
 = IrCurveYtmDao.getIrCurveYtm(bssd, irCurveNm);
 ```
@@ -26,7 +26,6 @@ for(Map.Entry<Integer, IrParamSw>
 ```
 
 ```java
-// 이 부분이 다름 !!!
 // 1. ytm -> spot 변환 
 // (ytm에 직접 스프레드를 반영, 10.0 추가된 up down 시나리오 산출 부분 확인)
 List<IRateInput> ytmAddList 
@@ -39,9 +38,8 @@ List<IRateInput> ytmAddList
                   .stream().map(s-> s.convertToCont())
                   .collect(Collectors.toList());
 
-    spotList.forEach(s-> s.setIrCurve(irCurve));
-    spotList.forEach(s-> log.info("zzzz : {},{}"
-                            , swSce.getKey(), s.toString()));
+spotList.forEach(s-> s.setIrCurve(irCurve));
+spotList.forEach(s-> log.info("zzzz : {},{}", swSce.getKey(), s.toString()));
 ```
 
 ```java
@@ -83,7 +81,9 @@ Map<String, Double> irSprdShkMap
               (swSce.getValue().getShkSprdSceNo(), 1))
             .stream().collect(Collectors.toMap
              (IrSprdAfnsBiz::getMatCd, IrSprdAfnsBiz::getShkSprdCont));
+```
 
+```java
 // 4. 시나리오 적용할 준비 : spotSceList copy 
 List<IrCurveSpot> spotSceList 
   = spotList.stream().map(s -> s.deepCopy(s))
@@ -98,9 +98,6 @@ Map<String, Double> fwdSpotMap
 spotSceList.stream()
            .forEach(s -> s.setSpotRate(fwdSpotMap.get(s.getMatCd())));}
 
-```
-
-```java
 String pvtMatCd = swSce.getValue().getPvtRateMatCd(); 
 double pvtRate  = spotMap.getOrDefault(pvtMatCd, 0.0);		
 double pvtMult  = swSce.getValue().getMultPvtRate();

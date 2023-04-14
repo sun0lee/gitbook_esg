@@ -64,7 +64,9 @@ Map<String, Double> irSprdShkMap
             , StringUtil.objectToPrimitive(swSce.getValue().getShkSprdSceNo(), 1))
   .stream().collect(Collectors.toMap
    (IrSprdAfnsBiz::getMatCd, IrSprdAfnsBiz::getShkSprdCont));
+```
 
+```java
 // spot rate (결과 담을 통)
 List<IrCurveSpot> spotSceList 
   = spotList.stream().map(s -> s.deepCopy(s))
@@ -77,9 +79,7 @@ if(!fwdMatCd.equals("M0000")) {
       Map<String, Double> fwdSpotMap = irSpotDiscToFwdMap(bssd, spotMap, fwdMatCd);
       spotSceList.stream().forEach(s -> s.setSpotRate(fwdSpotMap.get(s.getMatCd())));
     }
-```
-
-```java
+    
 String pvtMatCd = StringUtil.objectToPrimitive(swSce.getValue().getPvtRateMatCd() , "M0000");
 double pvtRate  = StringUtil.objectToPrimitive(spotMap.getOrDefault(pvtMatCd, 0.0), 0.0    );
 double pvtMult  = StringUtil.objectToPrimitive(swSce.getValue().getMultPvtRate()  , 1.0    );
