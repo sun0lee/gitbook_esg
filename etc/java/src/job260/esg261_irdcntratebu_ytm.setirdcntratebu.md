@@ -25,6 +25,10 @@ for(Map.Entry<Integer, IrParamSw>
     swSce : curveSwMap.getValue().entrySet()) {
 ```
 
+* 260번의 경우 동일한 base spot rate를 기반으로 가지고 들어와서 시나리오 별 스프레드 처리하기 때문에 시나리오별로 반복하기 전에 spot map을 만들었지만, &#x20;
+* 261의 경우 충격 시나리오별로 ytm 에 가산할 충격스프레드가 다르므로 시나리오별로 ytm을 읽어 shock을 반영 후 spot rate로 환산한 후 spot map을 만드는 형태임.&#x20;
+  * 두 작업 모두 sw.multIntRate 가 null이라면 결과는 같아야 함.&#x20;
+
 ```java
 // 1. ytm -> spot(cont) 변환 
 // (ytm에 직접 스프레드를 반영, 10.0 추가된 up down 시나리오 산출 부분 확인)
@@ -34,9 +38,9 @@ List<IRateInput> ytmAddList
       .collect(Collectors.toList());
 
  List<IrCurveSpot> spotList 
- = Esg150_YtmToSpotSw.createIrCurveSpot(ytmAddList, swSce.getValue())
-                  .stream().map(s-> s.convertToCont()) //연속복리이율 형태로 get 
-                  .collect(Collectors.toList());
+ = Esg150_YtmToSpotSw.createIrCurveSpot(ytmAddList,swSce.getValue())//sw.multIntRate
+            .stream().map(s-> s.convertToCont()) //연속복리이율 형태로 get 
+            .collect(Collectors.toList());
 
 spotList.forEach(s-> s.setIrCurve(irCurve));
 spotList.forEach(s-> log.info("zzzz : {},{}", swSce.getKey(), s.toString()));
