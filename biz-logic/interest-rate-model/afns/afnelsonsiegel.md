@@ -1,70 +1,14 @@
 # AFNelsonSiegel
 
-## Esg220\_ShkSprdAfns
+[calculate-shock-spread.md](../../esg-process/2.-adjusted-risk-free-term-structure/ir-shock-spread/calculate-shock-spread.md "mention")
 
-* 생성자 만들기 (필요한 입력변수 설정)&#x20;
-* 실질적인 금리모형 정의 및 시나리오 산출 작업은 AFNelsonSiegel.class에서 정의함.&#x20;
-* Esg220\_ShkSprdAfns.class에서는 입력변수 정의 및 할 일 나열 그리고 금리모형결과 외 부수적인 설정. &#x20;
+[job220](../../../etc/java/src/job220/ "mention")
 
-```java
-Map<String, List<?>> irShockSenario = new TreeMap<String, List<?>>();
-irShockSenario = Esg220_ShkSprdAfns.createAfnsShockScenario(FinUtils.toEndOfMonth(bssd)
-  , curveHisList
-  , curveBaseList
-  , irModelMst  // add 
-  , irparamSw   // add 
-  , argInDBMap  // add 
-  );	
-```
+[esg220\_shksprdafns.md](../../../etc/java/src/job220/esg220\_shksprdafns.md "mention")
 
-<details>
 
-<summary></summary>
 
-```java
-irShockSenario = Esg220_ShkSprdAfns.createAfnsShockScenario
-( FinUtils.toEndOfMonth(bssd)
-, curveHisList
-, curveBaseList
-, tenorList
-, modelMst 
-, dt
-, sigmaInit
-, irCurveSwMap.get(irCurveNm).getLtfr()
-, irCurveSwMap.get(irCurveNm).getLtfrCp() 
-, projectionYear
-, errorTolerance
-, kalmanItrMax
-, confInterval
-, epsilonInit);	
-```
-
-</details>
-
-```java
-// 1. 모수추정, 시나리오 생성 
-irScenarioList.addAll(afns.getAfnsResultList());
-// 2. 모수추정 결과 
-irShockParam.  addAll(afns.getAfnsParamList());
-// 3. 충격시나리오 결과 
-irShock.       addAll(
-());
-
-// fk 값 추가 
-irShockParam.stream().forEach(s -> s.setIrParamModel(irModelMst));
-irShock.     stream().forEach(s -> s.setIrParamModel(irModelMst));
-irShockParam.stream().forEach(s -> s.setIrCurve(irModelMst.getIrCurve()));
-irShock.     stream().forEach(s -> s.setIrCurve(irModelMst.getIrCurve()));
-irShockParam.stream().forEach(s -> s.setModifiedBy(jobId));
-irShock.     stream().forEach(s -> s.setModifiedBy(jobId));
-
-irShockSenario.put("PARAM",  irShockParam);
-irShockSenario.put("SHOCK",  irShock);
-```
-
-## AFNelsonSiegel
-
-### 0. 생성자&#x20;
+## 0. 생성자&#x20;
 
 ```java
 AFNelsonSiegel afns = new AFNelsonSiegel
@@ -79,7 +23,7 @@ AFNelsonSiegel afns = new AFNelsonSiegel
 
 <details>
 
-<summary>초기화 </summary>
+<summary>인스턴스 생성  &#x26;  변수 초기화 </summary>
 
 ```java
 public AFNelsonSiegel( String bssd
@@ -131,7 +75,9 @@ public AFNelsonSiegel( String bssd
 
 </details>
 
-### 1. getAfnsResultList()
+
+
+## 1. getAfnsResultList()
 
 * AFNS 모형의 초기 모수 설정.
 * kalmanFiltering을 이용하여 모수 최적화.&#x20;
@@ -160,7 +106,7 @@ if(!this.optParasFlag) {
 
 
 
-#### 1.1. initializeAfnsParas()
+### 1.1. initializeAfnsParas()
 
 <details>
 
@@ -244,7 +190,7 @@ if(this.inputParas != null) this.initParas = this.inputParas;
 // IrParamAfnsBiz에 입력된 모수가 있는 경우 초기화된 모수대신 입력된 모수를 우선 사용하도록 함. 
 ```
 
-#### 1.2. kalmanFiltering()
+### 1.2. kalmanFiltering()
 
 초기 모수를 이용하여 뭔가 최적화 과정을 통해 모수를 추정하는 과정 ?? 암튼 이걸 통해서 AFNS 모형의 모수가  결정된다.&#x20;
 
@@ -352,7 +298,7 @@ private void kalmanFiltering(double[] paras) {
 
 </details>
 
-#### 1.3. afnsShockGenerating()
+### 1.3. afnsShockGenerating()
 
 <details>
 
@@ -419,7 +365,7 @@ private void afnsShockGenerating() {
 
 
 
-### 2. getAfnsParamList()
+## 2. getAfnsParamList()
 
 [#1.2.-kalmanfiltering](afnelsonsiegel.md#1.2.-kalmanfiltering "mention")에서 산출한 모수값을 출력해서 테이블(IR\_PARAM\_AFNS\_CALC)에 적재&#x20;
 
@@ -472,7 +418,7 @@ public List<IrParamAfnsCalc> getAfnsParamList() {
 
 
 
-### 3. getAfnsShockList()
+## 3. getAfnsShockList()
 
 [#1.3.-afnsshockgenerating](afnelsonsiegel.md#1.3.-afnsshockgenerating "mention")에서 산출한 시나리오 산출결과를 출력해서 충격시나리오결과 테이블(IR\_SPRD\_AFNS\_CALC) 에 적재.&#x20;
 
@@ -503,3 +449,4 @@ for(int i=0; i<this.IntShock.numCols(); i++) {
   return shockList;
 }
 ```
+

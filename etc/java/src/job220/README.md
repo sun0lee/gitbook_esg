@@ -1,6 +1,6 @@
 # job220
 
-(Process)[calculate-shock-spread.md](../../../biz-logic/esg-process/2.-adjusted-risk-free-term-structure/ir-shock-spread/calculate-shock-spread.md "mention")
+(Process)[calculate-shock-spread.md](../../../../biz-logic/esg-process/2.-adjusted-risk-free-term-structure/ir-shock-spread/calculate-shock-spread.md "mention")
 
 ## 0.  금리커브 단위로 반복&#x20;
 
@@ -190,7 +190,7 @@ irShockSenario = Esg220_ShkSprdAfns.createAfnsShockScenario
   );	
 ```
 
-[#esg220\_shksprdafns](../../../biz-logic/interest-rate-model/afns/afnelsonsiegel.md#esg220\_shksprdafns "mention")
+[#esg220\_shksprdafns](../../../../biz-logic/interest-rate-model/afns/afnelsonsiegel.md#esg220\_shksprdafns "mention")
 
 
 

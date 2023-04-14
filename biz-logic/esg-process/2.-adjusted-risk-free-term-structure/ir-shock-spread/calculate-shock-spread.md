@@ -20,7 +20,7 @@ description: 금리충격스프레드 자체 생성
 
 ## Work Detail&#x20;
 
-* [job220.md](../../../../etc/java/src/job220.md "mention")
+* [job220](../../../../etc/java/src/job220/ "mention")
 * AFNS 모형 초기화
 * AFNS 모수추정&#x20;
 * 모형 파라메타 저장  `IR_PARAM_AFNS_CALC`

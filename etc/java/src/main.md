@@ -217,7 +217,7 @@ cirPrjYear                   = Integer.parseInt(argInDBMap.getOrDefault("CIR_PRO
 |  기본 무위험 금리커브 | [job130.md](job130.md "mention") | Set YTM TermStructure                                   |
 |  기본 무위험 금리커브 | [job150.md](job150.md "mention") | YTM to SPOT by Smith-Wilson Method                      |
 | 조정 무위험 금리커브  |    [job210](job210/ "mention")   | AFNS Weekly Input TermStructure Setup                   |
-|  조정 무위험 금리커브 | [job220.md](job220.md "mention") | AFNS Shock Spread                                       |
+|  조정 무위험 금리커브 |    [job220](job220/ "mention")   | AFNS Shock Spread                                       |
 |  조정 무위험 금리커브 | [job230.md](job230.md "mention") | Biz Applied AFNS Shock Spread                           |
 |  조정 무위험 금리커브 | [job240.md](job240.md "mention") | Set Liquidity Premium                                   |
 |  조정 무위험 금리커브 | [job240.md](job240.md "mention") | Biz Applied Liquidity Premium                           |
