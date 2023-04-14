@@ -7,6 +7,21 @@
 * Esg220\_ShkSprdAfns.class에서는 입력변수 정의 및 할 일 나열 그리고 금리모형결과 외 부수적인 설정. &#x20;
 
 ```java
+Map<String, List<?>> irShockSenario = new TreeMap<String, List<?>>();
+irShockSenario = Esg220_ShkSprdAfns.createAfnsShockScenario(FinUtils.toEndOfMonth(bssd)
+  , curveHisList
+  , curveBaseList
+  , irModelMst  // add 
+  , irparamSw   // add 
+  , argInDBMap  // add 
+  );	
+```
+
+<details>
+
+<summary></summary>
+
+```java
 irShockSenario = Esg220_ShkSprdAfns.createAfnsShockScenario
 ( FinUtils.toEndOfMonth(bssd)
 , curveHisList
@@ -24,6 +39,8 @@ irShockSenario = Esg220_ShkSprdAfns.createAfnsShockScenario
 , epsilonInit);	
 ```
 
+</details>
+
 ```java
 // 1. 모수추정, 시나리오 생성 
 irScenarioList.addAll(afns.getAfnsResultList());
@@ -34,24 +51,16 @@ irShock.       addAll(
 ());
 
 // fk 값 추가 
-irShockParam.stream().forEach(s -> s.setIrParamModel(modelMst.get(0)));
-irShock.     stream().forEach(s -> s.setIrParamModel(modelMst.get(0)));
-irShockParam.stream().forEach(s -> s.setIrCurve(modelMst.get(0).getIrCurve()));
-irShock.     stream().forEach(s -> s.setIrCurve(modelMst.get(0).getIrCurve()));
+irShockParam.stream().forEach(s -> s.setIrParamModel(irModelMst));
+irShock.     stream().forEach(s -> s.setIrParamModel(irModelMst));
+irShockParam.stream().forEach(s -> s.setIrCurve(irModelMst.getIrCurve()));
+irShock.     stream().forEach(s -> s.setIrCurve(irModelMst.getIrCurve()));
 irShockParam.stream().forEach(s -> s.setModifiedBy(jobId));
 irShock.     stream().forEach(s -> s.setModifiedBy(jobId));
 
 irShockSenario.put("PARAM",  irShockParam);
 irShockSenario.put("SHOCK",  irShock);
-
-return irShockSenario;
 ```
-
-
-
-
-
-
 
 ## AFNelsonSiegel
 
