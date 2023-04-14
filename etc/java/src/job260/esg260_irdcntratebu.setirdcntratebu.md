@@ -16,7 +16,9 @@ for(Map.Entry<String, Map<Integer, IrParamSw>>
 // 기본 무위험 커브 (spot rate) 준비 
 List<IrCurveSpot> spotList 
 = IrCurveSpotDao.getIrCurveSpot(bssd, curveSwMap.getKey());
+```
 
+```java
 // map (만기, spotRate) => lp, shock 등 충격 스프레드 적용위해 
 TreeMap<String, Double> spotMap 
   = spotList.stream().collect(Collectors.toMap
@@ -68,9 +70,6 @@ List<IrCurveSpot> spotSceList
   = spotList.stream().map(s -> s.deepCopy(s))
           .collect(Collectors.toList());
 
-```
-
-```java
 String fwdMatCd
  = StringUtil.objectToPrimitive(swSce.getValue().getFwdMatCd(), "M0000");
  
@@ -78,15 +77,15 @@ if(!fwdMatCd.equals("M0000")) {
       Map<String, Double> fwdSpotMap = irSpotDiscToFwdMap(bssd, spotMap, fwdMatCd);
       spotSceList.stream().forEach(s -> s.setSpotRate(fwdSpotMap.get(s.getMatCd())));
     }
+```
 
+```java
 String pvtMatCd = StringUtil.objectToPrimitive(swSce.getValue().getPvtRateMatCd() , "M0000");
 double pvtRate  = StringUtil.objectToPrimitive(spotMap.getOrDefault(pvtMatCd, 0.0), 0.0    );
 double pvtMult  = StringUtil.objectToPrimitive(swSce.getValue().getMultPvtRate()  , 1.0    );
 double addSprd  = StringUtil.objectToPrimitive(swSce.getValue().getAddSprd()      , 0.0    );
 int    llp      = StringUtil.objectToPrimitive(swSce.getValue().getLlp()          , 20     );
 ```
-
-
 
 ```java
 // tenor (matCd) 단위로 반복 
@@ -100,9 +99,9 @@ for(IrCurveSpot spot : spotSceList) {
 IrDcntRateBu dcntRateBu = new IrDcntRateBu();
 
 // 분석년도마다 예외적인 추가 시나리오가 있었던 듯. 
-int kicsAddSprdContSceNo = 12;
-if(bssd.equals("202012")) kicsAddSprdContSceNo =  6;
-if(bssd.equals("202112")) kicsAddSprdContSceNo = 12;
+// int kicsAddSprdContSceNo = 12;
+// if(bssd.equals("202012")) kicsAddSprdContSceNo =  6;
+// if(bssd.equals("202112")) kicsAddSprdContSceNo = 12;
 
 
 // pvtRate doesn't have an effect on parallel shift(only addSprd)

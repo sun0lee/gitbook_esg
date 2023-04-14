@@ -4,6 +4,180 @@ description: (bssd, "AFNS", "KICS", kicsSwMap)
 
 # Esg261\_IrDcntRateBu\_Ytm.setIrDcntRateBu()
 
+```java
+// irCurve 단위로 반복     
+for(Map.Entry<IrCurve, Map<Integer, IrParamSw>> 
+    curveSwMap : paramSwMap.entrySet()) {
+    
+  IrCurve irCurve  = curveSwMap.getKey();
+  String irCurveNm = irCurve.getIrCurveNm();
+```
+
+```java
+// 기본 무위험 커브 (spot rate) 준비 
+List<IrCurveYtm> ytmList 
+= IrCurveYtmDao.getIrCurveYtm(bssd, irCurveNm);
+```
+
+```java
+// 시나리오 단위로 반복 
+for(Map.Entry<Integer, IrParamSw> 
+    swSce : curveSwMap.getValue().entrySet()) {
+```
+
+```java
+// 이 부분이 다름 !!!
+// 1. ytm -> spot 변환 
+// (ytm에 직접 스프레드를 반영, 10.0 추가된 up down 시나리오 산출 부분 확인)
+List<IRateInput> ytmAddList 
+= ytmList.stream()
+      .map(s->s.addSpread(swSce.getValue().getYtmSpread()))
+      .collect(Collectors.toList());
+
+ List<IrCurveSpot> spotList 
+ = Esg150_YtmToSpotSw.createIrCurveSpot(ytmAddList, swSce.getValue())
+                  .stream().map(s-> s.convertToCont())
+                  .collect(Collectors.toList());
+
+    spotList.forEach(s-> s.setIrCurve(irCurve));
+    spotList.forEach(s-> log.info("zzzz : {},{}"
+                            , swSce.getKey(), s.toString()));
+```
+
+```java
+TreeMap<String, Double> spotMap 
+= spotList.stream().collect(Collectors.toMap(IrCurveSpot::getMatCd
+                                        , IrCurveSpot::getSpotRate
+                                        , (k, v) -> k
+                                        , TreeMap::new));
+    
+if(spotList.isEmpty()) {log.warn(
+"No IR Curve Spot Data [BIZ: {}, IR_CURVE_NM: {}] in [{}] for [{}]"
+      , applBizDv
+      , irCurveNm,
+       toPhysicalName(IrCurveSpot.class.getSimpleName())
+       , bssd);
+      continue;
+    }
+```
+
+```java
+// 2. 유동성 프리미엄 가져오기 
+// (biz, irCurveNm) 만기별 유동성프리미엄 
+Map<String, Double> irSprdLpMap 
+  = IrSprdDao.getIrSprdLpBizList
+            ( bssd
+            , applBizDv
+            , curveSwMap.getKey()
+            , swSce.getKey())
+  .stream().collect(Collectors.toMap
+   (IrSprdLpBiz::getMatCd, IrSprdLpBiz::getLiqPrem));
+
+// 3. 금리 충격스프레드 가져오기 시나리오번호도 디폴트 처리가 필요할까? 없으면 에러인데.
+Map<String, Double> irSprdShkMap 
+  = IrSprdDao.getIrSprdAfnsBizList
+            ( bssd
+            , irModelNm
+            , curveSwMap.getKey()
+            , StringUtil.objectToPrimitive
+              (swSce.getValue().getShkSprdSceNo(), 1))
+            .stream().collect(Collectors.toMap
+             (IrSprdAfnsBiz::getMatCd, IrSprdAfnsBiz::getShkSprdCont));
+
+// 4. 시나리오 적용할 준비 : spotSceList copy 
+List<IrCurveSpot> spotSceList 
+  = spotList.stream().map(s -> s.deepCopy(s))
+          .collect(Collectors.toList());
+          
+String fwdMatCd = swSce.getValue().getFwdMatCd();
+ 
+if(!fwdMatCd.equals("M0000")) {	
+Map<String, Double> fwdSpotMap 
+ = irSpotDiscToFwdMap(bssd, spotMap, fwdMatCd);
+ 
+spotSceList.stream()
+           .forEach(s -> s.setSpotRate(fwdSpotMap.get(s.getMatCd())));}
+
+```
+
+```java
+String pvtMatCd = swSce.getValue().getPvtRateMatCd(); 
+double pvtRate  = spotMap.getOrDefault(pvtMatCd, 0.0);		
+double pvtMult  = swSce.getValue().getMultPvtRate();
+double addSprd  = swSce.getValue().getAddSprd();
+int    llp      = swSce.getValue().getLlp();
+```
+
+```java
+// tenor (matCd) 단위로 반복 
+for(IrCurveSpot spot : spotSceList) {
+
+// 조건 추가 : LLP 이전까지만 반복     
+if(Integer.valueOf(spot.getMatCd().substring(1))
+                <= llp * MONTH_IN_YEAR) {
+```
+
+```java
+IrDcntRateBu dcntRateBu = new IrDcntRateBu();
+
+double baseSpot = pvtMult 
+                * (spot.getSpotRate() - pvtRate) +  pvtRate + addSprd ;
+//pvtRate doesn't have an effect on parallel shift(only addSprd)
+
+double baseSpotCont = baseSpot;	
+double shkCont      = applBizDv.equals(EApplBizDv.KICS) ? 
+                 irSprdShkMap.getOrDefault(spot.getMatCd(), 0.0) : 0.0;
+double lpDisc       = irSprdLpMap.getOrDefault(spot.getMatCd(), 0.0);
+double spotCont     = baseSpotCont + shkCont;
+double spotDisc     = irContToDisc(spotCont);
+double adjSpotDisc  = spotDisc + lpDisc;
+double adjSpotCont  = irDiscToCont(adjSpotDisc);	
+        
+//260
+// double baseSpotCont = irDiscToCont(baseSpot);
+
+// double shkCont 
+// = (applBizDv.equals("KICS")&&swSce.getKey()<= kicsAddSprdContSceNo) ?
+//    irSprdShkMap.getOrDefault(spot.getMatCd(), 0.0) + addSprd 
+//  : irSprdShkMap.getOrDefault(spot.getMatCd(), 0.0);
+```
+
+```java
+// 결과값 담기 
+dcntRateBu.setBaseYymm(bssd);
+dcntRateBu.setApplBizDv(applBizDv);
+dcntRateBu.setIrCurveNm(curveSwMap.getKey());
+dcntRateBu.setIrCurve(spot.getIrCurve()); 
+dcntRateBu.setIrCurveSceNo(swSce.getKey());
+dcntRateBu.setMatCd(spot.getMatCd());
+dcntRateBu.setSpotRateDisc(spotDisc);
+dcntRateBu.setSpotRateCont(spotCont);
+dcntRateBu.setLiqPrem(lpDisc);
+dcntRateBu.setAdjSpotRateDisc(adjSpotDisc);
+dcntRateBu.setAdjSpotRateCont(adjSpotCont);
+dcntRateBu.setAddSprd(addSprd);
+dcntRateBu.setModifiedBy(jobId);
+dcntRateBu.setUpdateDate(LocalDateTime.now());	
+
+rst.add(dcntRateBu);
+```
+
+} &#x20;
+
+```java
+// 모든 반복 작업이 정상적으로 끝나면 로그 출력
+log.info("{}({}) creates [{}] results of [{}]." +
+        "They are inserted into [{}] Table", jobId
+   , EJob.valueOf(jobId).getJobName()
+   , rst.size()
+   , applBizDv
+   , toPhysicalName(IrDcntRateBu.class.getSimpleName()));
+
+return rst;
+```
+
+
+
 ## 1. curveMap
 
 결정론적 시나리오 산출 대상을 금리커브 및 금리시나리오 (irCurveSceNo) 에 따라 구분함. (반복작업) &#x20;
