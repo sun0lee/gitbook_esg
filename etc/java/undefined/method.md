@@ -56,3 +56,20 @@
 
 </details>
 
+<details>
+
+<summary>compareTo()</summary>
+
+compareTo() 메서드의 반환값은 두 객체를 비교하여 결과를 정수로 반환.&#x20;
+
+1. 0 : 두 객체가 같은 경우
+2. 양수 : 인자로 전달된 객체보다 큰 경우
+3. 음수 : 인자로 전달된 객체보다 작은 경우
+
+```java
+// irCurveSce가 EDetSce.SCE06보다 큰 경우 
+irCurveSce.compareTo(EDetSce.SCE06) > 0
+```
+
+</details>
+
