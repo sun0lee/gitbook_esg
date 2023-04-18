@@ -10,6 +10,13 @@
 * 함수처럼 각 항목에 대응되는 값을 활용할 수도 있고 `valueOf()`&#x20;
 * 인덱스를 활용할 수 있음 `ordinal()`
 
+
+
+* `EDetSce.SCE01.name()` -> Enum에 정의된 이름과 동일한 String 리턴  (type : String)
+* `EDetSce.valueOf("SCE01")` -> "SCE01"과 이름이 동일한 Enum 리턴 ( type : EDetSce)&#x20;
+
+
+
 > 참고 &#x20;
 
 {% embed url="https://velog.io/@kyle/%EC%9E%90%EB%B0%94-Enum-%EA%B8%B0%EB%B3%B8-%EB%B0%8F-%ED%99%9C%EC%9A%A9" %}
