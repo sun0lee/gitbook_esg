@@ -18,7 +18,7 @@ description: 스트림에서 제공하는 연산 관련된 메서드
 
 *
 
-    <figure><img src="../../../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (29) (2).png" alt=""><figcaption></figcaption></figure>
 
 </details>
 
