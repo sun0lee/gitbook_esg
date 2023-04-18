@@ -26,6 +26,7 @@
       * [DF (Full Tenor)](biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-full-tenor.md)
       * [DF by Biz](biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-by-biz.md)
   * [3. Stochastic Scenario](biz-logic/esg-process/3.-stochastic-scenario/README.md)
+    * [K-ICS 해설서](biz-logic/esg-process/3.-stochastic-scenario/k-ics.md)
     * [금리모형 모수산출](biz-logic/esg-process/3.-stochastic-scenario/undefined/README.md)
       * [모수산출 (310)](biz-logic/esg-process/3.-stochastic-scenario/undefined/310.md)
       * [모수안정성검증 (320)](biz-logic/esg-process/3.-stochastic-scenario/undefined/320.md)

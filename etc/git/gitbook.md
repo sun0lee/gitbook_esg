@@ -24,6 +24,6 @@ description: how to Rollback ?
 
 ## 4. Rollback버튼 클릭&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 5. 완료 !!!
