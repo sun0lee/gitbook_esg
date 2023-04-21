@@ -4,6 +4,8 @@ description: Cascading Style Sheets
 
 # CSS
 
+## CSS
+
 웹 페이지의 디자인과 레이아웃을 담당하는 스타일 시트 언어. HTML은 구조와 콘텐츠를 담당하고, CSS는 이를 꾸미는 역할을 담당.
 
 CSS를 사용하면 HTML 문서에 있는 요소들의 크기, 색상, 폰트, 위치, 배경 등 다양한 스타일을 적용할 수 있음. 웹 페이지의 디자인을 통일성 있게 만들거나, 다양한 디바이스에 대응하여 반응형 웹 디자인을 구현할 수 있음.
@@ -48,11 +50,48 @@ Cascading은 "폭포처럼 내려오는" 또는 "계단식으로 내려가는" �
 
 Cascading은 스타일 규칙의 충돌을 해결하고, 복잡한 스타일링 구조에서도 일관성 있게 스타일링을 적용할 수 있도록 도와줌.&#x20;
 
-1. 중요도(!important) - !important가 선언된 스타일은 다른 모든 스타일보다 우선
-2. 직접 선언(Inline styles) - HTML 요소의 style 속성에 직접 선언된 스타일은 다른 모든 스타일보다 우선
-3. 아이디(Id) 선택자 - 아이디 선택자는 클래스 선택자보다 우선
-4. 클래스(Class) 선택자 - 클래스 선택자는 태그 선택자보다 우선
-5. 태그 선택자 - 태그 선택자는 전역 선택자보다 우선
-6. 전역(Global) 선택자 - 스타일 시트의 맨 위에 선언된 스타일은 다른 스타일보다 우선&#x20;
+적용 우선순위&#x20;
 
-따라서, 선언된 스타일이 동일한 우선순위를 가지면, 나중에 선언된 스타일이 적용됨.&#x20;
+* 중요도(Improtance)
+  1. 사용자 스타일 시트가 최우선(저시력자, 색약자)
+  2. 중요 스타일(`!important`) : 최우선 적용해야 할 스타일은 뒤에 `!important`붙인다.
+  3. 기본적인 브라우저 스타일 시트
+* 명시도(Specificity)
+  1. 인라인 스타일 : 태그 안에 style속성 사용
+  2. id 스타일
+  3. 클래스 스타일
+  4. 태그 스타일
+* 소스에서의 순서 : 나중에 온 스타일이 먼저 온 스타일을 덮어쓴다.
+
+## selector&#x20;
+
+| Selector         |    | desc                                                                                                                 |
+| ---------------- | -- | -------------------------------------------------------------------------------------------------------------------- |
+| 전체               | \* | <pre><code>*{
+	padding: 0;
+    margin: 0;
+}
+</code></pre>                                                            |
+| Tag              |    | <pre><code>h2{
+	font-size: 20px;
+    color: orange;
+}
+</code></pre>                                                  |
+| Class            | .  | <pre><code>.bluetext{
+	color: blue;
+}
+</code></pre><pre><code>h2.bluetext{
+	color: blue;
+}
+</code></pre>             |
+| ID               | #  | <pre><code>#container{
+	background: #ffa00;
+    width: 400px;
+    height: 200px;
+    margin: 0 auto;
+}
+</code></pre> |
+| Descendant       |    |                                                                                                                      |
+| Child            |    |                                                                                                                      |
+| Adjacent Sibling |    |                                                                                                                      |
+| General Sibling  |    |                                                                                                                      |
