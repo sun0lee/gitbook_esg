@@ -4,7 +4,7 @@
 
 `origin/main` 원격 저장소의 main 브랜치&#x20;
 
-`origin/HEAD` 원격 저장소의 현재 체크아웃된 커밋.&#x20;
+`origin/HEAD` 원격 저장소의 현재 체크아웃된 커밋. (포인터)
 
 
 
@@ -74,6 +74,7 @@ git restore myproj/main.txt
 ```
 
 * 변경내용 취소 / 작업 트리에서 삭제된 파일 복구 : 변경되거나 삭제된 파일을 이전 커밋 상태로 되돌리기&#x20;
+* 작업 디렉토리의 파일을 이전 상태로 되돌리기 (작업트리를 변경이전상태로 되돌리기 )
 
 
 
@@ -195,7 +196,8 @@ git commit -m "커밋 메세지"
  
 git merge main
 
-# dev = main 동기화 됨. 
+# dev = main 동기화 됨. 내 로컬에서만 반영된 것! 
+# 만약 원격에 반영하고 싶으면 push해야 함. 
 ```
 
 * 두 개의 브랜치에 있는 커밋들을 하나의 브랜치로 합치기
@@ -223,15 +225,20 @@ git breanch -d dev
 
 </details>
 
-* dev 브랜치에서 작업하다가 main 브랜치 변경사항 반영하기&#x20;
-  1. `dev` 브랜치에서 원격 저장소의 변경사항을 가져오기(`git fetch`)
-  2. `dev` 브랜치로 체크아웃
-  3. `git rebase origin/main` 명령어를 사용하여 `main` 브랜치의 변경사항을 `dev` 브랜치에 반영&#x20;
-  4. 이렇게 하면 `dev` 브랜치에서 작업한 커밋들이 `main` 브랜치의 변경사항 위에 올라가게 됩니다.
-
 
 
 &#x20;  **reset**     Reset current HEAD to the specified state
+
+```bash
+# 현재 변경 사항을 취소하고 이전 상태로 되돌리기 
+# 이전 커밋 이후 변경사항을 모두 삭제함. (브랜치를 조작) 
+# 로컬 저장소에서 커밋하기 전에 변경된 파일들을 취소함 
+git reset HEAD 
+```
+
+* 커밋한 것을 취소하고 되돌리기&#x20;
+
+
 
 &#x20;  **switch**    Switch branches 작업중인 브랜치 바꾸기&#x20;
 
@@ -246,9 +253,33 @@ git breanch -d dev
 
 (see also: git help workflows)
 
-&#x20;  fetch     Download objects and refs from another repository
+원격의 브랜치 확인하기&#x20;
 
-&#x20;  pull      Fetch from and integrate with another repository or a local branch
+```bash
+git branch -r 
+```
+
+
+
+&#x20;  **fetch**     Download objects and refs from another repository
+
+```bash
+# 원격 저장소의 내용을 가져오기 
+# origin 원격 저장소를 지칭 
+git fetch origin 
+
+# 로컬 저장소에 가져온것이지 로컬 브랜치에 반영된것은 아니기 때문에 합치기  
+git merge main
+```
+
+&#x20;  **pull**      Fetch from and integrate with another repository or a local branch
+
+```bash
+# pull = fetch + merge  
+git pull --help
+```
+
+
 
 &#x20;  **push**      Update remote refs along with associated object
 
