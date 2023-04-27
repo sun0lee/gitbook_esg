@@ -1,2 +1,0 @@
-# createParamHw1fSplitMap
-

@@ -38,7 +38,7 @@ $$dr(t) = \alpha \cdot [ \theta(t) - r(t)]dt + \sigma \cdot dW(t)$$ &#x20;
 
 
 
-### parameta 추정방법&#x20;
+### parameter 추정방법&#x20;
 
 스왑션 데이터가 관찰되는 기간과 관찰되지 않는 기간을 구분하여 산출.&#x20;
 
