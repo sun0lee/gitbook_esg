@@ -135,38 +135,48 @@ double[] hwInitParam  = new double[] {
 //double[] hwInitParam  = new double[] {0.03, 0.06, 0.007, 0.006, 0.005, 0.004, 0.005, 0.006};
 ```
 
-
-
-* logic&#x20;
+## 3.biz logic & save&#x20;
 
 ```java
+// NSP
 Map<String, List<?>> irParamHw1fNonSplitMap = new TreeMap<String, List<?>>();
-irParamHw1fNonSplitMap = Esg310_ParamHw1f.createParamHw1fNonSplitMap(bssd, irModelNmNsp, irCurveNm, spotList, swpnVolList, hwInitParam, freq, errTol, hwAlphaPieceNonSplit, hwSigmaPiece);
-//					irParamHw1fNonSplitMap = Esg310_ParamHw1f.createParamHw1fNonSplitMap(bssd, irModelNmNsp, irCrv.getKey(), spotList, swpnVolList, hwInitParamNsp, freq, errTol, hwAlphaPieceNonSplit, hwSigmaPiece);
+irParamHw1fNonSplitMap = Esg310_ParamHw1f.createParamHw1fNonSplitMap
+	( bssd
+	, irModelNmNsp
+	, irCurveNm
+	, spotList
+	, swpnVolList
+	, hwInitParam
+	, freq
+	, errTol
+	, hwAlphaPieceNonSplit
+	, hwSigmaPiece);
 
-for(Map.Entry<String, List<?>> rslt : irParamHw1fNonSplitMap.entrySet()) {												
-//						if(rslt.getKey().equals("VALID")) rslt.getValue().forEach(s -> session.save(s));
+for(Map.Entry<String, List<?>> rslt : irParamHw1fNonSplitMap.entrySet()) {
 	rslt.getValue().forEach(s -> session.save(s));
 	session.flush();
 	session.clear();
 }					
 
+// SP
 Map<String, List<?>> irParamHw1fSplitMap = new TreeMap<String, List<?>>();
-irParamHw1fSplitMap = Esg310_ParamHw1f.createParamHw1fSplitMap(bssd, irModelNmSp, irCurveNm, spotList, swpnVolList, hwInitParam, freq, errTol, hwAlphaPieceSplit, hwSigmaPiece);
-
-```
-
-
-
-## 3. save&#x20;
-
-```java
+irParamHw1fSplitMap = Esg310_ParamHw1f.createParamHw1fSplitMap
+	( bssd
+	, irModelNmSp
+	, irCurveNm
+	, spotList
+	, swpnVolList
+	, hwInitParam
+	, freq
+	, errTol
+	, hwAlphaPieceSplit
+	, hwSigmaPiece);
 for(Map.Entry<String, List<?>> rslt : irParamHw1fSplitMap.entrySet()) {
 	rslt.getValue().forEach(s -> session.save(s));
 	session.flush();
 	session.clear();
-}					
-}
+	}
+
 ```
 
 ## 4.log
