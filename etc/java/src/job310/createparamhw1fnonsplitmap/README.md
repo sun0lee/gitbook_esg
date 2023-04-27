@@ -92,11 +92,6 @@ return hw1fParam;
 }
 ```
 
-* swaption 가격 산출
-  * [https://ojs.tripaledu.com/index.php/jefa/article/view/38/44](https://ojs.tripaledu.com/index.php/jefa/article/view/38/44)
-
-
-
 </details>
 
 ### 그외 column set&#x20;
@@ -113,6 +108,83 @@ return hw1fParam;
 ```java
 validParam = calib.getValidationResult();
 ```
+
+<details>
+
+<summary>calib.getValidationResult()</summary>
+
+```java
+List<IrValidParamHw> validRslt = new ArrayList<IrValidParamHw>();
+
+double[][] volHw = new double[this.swpnMat.length][this.swapTenor.length];
+double[][] prcHw = new double[this.swpnMat.length][this.swapTenor.length];
+double[]   alpha = new double[] {this.optParas[0], this.optParas[1]};
+double[]   sigma = new double[] {this.optParas[2], this.optParas[3]
+                               , this.optParas[4], this.optParas[5]
+                               , this.optParas[6], this.optParas[7]};	
+
+double     errRelPrcSum = 0.0; 
+double     errRelPrc    = 0.0;	
+double     errRelVolSum = 0.0;
+double     errRelVol    = 0.0;	
+
+double     errAbsPrc    = 0.0;
+double     errAbsVol    = 0.0;
+```
+
+```java
+for(int i=0; i<this.swpnMat.length; i++) {
+	for(int j=0; j<this.swapTenor.length; j++) {
+
+	}
+}
+```
+
+시장의 스왑션가격과 모형으로 산출한 스왑션 가격의 차이 제곱의 평균이 최소가 되는 모수를 산출하는 것이 목적임.&#x20;
+
+또한 시장에서 관찰되는 스왑션의 변동성과 모형의 모수로  산출된 변동성과의 차이 역시 검토 대상임.&#x20;
+
+```java
+prcHw[i][j] = swpnPriceHw(this.swpnMat[i], this.swapMatTenor[i][j]
+                        , alpha, sigma, this.swapRate[i][j]);	
+volHw[i][j] = swpnVolHw  (this.swpnMat[i], this.swapRate[i][j]
+                        , this.swapDfSum[i][j], prcHw[i][j]);
+
+errRelPrc     = Math.pow( (this.swpnPriceAtm[i][j] - prcHw[i][j]) 
+                                / this.swpnPriceAtm[i][j], 2);
+errRelPrcSum += errRelPrc;				
+errRelVol     = Math.pow( (this.swpnVolMkt[i][j] - volHw[i][j]) 
+                                / this.swpnVolMkt[i][j], 2);
+errRelVolSum += errRelVol;
+
+errAbsPrc     = this.swpnPriceAtm[i][j] - prcHw[i][j];
+errAbsVol     = this.swpnVolMkt[i][j]   - volHw[i][j];
+
+IrValidParamHw prc = new IrValidParamHw();
+prc.setBaseYymm(dateToString(this.baseDate).substring(0,6));
+prc.setSwpnMatNum((double) this.swpnMat[i]);
+prc.setSwapTenNum((double) this.swapTenor[j]);
+prc.setValidDv("PRICE");
+prc.setValidVal1(this.swpnPriceAtm[i][j] / this.notional);
+prc.setValidVal2(prcHw[i][j] / this.notional);
+prc.setValidVal3(errAbsPrc / this.notional);
+prc.setValidVal4(errRelPrc);
+
+IrValidParamHw vol = new IrValidParamHw();
+vol.setBaseYymm(dateToString(this.baseDate).substring(0,6));
+vol.setSwpnMatNum((double) this.swpnMat[i]);
+vol.setSwapTenNum((double) this.swapTenor[j]);
+vol.setValidDv("VOL");
+vol.setValidVal1(this.swpnVolMkt[i][j]);
+vol.setValidVal2(volHw[i][j]);
+vol.setValidVal3(errAbsVol);
+vol.setValidVal4(errRelVol);
+
+validRslt.add(prc);
+validRslt.add(vol);
+```
+
+</details>
 
 ### 그외 column set&#x20;
 

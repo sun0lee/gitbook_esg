@@ -21,7 +21,7 @@ public List<Hw1fCalibParas> getHw1fCalibrationResultList(String mode) {
 
 * [https://ojs.tripaledu.com/index.php/jefa/article/view/38/44](https://ojs.tripaledu.com/index.php/jefa/article/view/38/44)
 
-#### 스왑션 정의 &#x20;
+### 스왑션 정의 &#x20;
 
 스왑션은 특정한 날짜에 특정한 금리로 이자율 스왑 계약을 할 수 있는 옵션 (Payer와 Receiver)
 
@@ -55,26 +55,26 @@ Black-76 모형은 이자율이 고정이 아닌 변동할 때 사용함. 기초
 
 ## 2nd Step : HW Calibration Parameters (최적 모수 산출)
 
-#### Hull-White 모형 이해&#x20;
+### Hull-White 모형 이해&#x20;
 
 Hull-White 모형은 단기 이자율을 모델링하기 위한 이항 트리 모형 혹은 금리 모형으로, 이자율 변동성이 시간에 따라 변하는 것을 반영함.&#x20;
 
-#### 모수
+### 모수
 
-* short rate volatility
-* mean reversion speed
-* long-term mean level
-* 현재 이자율
+* short rate volatility : 금리 변동성, 변동성이 클수록 금리가 불안정하게 움직임.&#x20;
+* mean reversion speed : 평균회귀속도, 금리가 평균에 가까워지는 속도를 의미함.&#x20;
+* long-term mean level : 장기평균금리, 장기적인 금리 수준을 결정함.&#x20;
+* 현재 이자율 -> 시뮬레이션 시작점.&#x20;
 
-#### 모수 산출 단계&#x20;
+### 모수 산출 단계&#x20;
 
 1. swaption 가격을 이용해서 이자율 노드들의 적정 가중치를 계산
 2. 산출된 가중치를 이용해서 이자율 모형을 추정
 3. 추정된 모형을 이용해서 모수를 계산
 
-#### 모수 추정방법&#x20;
+### 모수 추정방법&#x20;
 
-* 최소제곱법(least squares)에서는 swaption 가격과 이론적으로 계산된 swaption 가격 간의 차이를 최소화하는 모수를 선택
-* 최대우도법(maximum likelihood)에서는 주어진 swaption 가격들이 나올 확률이 가장 높은 모수를 선택
+* 최소제곱법(least squares) : swaption 가격과 이론적으로 계산된 swaption 가격 간의 차이를 최소화하는 모수를 선택
+* 최대우도법(maximum likelihood) : 주어진 swaption 가격들이 나올 확률이 가장 높은 모수를 선택
 
 \-> 추정된 모수를 대입해서 Hull-White 모형을 이용해서 금리시나리오 예측.&#x20;
