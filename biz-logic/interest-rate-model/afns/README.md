@@ -21,7 +21,32 @@ K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이
 * 기울기 ; slope&#x20;
 * 곡도 ; curvature&#x20;
 
+### 모수&#x20;
 
+<details>
+
+<summary></summary>
+
+$$\kappa$$
+
+```
+  this.initParas[0]  = this.lambda;
+  this.initParas[1]  = this.thetaL;  
+  this.initParas[2]  = this.thetaS;  
+  this.initParas[3]  = this.thetaC;
+  this.initParas[4]  = Math.max(this.kappaL, 1e-4); 
+  this.initParas[5]  = Math.max(this.kappaS, 1e-4);		
+  this.initParas[6]  = Math.max(this.kappaC, 1e-4);		
+  this.initParas[7]  = this.initSigma; 
+  this.initParas[8]  = 0.0; 
+  this.initParas[9]  = this.initSigma;
+  this.initParas[10] = 0.0;            
+  this.initParas[11] = 0.0; 
+  this.initParas[12] = this.initSigma;
+  this.initParas[13] = this.epsilon * 1000;
+```
+
+</details>
 
 ### 상태공간(  state - space )모형&#x20;
 
@@ -33,7 +58,7 @@ K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이
 | 금리모형        | 관측방정식                                                              | 상태방정식                                                                           |
 | ----------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | DNS (disc)  | $$y_t(\tau)= B(\tau)X_t + \epsilon_i(\tau)$$                       | $$X_t - \mu_X = \phi_X(X_{t-1} - \mu_X) + \eta_{Xt}$$                           |
-| AFNS (Cont) | $$y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)$$ | $$dXt = K^P (\theta^P-X_t)dt + \sum dW_t^P$$   ( $$P$$측도 하의  연속시간모형 )           |
+| AFNS (Cont) | $$y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)$$ | $$dXt = \Kappa ^P (\theta^P-X_t)dt + \sum dW_t^P$$   ( $$P$$측도 하의  연속시간모형 )     |
 | AFNS (disc) | $$y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)$$ | $$X_t = (I - e^{-K^P\Delta t})\theta^P + e^{-K^P \Delta t}X_{t-1} + \eta_{Xt}$$ |
 
 <details>
