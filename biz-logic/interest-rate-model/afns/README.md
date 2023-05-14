@@ -64,9 +64,15 @@ K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이
 
 1. 초기모수&#x20;
    * $$X_{1|0} = \theta^P$$
-   * $$V_{1|0} =  (I - e^-{K^{P \Delta t}})^{-1} \Sigma_\eta$$
-   * $$\psi_0 \equiv (I - )$$
-2.
+   * $$V_{1|0} =  (I - e^{-K^P   \Delta t})^{-1} \cdot \Sigma_\eta$$
+   * $$\psi_0 \equiv (I -  e^{-K^P   \Delta t}) \cdot \theta^P$$
+   * $$\psi_1 \equiv e^{-K^P   \Delta t}$$
+2. 칼만 필터에 의한 반복 계산 과정&#x20;
+   * 조건부 추정치&#x20;
+     * $$X_{t|t-1} = \psi_0 + \psi_1 \cdot X_{t-1|t-1}$$
+     * $$V_{t|t-1} = \psi_1 \cdot V_{t-1|t-1} \cdot \psi_1^T  + \Sigma_\eta$$
+   * 조건부 예측오차&#x20;
+     * &#x20;
 
 
 
