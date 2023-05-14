@@ -6,14 +6,14 @@ K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이
 
 
 
-### KICS 금리모형
+## KICS 금리모형
 
 1. K-ICS 1.0 금리모형은 DNS 모형이었으나&#x20;
 2. K-ICS 2.0 부터 무차익 조건이 추가된  DNS 모형, AFNS 모형을 기반으로 함.&#x20;
 
 
 
-### DNS, AFNS 모형의 구조
+## DNS, AFNS 모형의 구조
 
 아래 3가지 미관측 잠재요인에 따라 실제 관측되는 만기별 이자율 기간구조를 설명함.&#x20;
 
@@ -36,22 +36,50 @@ K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이
 | AFNS (Cont) | $$y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)$$ | $$dXt = K^P (\theta^P-X_t)dt + \sum dW_t^P$$   ( $$P$$측도 하의  연속시간모형 )           |
 | AFNS (disc) | $$y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)$$ | $$X_t = (I - e^{-K^P\Delta t})\theta^P + e^{-K^P \Delta t}X_{t-1} + \eta_{Xt}$$ |
 
-* notation&#x20;
-  * $$B(\tau)$$: 관측방정식의 계수 행렬&#x20;
-  * $$X_t= \begin{bmatrix}    L_t \\ S_t \\ C_t  \end{bmatrix}$$: 추정모수&#x20;
-  * $$\epsilon_i(\tau)$$ : 오차항&#x20;
-  * $$H$$ : 공분산 행렬&#x20;
-  * $$\mu_X =  \begin{bmatrix}    \mu_L \\ \mu_S \\ \mu_C \end{bmatrix}$$ : 3요인의 장기평균모수&#x20;
-  * $$\phi_X =  \begin{bmatrix}    \phi_L & 0 &  0 \\   0 & \phi_S & 0 \\ 0&0&\phi_C \end{bmatrix}$$ : 상태방정식 계수행렬 : 3요인의자기회귀모수&#x20;
+<details>
 
+<summary>DNS  (disc) notation </summary>
 
+#### 관측방정식
+
+* $$B(\tau)$$: 관측방정식의 계수 행렬&#x20;
+* $$X_t= \begin{bmatrix}    L_t \\ S_t \\ C_t  \end{bmatrix}$$: 추정모수&#x20;
+* $$\epsilon_i(\tau)$$ : 오차항&#x20;
+* $$H$$ : 공분산 행렬&#x20;
+
+#### 상태방정식
+
+* $$\mu_X =  \begin{bmatrix}    \mu_L \\ \mu_S \\ \mu_C \end{bmatrix}$$ : 3요인의 장기평균모수&#x20;
+* $$\phi_X =  \begin{bmatrix}    \phi_L & 0 &  0 \\   0 & \phi_S & 0 \\ 0&0&\phi_C \end{bmatrix}$$ : 상태방정식 계수행렬 : 3요인의자기회귀모수&#x20;
+
+</details>
+
+<details>
+
+<summary>AFNS  (conti.) notation </summary>
+
+#### 관측방정식
 
 * &#x20;$$\dfrac{A(\tau)}{\tau}$$ : 무차익거래 조정항 : 채권가격 결정 시 차익거래가 발생하지 않아야 한다는 이론적 제약을 도입하여 모형을 전개하면 도출되는 항. ( $$\ta$$$$\tau , \lambda , \Sigma$$ )으로 구할 수 있는 closed form.
+
+#### 상태방정식
+
 * $$K^P = \begin{bmatrix}    K_{11}^P & 0 &  0 \\   0 & K_{22}^P& 0 \\ 0&0&K_{33}^P \end{bmatrix}$$, 평균회귀속도 모수행렬&#x20;
+
+<!---->
+
 * $$\theta^P=\begin{bmatrix}  \theta_1^P  \\  \theta_2^P \\ \theta_3^P \end{bmatrix}$$ 장기평균모수 벡터&#x20;
+
+<!---->
+
 * $$\Sigma= \begin{bmatrix}    \sigma_{11} & 0 & 0 \\   \sigma_{21} & \sigma_{22} & 0 \\ \sigma_{31} & \sigma_{32} & \sigma_{33} \end{bmatrix}$$ 공분산 행렬의 촐레스키 하방 삼각 행렬, 변동성 행렬&#x20;
+
+<!---->
+
 * $$W_t^P$$ 표준 위너프로세스&#x20;
-*
+
+</details>
+
 * AFNS 모형의 관측방정식은 요인에 대한 선형모형으로 표현되므로 칼만필터를 이용하여 모수를 추정함.&#x20;
 
 ### 칼만필터&#x20;
