@@ -42,10 +42,13 @@ K-ICS 금리위험액은 1년간 금리변동에 따른 위험을 의미함. 이
 
 #### 관측방정식
 
-* $$B(\tau)$$: 관측방정식의 계수 행렬&#x20;
+* $$B(\tau)= \begin{bmatrix}    1 & (\frac{1-e^{-\lambda \tau_1}}{\lambda \tau_1}) & (\frac{1-e^{-\lambda \tau_1}}{\lambda \tau_1} - e^{-\lambda \tau_1}) \\    1 & (\frac{1-e^{-\lambda \tau_2}}{\lambda \tau_2}) & (\frac{1-e^{-\lambda \tau_2}}{\lambda \tau_2} - e^{-\lambda \tau_2}) \\  & \vdots &  \\ 1 & (\frac{1-e^{-\lambda \tau_N}}{\lambda \tau_N}) & (\frac{1-e^{-\lambda \tau_N}}{\lambda \tau_N} - e^{-\lambda \tau_N}) \end{bmatrix}$$: 관측방정식의 계수 행렬&#x20;
+
+<!---->
+
 * $$X_t= \begin{bmatrix}    L_t \\ S_t \\ C_t  \end{bmatrix}$$: 추정모수&#x20;
-* $$\epsilon_i(\tau)$$ : 오차항&#x20;
-* $$H$$ : 공분산 행렬&#x20;
+* $$\epsilon_i(\tau) ~ N(0_{N \times 1},H_{N \times N})$$ : 오차항&#x20;
+* $$H =  \begin{bmatrix}    \phi_L & 0 &  0 \\   0 & \phi_S & 0 \\ 0&0&\phi_C$$$$H =  \begin{bmatrix}    \phi_L & 0 &  0 \\   0 & \phi_S & 0 \\ 0&0&\phi_C$$$$H = \begin{bmatrix}    a & b & \hdots & 0 \\    c & d \\  \end{bmatrix}$$ : 공분산 행렬&#x20;
 
 #### 상태방정식
 
