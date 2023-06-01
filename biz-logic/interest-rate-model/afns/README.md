@@ -55,11 +55,7 @@ $$\kappa$$
 * 관측방정식 (measurement eq.)&#x20;
 * 상태방정식 (state eq.)&#x20;
 
-| 금리모형        | 관측방정식                                                              | 상태방정식                                                                           |
-| ----------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| DNS (disc)  | $$y_t(\tau)= B(\tau)X_t + \epsilon_i(\tau)$$                       | $$X_t - \mu_X = \phi_X(X_{t-1} - \mu_X) + \eta_{Xt}$$                           |
-| AFNS (Cont) | $$y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)$$ | $$dXt = \Kappa ^P (\theta^P-X_t)dt + \sum dW_t^P$$   ( $$P$$측도 하의  연속시간모형 )     |
-| AFNS (disc) | $$y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)$$ | $$X_t = (I - e^{-K^P\Delta t})\theta^P + e^{-K^P \Delta t}X_{t-1} + \eta_{Xt}$$ |
+<table><thead><tr><th width="111">금리모형</th><th>관측방정식</th><th>상태방정식</th></tr></thead><tbody><tr><td>DNS (disc)</td><td><span class="math">y_t(\tau)= B(\tau)X_t + \epsilon_i(\tau)</span></td><td><span class="math">X_t - \mu_X = \phi_X(X_{t-1} - \mu_X) + \eta_{Xt}</span></td></tr><tr><td>AFNS (Cont)</td><td><span class="math">y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)</span></td><td><span class="math">dXt = \Kappa ^P (\theta^P-X_t)dt + \sum dW_t^P</span>   ( <span class="math">P</span>측도 하의  연속시간모형 )</td></tr><tr><td>AFNS (disc)</td><td><span class="math">y_t(\tau)= B(\tau)X_t +\dfrac{A(\tau)}{\tau}+ \epsilon_i(\tau)</span></td><td><span class="math">X_t = (I - e^{-K^P\Delta t})\theta^P + e^{-K^P \Delta t}X_{t-1} + \eta_{Xt}</span></td></tr></tbody></table>
 
 <details>
 
@@ -73,7 +69,7 @@ $$\kappa$$
 
 * $$X_t= \begin{bmatrix}    L_t \\ S_t \\ C_t  \end{bmatrix}$$: 추정모수&#x20;
 * $$\epsilon_i(\tau) ~ N(0_{N \times 1},H_{N \times N})$$ : 오차항&#x20;
-* $$H =  \begin{bmatrix}    \phi_L & 0 &  0 \\   0 & \phi_S & 0 \\ 0&0&\phi_C$$$$H =  \begin{bmatrix}    \phi_L & 0 &  0 \\   0 & \phi_S & 0 \\ 0&0&\phi_C$$$$H = \begin{bmatrix}    a & b & \hdots & 0 \\    c & d \\  \end{bmatrix}$$ : 공분산 행렬&#x20;
+* $$H =  \begin{bmatrix}    \phi_L & 0 &  0 \\   0 & \phi_S & 0 \\ 0&0&\phi_C \end{bmatrix}$$: 공분산 행렬
 
 #### 상태방정식
 
@@ -88,7 +84,7 @@ $$\kappa$$
 
 #### 관측방정식
 
-* &#x20;$$\dfrac{A(\tau)}{\tau}$$ : 무차익거래 조정항 : 채권가격 결정 시 차익거래가 발생하지 않아야 한다는 이론적 제약을 도입하여 모형을 전개하면 도출되는 항. ( $$\ta$$$$\tau , \lambda , \Sigma$$ )으로 구할 수 있는 closed form.
+* &#x20;$$\dfrac{A(\tau)}{\tau}$$ : 무차익거래 조정항 : 채권가격 결정 시 차익거래가 발생하지 않아야 한다는 이론적 제약을 도입하여 모형을 전개하면 도출되는 항. ( $$\tau , \lambda , \Sigma$$ )으로 구할 수 있는 closed form.
 
 #### 상태방정식
 
