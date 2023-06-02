@@ -14,7 +14,9 @@ public static Map<String, List<?>> createParamHw1fNonSplitMap(
 {
 ```
 
-### input set&#x20;
+<details>
+
+<summary>input set </summary>
 
 ```java
   Map<String, List<?>>  irParamHw1fMap  = new TreeMap<String, List<?>>();
@@ -29,9 +31,12 @@ public static Map<String, List<?>> createParamHw1fNonSplitMap(
   IrCurve      irCurve  = irModel.getIrCurve();
   String     irCurveNm = irCurve.getIrCurveNm();
   
+  // 초기화 
   Hw1fCalibrationKics calib = new Hw1fCalibrationKics
     (bssd, spotList, volInfo, alphaPiece, sigmaPiece, initParas, freq, errTol);
 ```
+
+</details>
 
 ## Parameter 추정 (Main)
 
@@ -42,12 +47,8 @@ paramCalc = calib.getHw1fCalibrationResultList()
          .collect(toList());
 ```
 
-<details>
-
-<summary>Main Function for Calibration Parameter</summary>
-
 ```java
-Main Function for Calibration Parameter
+// Main Function for Calibration Parameter
 public List<Hw1fCalibParas> getHw1fCalibrationResultList(String mode) {
 
 // 1st Step 1-1: Preparation of Swap Cashflow from Smith-Wilson Result from baseCurve 	
@@ -92,9 +93,9 @@ return hw1fParam;
 }
 ```
 
-</details>
+<details>
 
-### 그외 column set&#x20;
+<summary>그외 column set </summary>
 
 ```java
   paramCalc.stream().forEach(s -> s.setIrParamModel(irModel));
@@ -102,6 +103,10 @@ return hw1fParam;
   paramCalc.stream().forEach(s -> s.setModifiedBy(jobId));
   paramCalc.stream().forEach(s -> s.setUpdateDate(LocalDateTime.now()));
 ```
+
+</details>
+
+
 
 ### Validation Result&#x20;
 
@@ -111,7 +116,7 @@ validParam = calib.getValidationResult();
 
 <details>
 
-<summary>calib.getValidationResult()</summary>
+<summary>변수 초기화 </summary>
 
 ```java
 List<IrValidParamHw> validRslt = new ArrayList<IrValidParamHw>();
@@ -132,6 +137,11 @@ double     errAbsPrc    = 0.0;
 double     errAbsVol    = 0.0;
 ```
 
+</details>
+
+* 시장의 스왑션가격과 모형으로 산출한 스왑션 가격의 차이 제곱의 평균이 최소가 되는 모수를 산출하는 것이 목적임.
+* 또한 시장에서 관찰되는 스왑션의 변동성과 모형의 모수로 산출된 변동성과의 차이 역시 검토 대상임.&#x20;
+
 ```java
 for(int i=0; i<this.swpnMat.length; i++) {
 	for(int j=0; j<this.swapTenor.length; j++) {
@@ -139,10 +149,6 @@ for(int i=0; i<this.swpnMat.length; i++) {
 	}
 }
 ```
-
-시장의 스왑션가격과 모형으로 산출한 스왑션 가격의 차이 제곱의 평균이 최소가 되는 모수를 산출하는 것이 목적임.&#x20;
-
-또한 시장에서 관찰되는 스왑션의 변동성과 모형의 모수로  산출된 변동성과의 차이 역시 검토 대상임.&#x20;
 
 ```java
 prcHw[i][j] = swpnPriceHw(this.swpnMat[i], this.swapMatTenor[i][j]
@@ -160,6 +166,7 @@ errRelVolSum += errRelVol;
 errAbsPrc     = this.swpnPriceAtm[i][j] - prcHw[i][j];
 errAbsVol     = this.swpnVolMkt[i][j]   - volHw[i][j];
 
+// 1. 시장 스왑션 가격과 산출 스왑션 가격 차이 비교 
 IrValidParamHw prc = new IrValidParamHw();
 prc.setBaseYymm(dateToString(this.baseDate).substring(0,6));
 prc.setSwpnMatNum((double) this.swpnMat[i]);
@@ -170,6 +177,7 @@ prc.setValidVal2(prcHw[i][j] / this.notional);
 prc.setValidVal3(errAbsPrc / this.notional);
 prc.setValidVal4(errRelPrc);
 
+// 2. 시장에서 관찰되는 스왑션 변동성과 모수로 산출된 동성과 차이 비교 
 IrValidParamHw vol = new IrValidParamHw();
 vol.setBaseYymm(dateToString(this.baseDate).substring(0,6));
 vol.setSwpnMatNum((double) this.swpnMat[i]);
@@ -184,9 +192,9 @@ validRslt.add(prc);
 validRslt.add(vol);
 ```
 
-</details>
+<details>
 
-### 그외 column set&#x20;
+<summary>그외 column set</summary>
 
 ```java
   validParam.stream().forEach(s -> s.setIrModelNm(irModelNm));
@@ -200,7 +208,11 @@ validRslt.add(vol);
   irParamHw1fMap.put("VALID",  validParam);
 ```
 
-### log&#x20;
+</details>
+
+<details>
+
+<summary>log</summary>
 
 ```java
 log.info("{}({}) creates {} results of [MODEL: {}]. They are inserted into [{}] Table", jobId, EJob.valueOf(jobId).getJobName(), paramCalc.size(), irModelNm, toPhysicalName(IrParamHwCalc.class.getSimpleName()));
@@ -208,3 +220,6 @@ log.info("{}({}) creates {} results of [MODEL: {}]. They are inserted into [{}] 
 
 return irParamHw1fMap;
 ```
+
+</details>
+
