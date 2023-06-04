@@ -65,33 +65,24 @@ Cascading은 스타일 규칙의 충돌을 해결하고, 복잡한 스타일링 
 
 ## selector&#x20;
 
-| Selector         |    | desc                                                                                                                 |
-| ---------------- | -- | -------------------------------------------------------------------------------------------------------------------- |
-| 전체               | \* | <pre><code>*{
+<table><thead><tr><th width="131.5">Selector</th><th width="43"></th><th>desc</th></tr></thead><tbody><tr><td>전체 </td><td>*</td><td><pre><code>*{
 	padding: 0;
     margin: 0;
 }
-</code></pre>                                                            |
-| Tag              |    | <pre><code>h2{
+</code></pre></td></tr><tr><td>Tag</td><td></td><td><pre><code>h2{
 	font-size: 20px;
     color: orange;
 }
-</code></pre>                                                  |
-| Class            | .  | <pre><code>.bluetext{
+</code></pre></td></tr><tr><td>Class</td><td>.</td><td><pre><code>.bluetext{
 	color: blue;
 }
 </code></pre><pre><code>h2.bluetext{
 	color: blue;
 }
-</code></pre>             |
-| ID               | #  | <pre><code>#container{
+</code></pre></td></tr><tr><td>ID</td><td>#</td><td><pre><code>#container{
 	background: #ffa00;
     width: 400px;
     height: 200px;
     margin: 0 auto;
 }
-</code></pre> |
-| Descendant       |    |                                                                                                                      |
-| Child            |    |                                                                                                                      |
-| Adjacent Sibling |    |                                                                                                                      |
-| General Sibling  |    |                                                                                                                      |
+</code></pre></td></tr><tr><td>Descendant</td><td></td><td></td></tr><tr><td>Child</td><td></td><td></td></tr><tr><td>Adjacent Sibling</td><td></td><td></td></tr><tr><td>General Sibling</td><td></td><td></td></tr></tbody></table>

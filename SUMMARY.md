@@ -29,7 +29,7 @@
     * [확률론적 할인율 시나리오](biz-logic/esg-process/3.-stochastic-scenario/undefined.md)
     * [금리모형 모수산출](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/README.md)
       * [모수산출 (310)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/310.md)
-      * [모수안정성검증 (320)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/320.md)
+      * [모수 적정성 (320)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/320.md)
       * [적용 모수✱(330)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/330.md)
     * [금리시나리오 생성 (340)](biz-logic/esg-process/3.-stochastic-scenario/340.md)
     * [유효성 검증](biz-logic/esg-process/3.-stochastic-scenario/undefined-1-1/README.md)

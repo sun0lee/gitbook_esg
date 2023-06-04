@@ -36,7 +36,7 @@ description: 로컬환경에서 DB 사용하기
 
 이렇게 입력 후 '연결' 클릭하면 아래처럼 경로에 ESG.mv.db 파일 생성됨.   &#x20;
 
-<figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (52) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 4. 접속 (저장한 설정 및 <mark style="color:red;">JDBC URL 변경</mark>★★ )
 

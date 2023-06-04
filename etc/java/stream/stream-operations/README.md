@@ -26,17 +26,7 @@ description: 스트림에서 제공하는 연산 관련된 메서드
 
 ## 1. Intermediate operation (중간연산)&#x20;
 
-| Operation                                  | Return type | Functional IF            | Fn discriptor |
-| ------------------------------------------ | ----------- | ------------------------ | ------------- |
-| [#1.1.-filter](./#1.1.-filter "mention")   | Stream\<T>  | Predicate\<T>            | T -> boolean  |
-| [#1.2.-map](./#1.2.-map "mention")         | Stream\<R>  | Function\<T,R>           | T -> R        |
-| [#1.3.-flatmap](./#1.3.-flatmap "mention") | Stream\<R>  | Function\<T, Stream\<R>> | T->Stream\<R> |
-| [#1.4.-sorted](./#1.4.-sorted "mention")   | Stream\<T>  | Comparator\<T>           | (T,T) -> int  |
-| distinct                                   | Stream\<T>  |                          |               |
-| limt                                       | Stream\<T>  | long                     |               |
-| skip                                       | Stream\<T>  | long                     |               |
-| takeWhile                                  | Stream\<T>  | Predicate\<T>            | T->boolean    |
-| dropWhile                                  | Stream\<T>  | redicate\<T>             | T->boolean    |
+<table><thead><tr><th width="149">Operation</th><th width="152">Return type</th><th>Functional IF</th><th>Fn discriptor</th></tr></thead><tbody><tr><td><a data-mention href="./#1.1.-filter">#1.1.-filter</a></td><td>Stream&#x3C;T></td><td>Predicate&#x3C;T></td><td>T -> boolean </td></tr><tr><td><a data-mention href="./#1.2.-map">#1.2.-map</a></td><td>Stream&#x3C;R></td><td>Function&#x3C;T,R></td><td>T -> R</td></tr><tr><td><a data-mention href="./#1.3.-flatmap">#1.3.-flatmap</a></td><td>Stream&#x3C;R></td><td>Function&#x3C;T, Stream&#x3C;R>></td><td>T->Stream&#x3C;R></td></tr><tr><td><a data-mention href="./#1.4.-sorted">#1.4.-sorted</a></td><td>Stream&#x3C;T></td><td>Comparator&#x3C;T></td><td>(T,T) -> int</td></tr><tr><td>distinct</td><td>Stream&#x3C;T></td><td></td><td></td></tr><tr><td>limt</td><td>Stream&#x3C;T></td><td>long</td><td></td></tr><tr><td>skip</td><td>Stream&#x3C;T></td><td>long</td><td></td></tr><tr><td>takeWhile</td><td>Stream&#x3C;T></td><td>Predicate&#x3C;T></td><td>T->boolean</td></tr><tr><td>dropWhile</td><td>Stream&#x3C;T></td><td>redicate&#x3C;T></td><td>T->boolean</td></tr></tbody></table>
 
 ### 1.1. filter()
 
@@ -91,17 +81,7 @@ Returns a stream consisting of the elements of this stream, sorted according to 
 
 ## 2. Terminal operation (최종연산)&#x20;
 
-| Operation                                  | Return type   | Functional IF      | Fn discriptor |
-| ------------------------------------------ | ------------- | ------------------ | ------------- |
-| [#2.1.-foreach](./#2.1.-foreach "mention") | void          | Consumer\<T>       | T-> void      |
-| [#2.2.-collect](./#2.2.-collect "mention") | R             | Collector\<T,A,R>  |               |
-| reduce                                     | Optional\<T>  | BinaryOperator\<T> | (T,T) -> T    |
-| anyMatch                                   | boolean       | Predicate\<T>      | T -> boolean  |
-| noneMatch                                  | boolean       | Predicate\<T>      | T -> boolean  |
-| allMatch                                   | boolean       | Predicate\<T>      | T -> boolean  |
-| count                                      | ong (generic) | long               |               |
-| findAny                                    | Optional\<T>  |                    |               |
-| findFirst                                  | Optional\<T>  |                    |               |
+<table><thead><tr><th width="151.66666666666666">Operation</th><th width="152">Return type</th><th>Functional IF</th><th>Fn discriptor</th></tr></thead><tbody><tr><td><a data-mention href="./#2.1.-foreach">#2.1.-foreach</a></td><td>void</td><td>Consumer&#x3C;T></td><td>T-> void</td></tr><tr><td><a data-mention href="./#2.2.-collect">#2.2.-collect</a></td><td>R</td><td>Collector&#x3C;T,A,R></td><td></td></tr><tr><td>reduce</td><td>Optional&#x3C;T></td><td>BinaryOperator&#x3C;T></td><td>(T,T) -> T</td></tr><tr><td>anyMatch</td><td>boolean</td><td>Predicate&#x3C;T></td><td>T -> boolean</td></tr><tr><td>noneMatch</td><td>boolean</td><td>Predicate&#x3C;T></td><td>T -> boolean</td></tr><tr><td>allMatch</td><td>boolean</td><td>Predicate&#x3C;T></td><td>T -> boolean</td></tr><tr><td>count</td><td>ong (generic)</td><td>long</td><td></td></tr><tr><td>findAny</td><td>Optional&#x3C;T></td><td></td><td></td></tr><tr><td>findFirst</td><td>Optional&#x3C;T></td><td></td><td></td></tr></tbody></table>
 
 ### 2.1. forEach()
 

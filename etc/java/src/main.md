@@ -210,21 +210,7 @@ cirPrjYear                   = Integer.parseInt(argInDBMap.getOrDefault("CIR_PRO
 
 ## 3. main job (job110 ... job820)&#x20;
 
-|              |                                  |                                                         |
-| :----------: | :------------------------------: | ------------------------------------------------------- |
-|   prepare    | [job110.md](job110.md "mention") | Set Smith-Wilson Attribute                              |
-|    prepare   | [job120.md](job120.md "mention") | Set Swaption Volatility                                 |
-|  기본 무위험 금리커브 | [job130.md](job130.md "mention") | Set YTM TermStructure                                   |
-|  기본 무위험 금리커브 | [job150.md](job150.md "mention") | YTM to SPOT by Smith-Wilson Method                      |
-| 조정 무위험 금리커브  |    [job210](job210/ "mention")   | AFNS Weekly Input TermStructure Setup                   |
-|  조정 무위험 금리커브 |    [job220](job220/ "mention")   | AFNS Shock Spread                                       |
-|  조정 무위험 금리커브 | [job230.md](job230.md "mention") | Biz Applied AFNS Shock Spread                           |
-|  조정 무위험 금리커브 | [job240.md](job240.md "mention") | Set Liquidity Premium                                   |
-|  조정 무위험 금리커브 | [job240.md](job240.md "mention") | Biz Applied Liquidity Premium                           |
-|  조정 무위험 금리커브 |    [job260](job260/ "mention")   | BottomUp Risk Free TermStructure with Liquidity Premium |
-|  조정 무위험 금리커브 |    [job270](job270/ "mention")   | Interpolated TermStructure by SW                        |
-|  조정 무위험 금리커브 | [job280.md](job280.md "mention") | Biz Applied TermStructure by SW                         |
-|              |                                  |                                                         |
+<table><thead><tr><th width="185.66666666666666" align="center"></th><th width="124" align="center"></th><th></th></tr></thead><tbody><tr><td align="center">prepare </td><td align="center"><a data-mention href="job110.md">job110.md</a></td><td>Set Smith-Wilson Attribute</td></tr><tr><td align="center">prepare</td><td align="center"><a data-mention href="job120.md">job120.md</a></td><td>Set Swaption Volatility</td></tr><tr><td align="center">기본 무위험 금리커브</td><td align="center"><a data-mention href="job130.md">job130.md</a></td><td>Set YTM TermStructure</td></tr><tr><td align="center">기본 무위험 금리커브</td><td align="center"><a data-mention href="job150.md">job150.md</a></td><td>YTM to SPOT by Smith-Wilson Method</td></tr><tr><td align="center">조정 무위험 금리커브 </td><td align="center"><a data-mention href="job210/">job210</a></td><td>AFNS Weekly Input TermStructure Setup</td></tr><tr><td align="center">조정 무위험 금리커브</td><td align="center"><a data-mention href="job220/">job220</a></td><td>AFNS Shock Spread</td></tr><tr><td align="center">조정 무위험 금리커브</td><td align="center"><a data-mention href="job230.md">job230.md</a></td><td>Biz Applied AFNS Shock Spread</td></tr><tr><td align="center">조정 무위험 금리커브</td><td align="center"><a data-mention href="job240.md">job240.md</a></td><td>Set Liquidity Premium</td></tr><tr><td align="center">조정 무위험 금리커브</td><td align="center"><a data-mention href="job240.md">job240.md</a></td><td>Biz Applied Liquidity Premium</td></tr><tr><td align="center">조정 무위험 금리커브</td><td align="center"><a data-mention href="job260/">job260</a></td><td>BottomUp Risk Free TermStructure with Liquidity Premium</td></tr><tr><td align="center">조정 무위험 금리커브</td><td align="center"><a data-mention href="job270/">job270</a></td><td>Interpolated TermStructure by SW</td></tr><tr><td align="center">조정 무위험 금리커브</td><td align="center"><a data-mention href="job280.md">job280.md</a></td><td>Biz Applied TermStructure by SW</td></tr><tr><td align="center"></td><td align="center"></td><td></td></tr></tbody></table>
 
 #### TODO : 반복되는 처리구간 중복되는 로직 없는지 확인하기&#x20;
 
