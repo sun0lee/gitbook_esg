@@ -148,7 +148,7 @@ git show 6f01eda
 
 &#x20;  **status**    Show the working tree status
 
-<figure><img src="../../.gitbook/assets/image (29) (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29) (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 현재 작업 중인 디렉토리나 파일의 상태 (어떤 파일이 변경되었고, 어떤 파일이 스테이지 영역에 추가되었는지, 커밋되었는지 등의 정보를 확인)
   * 작업 중인 브랜치의 이름
