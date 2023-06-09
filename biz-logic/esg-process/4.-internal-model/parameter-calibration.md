@@ -60,9 +60,19 @@ t+1 시점 상태변수의 확률과정의 모수를 독립적으로 추정&#x20
     <figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 * 추정된  $$\beta_{i,1} \textstyle { : intercept}, \beta_{i,2} \textstyle { : slope}$$ 를 이용해 $$\kappa, \theta$$의 초기값 산출&#x20;
   * $$\kappa_i = -\frac{ln\beta_{i,2}}{\Delta t}$$, $$\theta_i = \frac{\beta_{i,1}}{1-e^{-\kappa_i \Delta t}} = \frac{\beta_{i,1}}{1-\beta_{i,2} }$$
-* 추정되지 않은 모수의 초기값&#x20;
+
+
+
+* 추정되지 않은 모수의 초기값
   * $$\Sigma = \begin{bmatrix} \sigma_{11}, 0  , 0\\ \sigma_{21}, \sigma_{22}, 0 \\ \sigma_{31},\sigma_{32},\sigma_{33} \end{bmatrix}$$
-  * $$\epsilon = 0.001$$
+    * $$e=\begin{bmatrix} e_{L_1},e_{L_2},e_{L_3},...,e_{L_{N-1}}\\ e_{S_1},e_{S_2}, e_{S_3},...,e_{S_{N-1}}\\ e_{C_1}, e_{C_2}, e_{c_3},...,e_{C_{N-1}} \end{bmatrix}$$
+      * $$e_{L_n} = Y_{L_n} - (\hat\beta_{L1} + \hat\beta_{L2}\cdot X_{L_n})$$
+      * $$e_{S_n} = Y_{S_n} - (\hat\beta_{S1} + \hat\beta_{S2}\cdot X_{S_n})$$
+      * $$e_{C_n} = Y_{c_n} - (\hat\beta_{C1} + \hat\beta_{C2}\cdot X_{C_n})$$
+  * $$\hat \Omega  = \frac{1}{N-3}\cdot e \cdot e^T$$&#x20;
+  * $$\hat \Sigma = \frac{chol(\hat\Omega)}{\sqrt{\Delta_n}}$$ 으로 설정&#x20;
+  * > DNS 모형을 통한 금리 충격 시나리오 산출 및 분석 P.11 참고&#x20;
+* $$\epsilon = 0.001$$
 
 <figure><img src="../../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
