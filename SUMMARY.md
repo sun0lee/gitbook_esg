@@ -35,6 +35,7 @@
     * [유효성 검증](biz-logic/esg-process/3.-stochastic-scenario/undefined-1-1/README.md)
       * [난수 (360)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1-1/360.md)
       * [할인율 (370)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1-1/370.md)
+  * [4. Internal Model](biz-logic/esg-process/4.-internal-model.md)
   * [glossary](biz-logic/esg-process/glossary.md)
 * [Interest Rate Model](biz-logic/interest-rate-model/README.md)
   * [Smith-Wilson Method](biz-logic/interest-rate-model/smith-wilson-method/README.md)
