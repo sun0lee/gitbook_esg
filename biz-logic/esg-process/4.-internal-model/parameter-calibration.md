@@ -41,7 +41,7 @@ Nelson-Siegel 모델의 $$\lambda$$ 가 결정되면 $$L_t, S_t, C_t$$ 의 값�
     * $$\lambda^{opt} = argmin_{\lambda} \displaystyle\sum_t^T \epsilon_t$$
     *
 
-        <figure><img src="../../../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../../.gitbook/assets/image (89) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -72,11 +72,10 @@ t+1 시점 상태변수의 확률과정의 모수를 독립적으로 추정&#x20
   * $$\hat \Omega  = \frac{1}{N-3}\cdot e \cdot e^T$$&#x20;
   * $$\hat \Sigma = \frac{chol(\hat\Omega)}{\sqrt{\Delta_n}}$$ 으로 설정&#x20;
   * > DNS 모형을 통한 금리 충격 시나리오 산출 및 분석 P.11 참고&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
+
 * $$\epsilon = 0.001$$
-
-<figure><img src="../../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
-
-
 
 ## 모수 최적화&#x20;
 
