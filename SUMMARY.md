@@ -128,5 +128,6 @@
   * [HTML](etc/web/html.md)
   * [CSS](etc/web/css.md)
   * [JS](etc/web/js.md)
+  * [blog](etc/web/blog.md)
 * [Todo](etc/todo/README.md)
   * [@enumerated](etc/todo/enumerated.md)
