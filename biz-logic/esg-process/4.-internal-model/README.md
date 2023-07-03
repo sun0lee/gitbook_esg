@@ -29,11 +29,11 @@ description: 내부모형 목적의 시나리오 생성
 
 * 760 기준테너 할인율 생성
 
-<table data-view="cards"><thead><tr><th></th><th>entity</th><th>table</th></tr></thead><tbody><tr><td>input</td><td></td><td></td></tr><tr><td>output</td><td>IrDcntRateBu</td><td>IR_DCNT_RATE_BU</td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th>entity</th><th>table</th></tr></thead><tbody><tr><td>input</td><td></td><td></td></tr><tr><td>output</td><td>IrDcntRateBuIm</td><td>IR_DCNT_RATE_BU_IM</td></tr></tbody></table>
 
 * 770 full 테너 할인율 생성
 
-<table data-view="cards"><thead><tr><th></th><th>entity</th><th>table</th></tr></thead><tbody><tr><td>input</td><td>IrCurveSpot</td><td>IR_CURVE_SPOT</td></tr><tr><td>output</td><td>IrDcntRate</td><td>IR_DCNT_RATE</td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th>entity</th><th>table</th></tr></thead><tbody><tr><td>input</td><td>IrDcntRateBuIm</td><td>IR_DCNT_RATE_BU_IM</td></tr><tr><td>output</td><td>IrDcntRateIm</td><td>IR_DCNT_SCE_IM</td></tr></tbody></table>
 
 
 
