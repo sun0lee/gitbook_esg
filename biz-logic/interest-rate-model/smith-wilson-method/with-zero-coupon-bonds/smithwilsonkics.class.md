@@ -161,7 +161,9 @@ return swResultlList;
 
 ### 2.1. Alpha ;  `smithWilsonAlphaFinding()`
 
-#### 2.1.1. Alpha 값 조정&#x20;
+alphaItrNum = 100; 100회 반복후 조정된 alpha 값을 적용함.&#x20;
+
+#### 2.1.1. Alpha 초기값 설정&#x20;
 
 ```java
 for(int i=0; i<this.alphaItrNum; i++) {
@@ -267,34 +269,19 @@ if(i==0) {
   if(Math.abs(Math.exp(this.ltfrCont) - Math.exp(this.alphaFwd)) < ltfrEpsilon) {
     break;
   }
-  else if(this.alphaFwd > this.ltfrCont) {
-    this.alphaFwdT = Math.log(Math.exp(this.ltfrCont) + ltfrEpsilon);
-  }
-  else {
-    this.alphaFwdT = Math.log(Math.exp(this.ltfrCont) - ltfrEpsilon);
-  }
 }
 
 // 이후 회차 alpha 검토 
 else {
-  if(this.alphaFwdT < this.ltfrCont) {
-    if(this.alphaFwd < this.alphaFwdT) {
-      this.alphaApplied = this.alphaApplied + this.alphaDApplied;
-    }
-    else {
-      this.alphaApplied = this.alphaApplied - this.alphaDApplied;
-    }					
-  }
-  else {
-    if(this.alphaFwd < this.alphaFwdT) {
-      this.alphaApplied = this.alphaApplied - this.alphaDApplied;
-    }
-    else {
-      this.alphaApplied = this.alphaApplied + this.alphaDApplied;
-    }					
-  }
-  this.alphaDApplied *= 0.5;	
+// 23.07.20 수렴조건 수정 : FSS 수렴조건체크와 동일하도록 수정.
+if(Math.abs(Math.exp(this.alphaFwd) - Math.exp(this.ltfrCont)) > ltfrEpsilon) {
+   this.alphaApplied = this.alphaApplied + this.alphaDApplied;
+ }
+ else {
+    this.alphaApplied = this.alphaApplied - this.alphaDApplied;
 }
+  this.alphaDApplied *= 0.5;		
+ }
 }
 ```
 

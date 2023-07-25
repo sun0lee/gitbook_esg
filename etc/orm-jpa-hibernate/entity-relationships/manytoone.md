@@ -39,7 +39,7 @@
     <figure><img src="../../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 *
 
-    <figure><img src="../../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (37) (1).png" alt=""><figcaption></figcaption></figure>
 * IrCurveYtmUsr가 relation owner 임 (관계의 주인을 Owner라고 함)
 
 ```java

@@ -18,7 +18,7 @@ description: how to Rollback ?
 
 ## 3. 우측 하단에 점 세로 점 세개 클릭> Rollback 클릭&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

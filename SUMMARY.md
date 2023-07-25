@@ -26,7 +26,6 @@
       * [DF (Full Tenor)](biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-full-tenor.md)
       * [DF by Biz](biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-by-biz.md)
   * [3. Stochastic Scenario](biz-logic/esg-process/3.-stochastic-scenario/README.md)
-    * [확률론적 할인율 시나리오](biz-logic/esg-process/3.-stochastic-scenario/undefined.md)
     * [금리모형 모수산출](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/README.md)
       * [모수산출 (310)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/310.md)
       * [모수 적정성 (320)](biz-logic/esg-process/3.-stochastic-scenario/undefined-1/320.md)
@@ -38,8 +37,6 @@
   * [4. Internal Model](biz-logic/esg-process/4.-internal-model/README.md)
     * [parameter calibration](biz-logic/esg-process/4.-internal-model/parameter-calibration.md)
     * [calculate spread](biz-logic/esg-process/4.-internal-model/calculate-spread.md)
-    * [DF](biz-logic/esg-process/4.-internal-model/df.md)
-  * [glossary](biz-logic/esg-process/glossary.md)
 * [Interest Rate Model](biz-logic/interest-rate-model/README.md)
   * [Smith-Wilson Method](biz-logic/interest-rate-model/smith-wilson-method/README.md)
     * [with Zero Coupon Bonds](biz-logic/interest-rate-model/smith-wilson-method/with-zero-coupon-bonds/README.md)
@@ -49,7 +46,7 @@
       * [(수정) SmithWilsonKicsBts.class](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/smithwilsonkicsbts.class-1.md)
   * [AFNS](biz-logic/interest-rate-model/afns/README.md)
     * [AFNelsonSiegel](biz-logic/interest-rate-model/afns/afnelsonsiegel.md)
-  * [Hull-White 1 Factor](biz-logic/interest-rate-model/hull-white-1-factor.md)
+  * [Hull-White 1 Factor](biz-logic/interest-rate-model/undefined.md)
 
 ## ETC
 

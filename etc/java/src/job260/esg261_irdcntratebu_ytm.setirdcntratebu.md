@@ -266,7 +266,7 @@ List<IrCurveSpot> spotList
 
 *
 
-    <figure><img src="../../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
 
 &#x20;
 

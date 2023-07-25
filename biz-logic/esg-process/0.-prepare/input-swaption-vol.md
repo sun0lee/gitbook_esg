@@ -13,7 +13,7 @@ description: 스왑션변동성 입수 ; 금리커브 단위로 스왑션 만기
 * 컬럼으로 구분된 테너별 스왑션 변동성을 row로 구분할 수 있도록 unpivot 처리함
 * 단위변환 (% -> real number) &#x20;
 
-<figure><img src="../../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
@@ -36,6 +36,26 @@ description: 스왑션변동성 입수 ; 금리커브 단위로 스왑션 만기
 반면에, 테너가 3개월인 이자율 스왑션은 매월이 아니라 3개월마다 이자율을 교환합니다. 이 경우, 매월마다 교환하는 것보다는 변동성이 적으므로, 일반적으로 고정금리와 비교해서 스왑금리가 높게 형성됩니다. 그리고 만약 3개월 Euribor 금리가 상승한다면, 3개월 이자율 스왑션의 위험도 높아지므로 고정금리로 1년 이자율 스왑을 체결하는 것이 보다 안정적인 선택일 수 있습니다.
 
 </details>
+
+###
+
+### 금리스왑&#x20;
+
+<img src="../../../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
+
+* Payer IRS : 고정금리를 지급하고 변동금리를 수취
+* Receiver IRS : 고정금리를 수취하고 변동금리를 지급&#x20;
+* Swap Rate : 금리스왑 거래 시 변동금리와 교환되는 고정금리 $$S_{\alpha,\beta}(t) = \dfrac{P(t,T_\alpha)-P(t,T_\beta) }{\displaystyle \sum_{i=\alpha +1}^\beta \tau_i P(t,T_i)}$$
+
+
+
+### 스왑션&#x20;
+
+* 스왑 + 옵션 , 금리스왑을 기초자산으로 하는 옵션&#x20;
+* (Payer 스왑션) 행사시점에 Payer IRS를 행사할 수 있는 권리, 만기동안의 변동금리가 유리할 시 옵션 행사
+* (Receiver 스왑션) 행사시점에 Receiver IRS를 행사할 수 있는 권리, 만기동안의 고정금리가 유리할 시 옵션 행사
+
+<img src="../../../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
 
 ## Table&#x20;
 
