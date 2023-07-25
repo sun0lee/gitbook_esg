@@ -20,9 +20,11 @@
 >
 >
 >
-> 처음 아이디어  _Present market value = Present value applying the UFR_ $$\pm$$_Correction_ 에서 _Correction(_보정항)을 수식으로 정리하면, 아래와 같다.
+> 처음 아이디어  _Present market value = Present value applying the UFR_ $$\pm$$_Correction_ 에서 _Correction(_보정항)을 수식으로 정리하면, 아래와 같다. (무이표채권의 가격을 윌슨함수의 조합으로 표현 )
 >
 > $$m_t=v(0,t) =  e^{-UFR \small \cdot t} + \displaystyle\sum_{j=1}^N\zeta_j \cdot W(t , u_j)$$
+>
+>
 >
 > 시장에 이미 가격이 알려진 N개의 무이표채 가격을 이용하면 $$\zeta$$를 산출할 수 있으며, $$p(t)$$수식에 산출한 $$\zeta$$를 대입하면 만기 t에 대한 무이표채의 가격을 함수식으로 도출할 수 있음.&#x20;
 >
@@ -49,14 +51,14 @@ $$\small W(t, u_j) = e^{-UFR \cdot(t+u_j)} \cdot \{\alpha\cdot min(t,u_j)-0.5\cd
 
 시장에 알려만 각 만기 $$u_i$$ 에 따라 만기별 무이표채 가격의 식이 전개됨. 관측되는 만기 구간의 수가 $$N$$이고, 추정할 보정 계수 $$\zeta$$도 N개 이기 때문에 N x N 정방행렬의 형태로 구성됨.&#x20;
 
-$$M = \mu +W\cdot \zeta$$
+$$m = \mu +W\cdot \zeta$$
 
 * &#x20; $$M =  \begin{bmatrix},m_1\\m_2 \\ \vdots \\m_j\\ \vdots \\m_N \end{bmatrix}$$ ,  $$\mu = \begin{bmatrix}e^{-UFR\cdot t_1} \\e^{-UFR\cdot t_2} \\ \vdots\\e^{-UFR\cdot t_j}\\\vdots\\ e^{-UFR\cdot t_N} \end{bmatrix}$$   , $$\zeta=\begin{bmatrix} \zeta_1 \\ \zeta_2 \\ \vdots \\ \zeta_j \\\vdots\\ \zeta_N \end{bmatrix}$$,&#x20;
 * $$W = \begin{bmatrix} W(t_1,t_1),W(t_1,t_2), ... , W(t_1,t_N) \\ W(t_2,t_1),W(t_2,t_2), ... , W(t_2,t_N) \\ \vdots\\ W(t_j,t_1),W(t_j,t_2), ... , W(t_j,t_N)  \\\vdots\\  W(t_N,t_1),W(t_N,t_2), ... , W(t_N,t_N) \end{bmatrix}$$&#x20;
 
 벡터 $$\zeta$$는 관측치($$M$$)와 장기 선도이자율($$\mu$$)에 대한 차이에 벡터 $$W$$의 역함수를 곱하여 산출함.
 
-$$\zeta = W^{-1}\cdot(P-\mu)$$
+$$\zeta = W^{-1}\cdot(P-\mu) =  W^{-1}\cdot(m-\mu)$$
 
 
 

@@ -1,3 +1,9 @@
+---
+description: >-
+  일반화된 스미스윌슨 방법론 ; 무이표채가 아닌, 이표(coupon)가 내재된 채권가격으로부터 무이표 수익률을 추출해 낼 수 있도록 만든
+  방법론.
+---
+
 # with Assets generating multiple CF
 
 <img src="../../../../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
