@@ -71,7 +71,7 @@ description: >-
 
 <figure><img src="../../.gitbook/assets/image (37).png" alt="" width="563"><figcaption><p>스왑션 데이터가 관찰되지 않는 기간의 모수산출기준 (감독원장 제시 2022)</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt="" width="563"><figcaption><p>스왑션 데이터가 관찰되지 않는 기간의 모수산출기준 (감독원장 제시 2023)</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt="" width="563"><figcaption><p>스왑션 데이터가 관찰되지 않는 기간의 모수산출기준 (감독원장 제시 2023)</p></figcaption></figure>
 
 <details>
 

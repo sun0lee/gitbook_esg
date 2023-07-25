@@ -57,7 +57,7 @@ t+1 시점 상태변수의 확률과정의 모수를 독립적으로 추정&#x20
 * 최소자승법 (OLS) 최적화를 통해 $$\beta_{i,1}, \beta_{i,2}$$ 추정&#x20;
 *
 
-    <figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 * 추정된  $$\beta_{i,1} \textstyle { : intercept}, \beta_{i,2} \textstyle { : slope}$$ 를 이용해 $$\kappa, \theta$$의 초기값 산출&#x20;
   * $$\kappa_i = -\frac{ln\beta_{i,2}}{\Delta t}$$, $$\theta_i = \frac{\beta_{i,1}}{1-e^{-\kappa_i \Delta t}} = \frac{\beta_{i,1}}{1-\beta_{i,2} }$$
 

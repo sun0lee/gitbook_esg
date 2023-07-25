@@ -6,7 +6,7 @@
 
 <summary>이자율 곡선의 보간 및 보외 </summary>
 
-시장에서 관찰되는 자산의 만기는 한정된 정보를 이용하여 듀레이션이 긴 보험부채를 평가하기 위해 관찰되지 않는 기간의 금리를 보간 및 보외하는 방식이 필요함.&#x20;
+시장에서 관찰되는 자산의 만기 정보를 이용하여 듀레이션이 긴 보험부채를 평가하기 위해 관찰되지 않는 기간의 금리를 보간 및 보외하는 방식이 필요함.&#x20;
 
 금리곡선 보간 보외 방식은 넬슨 시겔모형, 직선 보간 보외법, smith wilson 방법 등 여러가지 방법이 있으나, ICS 및  SolvencyII 등의 해외 주요제도에서는 smith-wilson 방식을 채택함.&#x20;
 
@@ -46,9 +46,12 @@ K-ICS에서는 무위험이자율 대용치로 사용할 시장데이터를 국�
 {% endtab %}
 
 {% tab title="LOT" %}
-**LOT(Last Observed Term)** :  최종관찰만기 (20Y)
+**LOT(Last Observed Term)** :  최종관찰만기&#x20;
 
-* ① 최종관찰만기는 국고채 발행잔액, 국고채 지표물 호가 스프레드 등을 감안하여 <mark style="background-color:green;">**감독원장이 정한다.**</mark>
+* 부채평가 할인율 LOT : (20Y)
+  * &#x20;최종관찰만기는 국고채 발행잔액, 국고채 지표물 호가 스프레드 등을 감안하여 <mark style="background-color:green;">**감독원장이 정한다.**</mark>
+* 자산평가 할인율 : LOT : (50Y)
+  * 시장에서 관찰되는 최장만기까지의 국고채 수익률을 Smith-Wilson 보간법으로 추정한 수익률 곡선을 사용하여 산출하며, 금융감독원장(이하 ‘감독원장’)이 제시한다.
 {% endtab %}
 
 {% tab title="CP" %}
@@ -60,7 +63,8 @@ K-ICS에서는 무위험이자율 대용치로 사용할 시장데이터를 국�
 {% tab title="alpha" %}
 $$\alpha$$: 수렴속도, 장기선도금리로 수렴하는 속도를 의미하며 값이 클수록 장기선도금리에 빠르게 수렴.&#x20;
 
-* 수렴시점 선도금리가 장기선도금리와 1bp 차이나도록 해찾기를 통해 산출함
+* 부채 : 수렴시점 선도금리가 장기선도금리와 1bp 차이나도록 해찾기를 통해 산출함
+* 자산 : 0.1&#x20;
 {% endtab %}
 {% endtabs %}
 
@@ -75,6 +79,8 @@ $$\alpha$$: 수렴속도, 장기선도금리로 수렴하는 속도를 의미하
 <figure><img src="../../../.gitbook/assets/image (38).png" alt="" width="563"><figcaption><p>감독원장 제시 (2023)</p></figcaption></figure>
 
 </div>
+
+<figure><img src="../../../.gitbook/assets/image.png" alt="" width="563"><figcaption></figcaption></figure>
 
 ## 3. 활용 (K-ICS) &#x20;
 
