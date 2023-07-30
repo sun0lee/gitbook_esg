@@ -1,5 +1,22 @@
 # job260
 
+{% hint style="danger" %}
+시나리오를 만들 금리를 조정하는 항목
+
+요건을 명확히 해야함 !!!
+
+&#x20;
+
+* **YTM 조정**&#x20;
+  * YTM\_SPREAD : ytm 가산 스프레드&#x20;
+* **SPOT RATE (disc) 조정**&#x20;
+  * MULT\_INT\_RATE : 승산 스프레드 &#x20;
+  * ADD\_SPRD : 가산스프레드&#x20;
+* <mark style="background-color:red;">**PVT**</mark> <mark style="background-color:red;"></mark><mark style="background-color:red;">??? 금리 조정 (shift ) --> 확인 필요 !!</mark>
+  * PVT\_RATE\_MAT\_CD : shift 버킷&#x20;
+  * MULT\_PVT\_RATE : 현재 코드에서는 사용하지 않음.&#x20;
+{% endhint %}
+
 #### (process) [df-base-tenor.md](../../../../biz-logic/esg-process/2.-adjusted-risk-free-term-structure/bottom-up-discount-rate/df-base-tenor.md "mention")
 
 ## 1.delete&#x20;

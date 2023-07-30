@@ -13,6 +13,10 @@ for(Map.Entry<IrCurve, Map<Integer, IrParamSw>>
   String irCurveNm = irCurve.getIrCurveNm();
 ```
 
+
+
+### 1. YTM 금리 사용&#x20;
+
 ```java
 // 기본 무위험 커브 (ytm rate) 준비 
 List<IrCurveYtm> ytmList 
@@ -21,30 +25,36 @@ List<IrCurveYtm> ytmList
 
 ```java
 // 시나리오 단위로 반복 
-for(Map.Entry<Integer, IrParamSw> 
-    swSce : curveSwMap.getValue().entrySet()) {
+for(Map.Entry<Integer, IrParamSw> swSce : curveSwMap.getValue().entrySet()) {
 ```
 
 * 260번의 경우 동일한 base spot rate를 기반으로 가지고 들어와서 시나리오 별 스프레드 처리하기 때문에 시나리오별로 반복하기 전에 spot map을 만들었지만, &#x20;
 * 261의 경우 충격 시나리오별로 ytm 에 가산할 충격스프레드가 다르므로 시나리오별로 ytm을 읽어 shock을 반영 후 spot rate로 환산한 후 spot map을 만드는 형태임.&#x20;
   * 두 작업 모두 sw.multIntRate 가 null이라면 결과는 같아야 함.&#x20;
 
+#### 1-1. YTM  + YTM spread&#x20;
+
 ```java
-// 1. ytm -> spot(cont) 변환 
+// 1. ytm -> spot(disc) 변환 
 // (ytm에 직접 스프레드를 반영, 10.0 추가된 up down 시나리오 산출 부분 확인)
 List<IRateInput> ytmAddList 
 = ytmList.stream()
       .map(s->s.addSpread(swSce.getValue().getYtmSpread()))
       .collect(Collectors.toList());
+```
 
+#### 1-2. spread반영된 YTM을 spot rate으로 변환 (job 150)
+
+```java
  List<IrCurveSpot> spotList 
  = Esg150_YtmToSpotSw.createIrCurveSpot(ytmAddList,swSce.getValue())//sw.multIntRate
-            .stream().map(s-> s.convertToCont()) //연속복리이율 형태로 get 
             .collect(Collectors.toList());
 
 spotList.forEach(s-> s.setIrCurve(irCurve));
 spotList.forEach(s-> log.info("zzzz : {},{}", swSce.getKey(), s.toString()));
 ```
+
+#### 1-3. spot rate map에 담기&#x20;
 
 ```java
 TreeMap<String, Double> spotMap 
@@ -63,6 +73,12 @@ if(spotList.isEmpty()) {log.warn(
     }
 ```
 
+
+
+### 2. 조정항목 반영
+
+#### 2-1. 유동성 프리미엄&#x20;
+
 ```java
 // 2. 유동성 프리미엄 가져오기 
 // (biz, irCurveNm) 만기별 유동성프리미엄 
@@ -74,7 +90,19 @@ Map<String, Double> irSprdLpMap
             , swSce.getKey())
   .stream().collect(Collectors.toMap
    (IrSprdLpBiz::getMatCd, IrSprdLpBiz::getLiqPrem));
+```
 
+#### 2-2. 금리 충격스프레드 (irmodel.AFNS)
+
+* 기존 esg에서는 `applBizDv.equals(EApplBizDv.KICS)` 에 따라 다른 로직을 적용함.
+  * KICS 인 경우 irModelNm=AFNS 인 금리 충격시나리오를 적용함
+  * 그외 0 적용.
+
+**TODO** : 결정론적 시나리오를 어떤 방식으로 적용할 것인지 결정이 필요함.&#x20;
+
+다른 비즈니스 구분이라 하더라도 시나리오 번호를 채번하여 충격스프레드를 적용하고자 하는 경우 IR\_PARAM\_SW\_USR에 적용할 스프레드의 금리 모델을 알려줘야 함. 지금은 AFNS로 동일하게 적용하고 있음. &#x20;
+
+```java
 // 3. 금리 충격스프레드 가져오기 시나리오번호도 디폴트 처리가 필요할까? 없으면 에러인데.
 Map<String, Double> irSprdShkMap 
   = IrSprdDao.getIrSprdAfnsBizList
@@ -86,6 +114,8 @@ Map<String, Double> irSprdShkMap
             .stream().collect(Collectors.toMap
              (IrSprdAfnsBiz::getMatCd, IrSprdAfnsBiz::getShkSprdCont));
 ```
+
+#### 2-3. 조정항목 반영&#x20;
 
 ```java
 // 4. 시나리오 적용할 준비 : spotSceList copy 
@@ -121,25 +151,23 @@ IrDcntRateBu dcntRateBu = new IrDcntRateBu();
 
 double baseSpot = pvtMult 
                 * (spot.getSpotRate() - pvtRate) +  pvtRate + addSprd ;
-//pvtRate doesn't have an effect on parallel shift(only addSprd)
 
-double baseSpotCont = baseSpot;	
-double shkCont      = applBizDv.equals(EApplBizDv.KICS) ? 
-                 irSprdShkMap.getOrDefault(spot.getMatCd(), 0.0) : 0.0;
+double baseSpotCont = irDiscToCont(baseSpot);
+
+double shkCont      = irSprdShkMap.getOrDefault(spot.getMatCd(), 0.0) ;
 double lpDisc       = irSprdLpMap.getOrDefault(spot.getMatCd(), 0.0);
+```
+
+```java
 double spotCont     = baseSpotCont + shkCont;
 double spotDisc     = irContToDisc(spotCont);
 double adjSpotDisc  = spotDisc + lpDisc;
-double adjSpotCont  = irDiscToCont(adjSpotDisc);	
-        
-//260
-// double baseSpotCont = irDiscToCont(baseSpot);
-
-// double shkCont 
-// = (applBizDv.equals("KICS")&&swSce.getKey()<= kicsAddSprdContSceNo) ?
-//    irSprdShkMap.getOrDefault(spot.getMatCd(), 0.0) + addSprd 
-//  : irSprdShkMap.getOrDefault(spot.getMatCd(), 0.0);
+double adjSpotCont  = irDiscToCont(adjSpotDisc);
 ```
+
+
+
+### 3. 결과 매핑&#x20;
 
 ```java
 // 결과값 담기 
@@ -174,197 +202,6 @@ log.info("{}({}) creates [{}] results of [{}]." +
 
 return rst;
 ```
-
-
-
-## 1. curveMap
-
-결정론적 시나리오 산출 대상을 금리커브 및 금리시나리오 (irCurveSceNo) 에 따라 구분함. (반복작업) &#x20;
-
-<details>
-
-<summary><code>IrCurveNm : ParamSw</code></summary>
-
-&#x20;작업대상 입력모수 : 동일한 금리커브라도 설정한 시나리오 갯수만큼 작업을 반복함.
-
-{% code overflow="wrap" %}
-```java
-Map.Entry<String, Map<Integer, IrParamSw>> 
-    curveSwMap : paramSwMap.entrySet()
-```
-{% endcode %}
-
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
-
-</details>
-
-## 2. ytmList&#x20;
-
-금리 커브 별 ytm 정보 입수.&#x20;
-
-<details>
-
-<summary><code>List ytmList</code> </summary>
-
-```java
-List ytmList = IrCurveYtmDao.getIrCurveYtm(bssd, curveSwMap.getKey())
-```
-
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
-
-</details>
-
-## 3. 이하 작업은 시나리오별 loop&#x20;
-
-<details>
-
-<summary>3-1. <code>ytmAddList</code></summary>
-
-* &#x20;ytm 가공(addSpread)하여 읽어오기
-* &#x20;QIS 10.0 YTM 값에 직접 충격치를 반영하는 경우 처리를 위해, ytm에 스프레드를 가산한 ytmAddList 추가 &#x20;
-
-{% code overflow="wrap" %}
-```java
-List ytmAddList = ytmList.stream()
-    .map(s->s.addSpread(swSce.getValue().getYtmSpread()))
-    .collect(Collectors.toList());
-```
-{% endcode %}
-
-*   `addSpread`&#x20;
-
-    <figure><img src="../../../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
-
-</details>
-
-<details>
-
-<summary>3-2. <code>spotList</code></summary>
-
-&#x20;읽어온 ytm을 이용하여 spot rate산출&#x20;
-
-{% code overflow="wrap" %}
-```java
-List<IrCurveSpot> spotList 
-= Esg150_YtmToSpotSw.createIrCurveSpot
-    ( bssd
-    , curveSwMap.getKey()
-    , ytmAddList
-    , swSce.getValue().getSwAlphaYtm()
-    , swSce.getValue().getFreq())
-    .stream().map(s-> s.convertToCont())
-    .collect(Collectors.toList());
-```
-{% endcode %}
-
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
-
-&#x20;
-
-</details>
-
-<details>
-
-<summary>3-3. <code>spotMap</code></summary>
-
-{% code overflow="wrap" %}
-```java
-TreeMap<String, Double> spotMap 
-= spotList.stream().collect(Collectors.toMap
-    (IrCurveSpot::getMatCd, IrCurveSpot::getSpotRate
-    , (k, v) -> k, TreeMap::new));
-```
-{% endcode %}
-
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
-
-</details>
-
-<details>
-
-<summary>3-4. <code>irSprdLpMap</code></summary>
-
-{% code overflow="wrap" %}
-```java
-Map<String, Double> irSprdLpMap 
-= IrSprdDao.getIrSprdLpBizList
-    (bssd, applBizDv, curveSwMap.getKey(), swSce.getKey())
-    .stream().collect(Collectors.toMap
-    (IrSprdLpBiz::getMatCd, IrSprdLpBiz::getLiqPrem));
-```
-{% endcode %}
-
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (50) (1).png" alt=""><figcaption></figcaption></figure>
-
-</details>
-
-<details>
-
-<summary>3-5. <code>irSprdShkMap</code></summary>
-
-{% code overflow="wrap" %}
-```java
-Map<String, Double> irSprdShkMap 
-= IrSprdDao.getIrSprdAfnsBizList
-    ( bssd
-    , irModelId
-    , curveSwMap.getKey()
-    , StringUtil.objectToPrimitive(swSce.getValue().getShkSprdSceNo(), 1)
-    )
-    .stream().collect(Collectors.toMap
-    (IrSprdAfnsBiz::getMatCd, IrSprdAfnsBiz::getShkSprdCont));
-```
-{% endcode %}
-
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (70).png" alt=""><figcaption></figcaption></figure>
-
-</details>
-
-<details>
-
-<summary>3-6. <code>spotSceList</code></summary>
-
-* 시나리오 결과를 저장하기 위해 deepCopy&#x20;
-  * 시나리오 별로 반복 시, spot rate값을 직접 변경하면 다음 작업 시 영향을 받으므로 deepCopy 로 원본과 값 분리. &#x20;
-
-{% code overflow="wrap" %}
-```java
-List spotSceList 
-    = spotList.stream().map
-    (s -> s.deepCopy(s)).collect(Collectors.toList());
-```
-{% endcode %}
-
-*
-
-    <figure><img src="../../../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
-
-</details>
-
-## 3.3\~3.5  스프레드 적용 순서 &#x20;
-
-* <mark style="color:red;">`shkCont`</mark>  : AFNS 충격 스프레드는 연속(continuous) 복리 기준의 충격치임 &#x20;
-* <mark style="color:red;">`lpDisc`</mark> : 유동성프리미엄은 이산 (discrete) 기준의 스프레드임&#x20;
-
-1. `spotCont = baseSpotCont +`` `<mark style="color:red;">`shkCont`</mark>` ``;` &#x20;
-2. `spotDisc = irContToDisc(spotCont) ;`&#x20;
-3. `adjSpotDisc =  spot_disc +`` `<mark style="color:red;">`lpDisc`</mark>` ``;`&#x20;
-4. `adjSpotCont = irDiscToCont (adjSpotDisc) ;`
 
 
 
