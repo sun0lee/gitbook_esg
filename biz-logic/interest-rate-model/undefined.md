@@ -1,7 +1,7 @@
 ---
 description: >-
   확률론적 시뮬레이션이란 자산의 미래가치를 특정모형을 활용하여 무작위적으로 상당수의 시나리오를 발생시킨 후, 각 시나리오 하에서 미래가치를
-  프로젝션 하는 방법임.
+  프로젝션하는 방법임.
 ---
 
 # Hull-White 1 Factor
@@ -16,7 +16,17 @@ description: >-
 
 조정 무위험 금리 기간구조를 기반으로 금리 시나리오 모형을 통해 산출함. (**Hull-White 1 factor 모델**, 무차익 모형이며 스왑션 변동성 데이터를 기반으로 수렴속도 모수$$\alpha$$ 와 변동성 모수$$\sigma$$를 추정하여 시나리오 생성. )
 
-* $$dr(t) = \alpha \cdot [ \theta(t) - r(t)]dt + \sigma \cdot dW(t)$$ &#x20;
+*   $$dr(t) = \alpha (t) \cdot [ \theta(t) - r(t)]dt + \sigma \cdot dW(t)$$
+
+    &#x20;이산화 : ( $$r_{t+1} = r_t + \alpha (\theta_t -r_t) + \sigma \epsilon_t$$ )
+
+    * $$\theta(t)$$ ; 목표금리, 관찰된 시장 금리곡선에 적합시켜 금리가 시장금리곡선을 중심으로 수렴하도록 함.
+      *   $$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i^2 e^{-2\alpha(t-u)}du$$
+
+
+    * $$\alpha(t)$$; 회귀모수, 목표금리로 수렴하는 속도&#x20;
+    * $$\sigma(t)$$; 변동성모수, 연율화된 금리의 변동성&#x20;
+    * $$dW_t$$; Brownian Motion, 확률적으로 움직이는 위험 요인&#x20;
 
 
 
@@ -62,6 +72,8 @@ description: >-
 수익률곡선이 복원 가능하도록 조정하는 역할을 하는 함수, Yeild Curve Fitting, 관찰된 시장 금리곡선에 적합시켜 금리가 시장금리곡선을 중심으로 수렴하도록 함.&#x20;
 
 #### parameter 추정방법&#x20;
+
+$$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i e^{-(t-u)}du$$
 
 
 {% endtab %}
