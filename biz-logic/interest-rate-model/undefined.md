@@ -23,6 +23,8 @@ description: >-
     * $$\theta(t)$$ ; 목표금리, 관찰된 시장 금리곡선에 적합시켜 금리가 시장금리곡선을 중심으로 수렴하도록 함.
       *   $$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i^2 e^{-2\alpha(t-u)}du$$
 
+          ($$= \frac{\partial f(0,t)}{\partial t} + \alpha f(0,t) + \frac{\sigma^2}{2 \alpha} (1-e^{-2\alpha t})$$)
+
 
     * $$\alpha(t)$$; 회귀모수, 목표금리로 수렴하는 속도&#x20;
     * $$\sigma(t)$$; 변동성모수, 연율화된 금리의 변동성&#x20;
