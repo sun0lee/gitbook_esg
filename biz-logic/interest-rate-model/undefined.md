@@ -21,9 +21,11 @@ description: >-
     &#x20;이산화 : ( $$r_{t+1} = r_t + \alpha (\theta_t -r_t) + \sigma \epsilon_t$$ )
 
     * $$\theta(t)$$ ; 목표금리, 관찰된 시장 금리곡선에 적합시켜 금리가 시장금리곡선을 중심으로 수렴하도록 함.
-      *   $$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i^2 e^{-2\alpha(t-u)}du$$
+      *   $$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha_t \Delta t} + f_t + \int_0^t \sigma_u^2 \cdot e^{-2\alpha_u \cdot(t-u)}du$$
 
-          ($$= \frac{\partial f(0,t)}{\partial t} + \alpha f(0,t) + \frac{\sigma^2}{2 \alpha} (1-e^{-2\alpha t})$$)
+
+
+          ( $$= \frac{\partial}{\partial t} f_t + \alpha_t f_t + \frac{1}{2} (\frac{\partial ^2}{\partial t^2} \int_t^T \sigma^2_udu +\alpha_t \frac{\partial}{\partial t} \int_t^T \sigma^2_udu)$$)
 
 
     * $$\alpha(t)$$; 회귀모수, 목표금리로 수렴하는 속도&#x20;
