@@ -23,6 +23,10 @@ description: >-
     * $$\theta(t)$$ ; 목표금리, 관찰된 시장 금리곡선에 적합시켜 금리가 시장금리곡선을 중심으로 수렴하도록 함.
       *   $$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha_t \Delta t} + f_t + \int_0^t \sigma_u^2 \cdot e^{-2\alpha_u \cdot(t-u)}du$$
 
+          $$= \dfrac{f_{t+1}-f_t}{\alpha_t \Delta t} + f_t + Z(t)$$
+
+          (이때 $$Z(t)$$는 finding theta 참조)
+
 
 
           ( $$= \frac{\partial}{\partial t} f_t + \alpha_t f_t + \frac{1}{2} (\frac{\partial ^2}{\partial t^2} \int_t^T \sigma^2_udu +\alpha_t \frac{\partial}{\partial t} \int_t^T \sigma^2_udu)$$)
