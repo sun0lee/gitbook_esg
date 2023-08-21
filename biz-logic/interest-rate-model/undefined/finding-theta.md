@@ -41,3 +41,6 @@ $$Z(t,T) = \begin{cases}   \displaystyle \int_0^t \sigma(u)^2 \cdot e^{-\alpha_1
 
 
 
+> 참고 site
+
+{% embed url="https://www.r-bloggers.com/2021/06/hull-white-1-factor-model-using-r-code/" %}
