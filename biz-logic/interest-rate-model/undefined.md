@@ -75,11 +75,11 @@ description: >-
 
 #### parameter 추정방법&#x20;
 
-$$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i e^{-(t-u)}du$$
-
-
+$$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i^2 e^{-2\alpha(t-u)}du$$
 {% endtab %}
 {% endtabs %}
+
+
 
 <figure><img src="../../.gitbook/assets/image (13).png" alt="" width="563"><figcaption><p>산출시점별 parameter 추정 예시 </p></figcaption></figure>
 
