@@ -83,11 +83,11 @@ $$\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i^2 e
 
 
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt="" width="563"><figcaption><p>산출시점별 parameter 추정 예시 </p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (13).png" alt="" width="563"><figcaption><p>산출시점별 parameter 추정 예시 </p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt="" width="563"><figcaption><p>스왑션 데이터가 관찰되지 않는 기간의 모수산출기준 (감독원장 제시 2022)</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (37).png" alt="" width="563"><figcaption><p>스왑션 데이터가 관찰되지 않는 기간의 모수산출기준 (감독원장 제시 2022)</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (1) (2).png" alt="" width="563"><figcaption><p>스왑션 데이터가 관찰되지 않는 기간의 모수산출기준 (감독원장 제시 2023)</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (2).png" alt="" width="563"><figcaption><p>스왑션 데이터가 관찰되지 않는 기간의 모수산출기준 (감독원장 제시 2023)</p></figcaption></figure>
 
 <details>
 

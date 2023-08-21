@@ -48,7 +48,8 @@
       * [(수정) SmithWilsonKicsBts.class](biz-logic/interest-rate-model/smith-wilson-method/with-assets-generating-multiple-cf/smithwilsonkicsbts.class-1.md)
   * [AFNS](biz-logic/interest-rate-model/afns/README.md)
     * [AFNelsonSiegel](biz-logic/interest-rate-model/afns/afnelsonsiegel.md)
-  * [Hull-White 1 Factor](biz-logic/interest-rate-model/undefined.md)
+  * [Hull-White 1 Factor](biz-logic/interest-rate-model/undefined/README.md)
+    * [finding theta](biz-logic/interest-rate-model/undefined/finding-theta.md)
 
 ## ETC
 
