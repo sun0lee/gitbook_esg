@@ -131,3 +131,4 @@
   * [blog](etc/web/blog.md)
 * [Todo](etc/todo/README.md)
   * [@enumerated](etc/todo/enumerated.md)
+  * [초기설정](etc/todo/undefined.md)
