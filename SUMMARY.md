@@ -114,6 +114,7 @@
   * [H2DB 설치](etc/db/h2db.md)
   * [Dbeaver 연결](etc/db/dbeaver.md)
   * [H2DB 미지원함수 추가](etc/db/h2db-1.md)
+  * [H2 DB 저장경로 옮기기](etc/db/h2-db.md)
 * [ORM, JPA, Hibernate](etc/orm-jpa-hibernate/README.md)
   * [persistence의 필요성과 어려움](etc/orm-jpa-hibernate/persistence.md)
   * [preview](etc/orm-jpa-hibernate/preview.md)
